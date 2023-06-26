@@ -1,10 +1,12 @@
-# mh3se
+# mh3se - mh3 save editor
 
 ## Roadmap
 + Equipment Worn + Box
 * HR and HRP?
 
 ## Notes
+
+It is not really a save editor, it just translates save files to a giant spreadsheet for you to modify it and can apply this spreadsheet back to a save file.
 
 Be careful with you saves!!! This is very much experimental please make backups before any modifications!
 

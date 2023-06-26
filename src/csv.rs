@@ -219,6 +219,7 @@ pub fn csv_to_save(csv: &Vec<String>, dest: &mut CharacterSlot, ids: &DataIDs) -
         else
         {
             eprintln!("Unknown entry in line {}", linecount);
+            return Ok(linecount);
         }
     }
     Ok(linecount)
