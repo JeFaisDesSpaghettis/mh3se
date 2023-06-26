@@ -1,8 +1,6 @@
 # mh3se
 
 ## Roadmap
-+ Pouches
-* Item Box
 + Equipment Worn + Box
 * HR and HRP?
 
