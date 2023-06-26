@@ -60,3 +60,32 @@ note that the playtime is in seconds
 ## Other
 
 Based on [this](https://github.com/sepalani/MHTrIDA/tree/master/save) and (will be based) [this](https://github.com/sepalani/MH3DB)
+
+Some pending findings
+
+```
+/* [WIP]
+    // Worn Equipment...
+    worn_weapon_type: u8, // 0x0068
+    worn_weapon_id: u16, // 0x006A
+    worn_weapon_deco_1: u16,   // 0x006E
+    worn_weapon_deco_2: u16,   // 0x0070
+    worn_weapon_deco_3: u16,   // 0x0072
+    worn_weapon_loc: u16,   // 0x00D4
+
+    worn_head_lvl: u8, // 0x00BD
+    worn_head_id: u16, // 0x00BE
+    worn_head_deco_1: u16, // 0x00C2, offset to first deco in item list
+    worn_head_loc: u16, // 0x00E2
+
+    worn_arms_lvl: u8, // 0x0099
+    worn_arms_id: u16, // 0x009A
+    worn_arms_deco_1: u16, // 0x009E, offset to first deco in item list
+    worn_arms_deco_2: u16, // 0x00A0, offset to first deco in item list
+    worn_arms_loc: u16, // 0x00DC
+    // Equipment Box...
+
+    // Hunter rank...
+    hr: u16
+    */
+```

@@ -1,0 +1,747 @@
+NONE
+Barrel Bomb S
+Barrel Bomb L
+Pitfall Trap
+Shock Trap
+Flash Bomb
+Oxygen Supply
+Sonic Bomb
+Throwing Knife
+Poison Knife
+Sleep Knife
+Paralysis Knife
+Tranq Knife
+Potion
+Mega Potion
+Dash Juice
+Mega Dash Juice
+Antidote
+Demondrug
+Mega Demondrug
+Might Pill
+Armorskin
+Mega Armorskin
+Adamant Pill
+Cool Drink
+Hot Drink
+Well-done Steak
+Rare Steak
+Burnt Meat
+Raw Meat
+Poisoned Meat
+Tinged Meat
+Drugged Meat
+Paintball
+Old Pickaxe
+Iron Pickaxe
+Mega Pickaxe
+Old Bug Net
+Bug Net
+Mega Bug Net
+BBQ Spit
+Great Jaggi Head
+Map
+Torch
+First-aid Med
+Ration
+Mini Oxy Supply
+Portable Spit
+Mini Whetstone
+EZ Shock Trap
+EZ Flash Bomb
+Max Potion
+Barrel Bomb L+
+Normal S Lv1
+Normal S Lv2
+Normal S Lv3
+Pierce S Lv1
+Pierce S Lv2
+Pierce S Lv3
+Pellet S Lv1
+Pellet S Lv2
+Pellet S Lv3
+Crag S Lv1
+Crag S Lv2
+Crag S Lv3
+Clust S Lv1
+Clust S Lv2
+Clust S Lv3
+Flaming S
+Water S
+Thunder S
+Freeze S
+Dragon S
+Recov S Lv1
+Recov S Lv2
+Poison S Lv1
+Poison S Lv2
+Para S Lv1
+Para S Lv2
+Sleep S Lv1
+Sleep S Lv2
+Tranq S
+Paint S
+Demon S I
+Demon S II
+Armor S I
+Armor S II
+Sub S Lv1
+Sub S Lv2
+Exhaust S
+ERR89
+Slicing S
+WyvernFire Lv1
+WyvernFire Lv2
+WyvernFire Lv3
+Binoculars
+Tranq Bomb
+Stone
+Whetstone
+Iron Ore
+Earth Crystal
+Machalite Ore
+Dragonite Ore
+Carbalite Ore
+Pelagicite Ore
+Bathycite Ore
+Firestone
+Ice Crystal
+Lightcrystal
+Sharq Ticket
+Rustshard
+Ancient Shard
+Isisium
+Gracium
+ERR113
+Godbug
+Bitterbug
+Flashbug
+Thunderbug
+Gluehopper
+Killer Beetle
+Rare Scarab
+Royal Rhino
+Herb
+Antidote Herb
+Sleep Herb
+Fire Herb
+Sap Plant
+Paintberry
+Needleberry
+Huskberry
+Scatternut
+Bomberry
+Ivy
+Might Seed
+Adamant Seed
+Hot Pepper
+Cactus Flower
+Airweed
+Wyvern Egg
+Unknown Skull
+Honey
+Blue Mushroom
+Choice Mushroom
+Unique Mushroom
+Exciteshroom
+Parashroom
+Nitroshroom
+ERR147
+Black Pearl
+Jumbo Pearl
+Broken Shell
+Dragonbone Relic
+Monster Bone S
+Monster Bone M
+Monster Bone L
+ERR155
+Eldest Saturnian
+ERR157
+ERR158
+ERR159
+ERR160
+ERR161
+ERR162
+Hercudrome
+ERR164
+Chilled Meat
+Hot Meat
+ERR167
+Rathian Scale+
+Rathian Carapace
+Rath Medulla
+Rathian Spike+
+Rathian Ruby
+Rathalos Ruby
+Inferno Sac
+Rathalos Scale+
+RathalosCarapace
+Qurupeco Scale+
+ERR178
+Wonderful Beak
+Unnerving Talon
+Fearsome Maw
+Wyvern Stone
+Freezer Sac
+Wyvrnhide Ticket
+Black Gem Ticket
+Flabby Hide+
+Uncanny Hide+
+Toxin Sac
+Unnerving Talon+
+Stunning Quill
+Pittance Fang
+Vermilion Scale
+Fishing Harpoon
+Insect Husk
+Bone
+Dung
+Spider Web
+Bomb Casing
+Small Barrel
+Large Barrel
+Cricket
+Worm
+Firefly
+Mega Fishing Fly
+Frog
+Whetfish
+Sushifish
+Pin Tuna
+Popfish
+Sleepyfish
+Burst Arowana
+Bomb Arowana
+Glutton Tuna
+Scatterfish
+Small Goldenfish
+Goldenfish
+ERR217
+Beautiful Scale
+Giant Skull
+Pirate Booty
+Net
+No Item
+Shroom Germ
+BugMaker! Pro
+Bizzy Bees
+Saturnian
+Fortune Fang
+Shining Starfish
+Mystic Narwhal
+Atlantis Crab
+Gold Needle
+Armorfish Morsel
+Fish Finder
+Treasure Tracker
+Spare Spear
+Perfect Paddle
+Shroom Germ+
+Pink Liver
+Ethnic Wyvrnmeat
+Ancient Skin Oil
+Queen's Spirit
+ERR242
+Funky Pheromones
+Saturnian Trap
+ERR245
+Super-sized Dung
+Fine Pelt
+Moonlight Fang
+Queen Needle
+Power Paddle
+Curved Fang
+Flamboyant Quill
+Glittering Scale
+Sea-King's Scale
+Wyverngold
+ERR256
+ERR257
+ERR258
+ERR259
+ERR260
+ERR261
+ERR262
+Felvine Bomb
+Double BBQ Spit
+Dragonbone Piece
+Abalone Piece
+Fossil Piece
+Odd Egg
+Mystery Bone
+ERR270
+ERR271
+Herbal Medicine
+Rathian Scale
+Rathian Shell
+Rathian Webbing
+Rathian Spike
+Rathian Plate
+Flame Sac
+Wyvern Tear
+Rathalos Scale
+Rathalos Shell
+Rathalos Webbing
+Rath Marrow
+Rathalos Plate
+Rathalos Tail
+Qurupeco Scale
+Qurupeco Feather
+Vivid Feather
+Strange Beak
+Flabby Hide
+Uncanny Hide
+Poison Sac
+Pale Extract
+Diablos Fang
+Diablos Shell
+Diablos Ridge
+Diablos Tailcase
+Barroth Shell
+Barroth Ridge
+Barroth Claw
+Barroth Tail
+Barroth Scalp
+Bird Wyvern Fang
+Jaggi Hide
+Jaggi Scale
+Great Jaggi Claw
+Great Jaggi Hide
+Screamer
+Lagiacrus Hide
+Lagiacrus Scale
+Lagiacrus Claw
+Shell Shocker+
+Lagiacrus Tail
+Lagiacrus Plate
+Spongy Hide
+R.Ludroth Scale
+R.Ludroth Claw
+R.Ludroth Tail
+Dash Extract
+Hydro Hide
+Immature Sponge
+Gobul Spike
+Gobul Hide
+Paralysis Sac
+Gobul Fin
+Armor Sphere
+Armor Sphere+
+Gobul Lantern
+Warm Pelt
+Nutrients
+Mega Nutrients
+Dragon Toadstool
+Immunizer
+Catalyst
+Bomb Sac
+Kelbi Horn
+Blue Kelbi Horn
+Bnahabra Shell
+Bnahabra Wing
+Monster Fluid
+Bone Husk S
+Bone Husk L
+Toadstool
+Smoke Bomb
+Poison Smoke Bmb
+Dung Bomb
+Gunpowder
+Trap Tool
+Yambug
+Tuna Bait
+Bughopper
+Arowana Bait
+Snakebee Larva
+Goldenfish Bait
+Antiseptic Stone
+Wyvern Fang
+Lifecrystals
+Wyvern Claw
+Lifepowder
+Hunting Horn
+Health Horn
+Antidote Horn
+Demon Horn
+Armor Horn
+Farcaster
+Tranquilizer
+Dragonfell Berry
+ERR368
+ERR369
+ERR370
+ERR371
+ERR372
+Energy Drink
+Cleanser
+Garbage
+Ancient Potion
+Psychoserum
+Agnaktor Coin
+Ballista Ammo
+Cannon Ammo
+Powderstone
+Anti-dragon Bomb
+Ballista Binder
+Rath Talon
+Twisted Horn
+Majestic Horn
+Mega Harpoon
+Whetfish Bait
+Sushifish Bait
+Firedouse Berry
+Waterblock Seed
+Icethaw Pellet
+Stormsender Seed
+Herbivore Egg
+Crystal Bone
+Golden Bone
+Air Philter
+Mega Air Philter
+Altaroth Stomach
+Altaroth Jaw
+Ripened Mushroom
+R.Ludroth Crest
+Barioth Shell
+Barioth Pelt
+Amber Tusks
+Barioth Claw
+Barioth Spike
+Frost Sac
+Uragaan Shell
+Uragaan Scute
+Uragaan Marrow
+Uragaan Jaw
+Agnaktor Shell
+Agnaktor Hide
+Agnaktor Fin
+Agnaktor Claw
+Agnaktor Scale
+Agnaktor Beak
+King's Frill
+Fertile Mud
+Gobul Whisker
+Shell Shocker
+Lagiacrus Horn
+Flintstone
+Barioth Tail
+Bloodstone
+Paw Pass Ticket
+Monster Guts
+Red Coral Stone
+Voucher
+Gourmet Voucher
+Alatreon Scute
+Alatreon Plate
+Alatreon Talon
+Azure Dragongem
+Skypiercer
+BBQ with Mask
+No Mask
+Mystery Charm
+Shining Charm
+Timeworn Charm
+Armor Stone
+Adv Armor Sphere
+Hrd Armor Sphere
+Hvy Armor Sphere
+Aquaglow Jewel
+Sunspire Jewel
+Bloodrun Jewel
+Lazurite Jewel
+Barioth Carapace
+Barioth Pelt+
+Amber Tusks+
+Barioth Claw+
+Diablos Marrow
+Diablos Carapace
+Diablos Ridge
+Stout Horn
+Ceadeus Hide
+Ceadeus Scale
+Ceadeus Fur
+Ceadeus Tail
+Luminous Organ
+Deep Dragongem
+Crooked Horn
+ElderDragonBlood
+Mohran Shell
+Mohran Brace
+Mohran Scale
+Sturdy Fang
+Earth Dragongem
+Mohran Carapace
+Mohran Scale+
+Sturdy Fang+
+Mohran Brace+
+Barroth Carapace
+Barroth Ridge+
+Barroth Claw+
+Uragaan Scale
+Uragaan Scale+
+Uragaan Ruby
+Uragaan Carapace
+Deviljho Hide
+Deviljho Scale
+Deviljho Talon
+Deviljho Fang
+Deviljho Gem
+Deviljho Scalp
+Deviljho Tail
+Quality Sponge
+Spongy Hide+
+R.Ludroth Scale+
+R.Ludroth Claw+
+R.Ludroth Crest+
+Gobul Spike+
+Gobul Hide+
+Gobul Lantern+
+Gobul Fin+
+Lagiacrus Hide+
+Lagiacrus Scale+
+Lagiacrus Claw+
+Lagiacrus Horn+
+Lagia Sapphire
+Agnaktor Tail
+AgnaktorCarapace
+Agnaktor Hide+
+Agnaktor Fin+
+Agnaktor Claw+
+Firecell Stone
+Brkn Skypiercer
+Alatreon Tail
+Alatreon Webbing
+Kelbi Horn Objet
+Twstd Horn Objet
+MohranFang Objet
+Piggie
+Eggie Piggie
+Rath Piggie
+Sandstone Plant
+Marshland Plant
+Snowflake Plant
+Prismshroom Lamp
+Qurupeco Lamp
+Sirensea Lamp
+Oceanic Fountain
+Bubbly Fountain
+Magma Fountain
+Iron Figure
+Machalite Figure
+Dragonite Figure
+Model Sandskiff
+Model Airship
+Model Piggieship
+Guildie (Red)
+Guildie (Green)
+Guildie (Blue)
+Great Piggie
+Qurupeco Wing
+Jaggi Hide+
+Lightning Ticket
+Great Baggi Claw
+High-qualty Pelt
+Popo Tongue
+Rhenoplos Shell
+Rhenoplos Scalp
+Rheno Carapace
+BnahabraCarapace
+Monster Broth
+Quality Sac
+Sleep Sac
+Coma Sac
+Baggi Hide
+Baggi Scale
+Great Baggi Hide
+Leader's Crest
+Bird Wyvern Gem
+Uroktor Scale
+Smith's Notebook
+Bird Wyvern Bone
+Big Fin
+Quality Fin
+Sharpened Fang
+Velvety Hide
+Giggi Stinger
+Commendation
+Bird Wyvern Claw
+Barrel Bomb S+
+Felvine
+Steel Egg
+Silver Egg
+Golden Egg
+Incomplete Crown
+Crown's Gemstone
+Dazzling Crown
+Book of Combos 1
+Book of Combos 2
+Book of Combos 3
+Book of Combos 4
+Book of Combos 5
+Organizer Guide
+Pack Rat Guide
+EZ Barrel Bomb L
+UW Ballista Ammo
+Rathalos Coin
+Gobul Coin
+Barioth Coin
+Hunter King Coin
+Diablos Coin
+Deviljho Coin
+HellHunter Tag
+Dark Metal
+Incomplete Plans
+Lion King's Seal
+SoulHunter Tag
+Monster Bone+
+Powercharm
+Powertalon
+Armorcharm
+Armortalon
+Bounce Bomb
+Bounce Bomb+
+Sharqskin
+Conqueror's Seal
+Golden Medallion
+Prize Gold Sword
+Great Jaggi Coin
+Qurupeco Coin
+Barroth Coin
+R.Ludroth Coin
+Rathian Coin
+Lagiacrus Coin
+Uragaan Coin
+Wyvern Lord Coin
+Sea Lord Coin
+Pinnacle Coin
+Antidote Jewel
+Antidote Jewel+
+Paralysis Jewel
+Paralysis Jewel+
+Pep Jewel
+Pep Jewel+
+Steadfast Jewel
+Steadfast Jewel+
+Weather Jewel
+Weather Jewel+
+Ninja Jewel
+Vitality Jewel
+Recovery Jewel
+Resurgence Jewel
+Razor Jewel
+Cutter Jewel
+Handicraft Jewel
+Architect Jewel
+Fencer Jewel
+Swordsman Jewel
+Expert Jewel
+Master Jewel
+Hermit Jewel
+Grinder Jewel
+Stone Wall Jewel
+Iron Wall Jewel
+Shield Jewel
+Aegis Jewel
+Quickload Jewel
+Flashload Jewel
+Absorber Jewel
+FlinchFree Jewel
+Forceshot Jewel
+Forceshot Jewel+
+Pierce Jewel
+Pierce Jewel+
+Pellet Jewel
+Pellet Jewel+
+ShotPlus Jewel
+ShotPlus Jewel+
+PiercPlus Jewel
+PiercPlus Jewel+
+PelletPlus Jewel
+CragPlus Jewel
+ClustPlus Jewel
+Disabler Jewel
+Disabler Jewel+
+Element Jewel
+Element Jewel+
+Bombardier Jewel
+Lite Eater Jewel
+Hungerless Jewel
+Metabolism Jewel
+Attack Jewel
+Assault Jewel
+Onslaught Jewel
+Defense Jewel
+Turtle Jewel
+Protection Jewel
+Asylum Jewel
+Earplug Jewel
+Silencer Jewel
+Alarm Jewel
+Friendship Jewel
+Alliance Jewel
+Transportr Jewel
+Crimson Jewel
+Torrent Jewel
+Storm Jewel
+Glacier Jewel
+Dragonbane Jewel
+Breeze Jewel
+Warmth Jewel
+Sandbag Jewel
+Anchor Jewel
+Map Jewel
+Gathering Jewel
+Spree Jewel
+Blessing Jewel
+Fate Jewel
+Destiny Jewel
+Fisher Jewel
+Psychic Jewel
+Medicine Jewel
+Panacea Jewel
+Professor Jewel
+Factory Jewel
+Evade Jewel
+Lightfoot Jewel
+Crisis Jewel
+Peril Jewel
+Enduring Jewel
+Sprinter Jewel
+Marathon Jewel
+Chamber Jewel
+Magazine Jewel
+Sniper Jewel
+Gobbler Jewel
+Voracious Jewel
+Carver Jewel
+Looter Jewel
+Footing Jewel
+Tectonic Jewel
+BBQ Jewel
+Jumping Jewel
+Leaping Jewel
+Draw Jewel
+Critical Jewel
+TrapMaster Jewel
+Workout Jewel
+Physique Jewel
+Tranq Jewel
+Capture Jewel
+Perception Jewel
+Charger Jewel
+Dynamo Jewel
+Fresh Air Jewel
+Upstream Jewel
+Swimmer Jewel
+Diver Jewel
+Gambit Jewel
+Checkmate Jewel
+Resistor Jewel
+Release Jewel
+Catalyst Jewel
+Guts Jewel
+Fortitude Jewel
+Salvo Jewel
+Fusillade Jewel
+Dung Jewel
+Torchlight Jewel

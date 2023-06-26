@@ -3,11 +3,12 @@ use std::env;
 
 mod save;
 mod csv;
-mod defs;
+mod common;
 
-use crate::save::{file_to_buf, buf_to_save, save_to_buf, buf_to_file};
-use crate::csv::{save_to_csv, csv_to_file, file_to_csv, csv_to_save};
-use defs::CharacterSlot;
+use crate::common::DataIDs;
+use crate::save::{ file_to_buf, buf_to_save, save_to_buf, buf_to_file };
+use crate::csv::{ save_to_csv, csv_to_file, file_to_csv, csv_to_save };
+use common::CharacterSlot;
 
 fn main()
 {
@@ -22,11 +23,22 @@ fn main()
         process::exit(1);
     }
 
+    let ids: DataIDs;
+    match DataIDs::new(&String::from("genders.txt"), &String::from("items.txt"))
+    {
+        Ok(res) => ids = res,
+        Err(err) =>
+        {
+            eprintln!("Couldn't access data files {}", err);
+            process::exit(1);
+        }
+    }
+
     if args[0] == "decode"
     {
         let savepath = &args[1];
         let csvpath = &args[2];
-        let mut character_slot: usize = 0;
+        let character_slot: usize;
 
         match args[3].parse::<usize>()
         {
@@ -42,7 +54,7 @@ fn main()
             }
         }
 
-        let mut buffer: Vec<u8> = Vec::new();
+        let buffer: Vec<u8>;
         match file_to_buf(&String::from(savepath))
         {
             Ok(buf) =>
@@ -59,7 +71,7 @@ fn main()
         let mut slot: CharacterSlot = CharacterSlot::default();
         let mut csv: Vec<String> = Vec::new();
         buf_to_save(&buffer, &mut slot, character_slot);
-        save_to_csv(&slot, &mut csv);
+        save_to_csv(&slot, &mut csv, &ids);
         match csv_to_file(&String::from(csvpath), &csv)
         {
             Ok(_) =>
@@ -78,7 +90,7 @@ fn main()
     {
         let savepath = &args[1];
         let csvpath = &args[2];
-        let mut character_slot: usize = 0;
+        let character_slot: usize;
 
         match args[3].parse::<usize>()
         {
@@ -94,7 +106,7 @@ fn main()
             }
         }
 
-        let mut csv: Vec<String> = Vec::new();
+        let csv: Vec<String>;
         match file_to_csv(csvpath)
         {
             Ok(res) =>
@@ -110,9 +122,9 @@ fn main()
         }
 
         let mut slot: CharacterSlot = CharacterSlot::default();
-        csv_to_save(&csv, &mut slot);
+        let _ = csv_to_save(&csv, &mut slot, &ids);
 
-        let mut buffer: Vec<u8> = Vec::new();
+        let mut buffer: Vec<u8>;
         match file_to_buf(savepath)
         {
             Ok(buf) =>

@@ -1,8 +1,8 @@
 use std::io::{ self, Read, Write };
 use std::fs::File;
 
-use crate::defs::locations::*;
-use crate::defs::{ CharacterSlot };
+use crate::common::locations::*;
+use crate::common::{ CharacterSlot };
 
 fn read_u8(filebuffer: &Vec<u8>, address: usize) -> u8
 {
@@ -81,6 +81,21 @@ pub fn buf_to_save(src: &Vec<u8>, dest: &mut CharacterSlot, slot_n: usize)
     dest.name.data      = read_str(src, SLOTS[slot_n] + dest.name.offset    );
     dest.zenny.data     = read_u32(src, SLOTS[slot_n] + dest.zenny.offset   );
     dest.playtime.data  = read_u32(src, SLOTS[slot_n] + dest.playtime.offset);
+    for k in 0..dest.b_pouch.data.len()
+    {
+        dest.b_pouch.data[k].0 = read_u16(src, SLOTS[slot_n] + dest.b_pouch.offset + (k * 4));
+        dest.b_pouch.data[k].1 = read_u16(src, SLOTS[slot_n] + dest.b_pouch.offset + (k * 4) + 2) as i16;
+    }
+    for k in 0..dest.g_pouch.data.len()
+    {
+        dest.g_pouch.data[k].0 = read_u16(src, SLOTS[slot_n] + dest.g_pouch.offset + (k * 4));
+        dest.g_pouch.data[k].1 = read_u16(src, SLOTS[slot_n] + dest.g_pouch.offset + (k * 4) + 2) as i16;
+    }
+    for k in 0..dest.item_box.data.len()
+    {
+        dest.item_box.data[k].0 = read_u16(src, SLOTS[slot_n] + dest.item_box.offset + (k * 4));
+        dest.item_box.data[k].1 = read_u16(src, SLOTS[slot_n] + dest.item_box.offset + (k * 4) + 2) as i16;
+    }
     return
 }
 
@@ -90,6 +105,21 @@ pub fn save_to_buf(src: &CharacterSlot, dest: &mut Vec<u8>, slot_n: usize)
     write_str(dest, SLOTS[slot_n] + src.name.offset    , src.name.data   );
     write_u32(dest, SLOTS[slot_n] + src.zenny.offset   , src.zenny.data      );
     write_u32(dest, SLOTS[slot_n] + src.playtime.offset, src.playtime.data   );
+    for k in 0..src.b_pouch.data.len()
+    {
+        write_u16(dest, SLOTS[slot_n] + src.b_pouch.offset + (k * 4), src.b_pouch.data[k].0);
+        write_u16(dest, SLOTS[slot_n] + src.b_pouch.offset + (k * 4) + 2, src.b_pouch.data[k].1 as u16);
+    }
+    for k in 0..src.g_pouch.data.len()
+    {
+        write_u16(dest, SLOTS[slot_n] + src.g_pouch.offset + (k * 4), src.g_pouch.data[k].0);
+        write_u16(dest, SLOTS[slot_n] + src.g_pouch.offset + (k * 4) + 2, src.g_pouch.data[k].1 as u16);
+    }
+    for k in 0..src.item_box.data.len()
+    {
+        write_u16(dest, SLOTS[slot_n] + src.item_box.offset + (k * 4), src.item_box.data[k].0);
+        write_u16(dest, SLOTS[slot_n] + src.item_box.offset + (k * 4) + 2, src.item_box.data[k].1 as u16);
+    }
 }
 
 pub fn buf_to_file(filepath: &String, buffer: &mut Vec<u8>) -> io::Result<()>
