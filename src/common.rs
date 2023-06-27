@@ -6,6 +6,7 @@ pub mod locations
     pub const CHECKSUM: usize = 0x04;
     pub const SLOTS: [usize; 3] = [0x0048, 0x6048, 0xC048];
 }
+
 pub struct U8Entry
 {
     pub name: String,
@@ -110,19 +111,19 @@ impl CharacterSlot
     {
         CharacterSlot
         {
-            file_enabled: U32Entry{name: String::from("file_activated"), offset: 0x00, data: 0x00},
-            slot1_enabled: U8Entry{name: String::from("char1_activated"), offset: 0x1A, data: 0x00},
-            slot2_enabled: U8Entry{name: String::from("char2_activated"), offset: 0x1B, data: 0x00},
-            slot3_enabled: U8Entry{name: String::from("char3_activated"), offset: 0x1C, data: 0x00},
-            gender: U8Entry{name: String::from("gender"), offset: 0x00, data: 0x00},
+            file_enabled: U32Entry{name: String::from("file_activated"), offset: 0x00, data: 0},
+            slot1_enabled: U8Entry{name: String::from("char1_activated"), offset: 0x1A, data: 0},
+            slot2_enabled: U8Entry{name: String::from("char2_activated"), offset: 0x1B, data: 0},
+            slot3_enabled: U8Entry{name: String::from("char3_activated"), offset: 0x1C, data: 0},
+            gender: U8Entry{name: String::from("gender"), offset: 0x00, data: 0},
             name: NameEntry{name: String::from("name"), offset: 0x03, data: [0; 8]},
-            zenny: U32Entry{name: String::from("zenny"), offset: 0x18, data: 0x00},
-            playtime: U32Entry{name: String::from("playtime"), offset: 0x1C, data: 0x00},
+            zenny: U32Entry{name: String::from("zenny"), offset: 0x18, data: 0},
+            playtime: U32Entry{name: String::from("playtime"), offset: 0x1C, data: 0},
             b_pouch: BPouch{name: String::from("blade_pouch"), offset: 0xA0, data: [(0, 0) ; 3 * 8]},
             g_pouch: GPouch{name: String::from("gunner_pouch"), offset: 0x100, data: [(0, 0) ; 4 * 8]},
             item_box: ItemBox { name: String::from("item_box"), offset: 0x180, data: [(0, 0) ; 100 * 8]},
-            hrp: U32Entry { name: String::from("hrpoints"), offset: 0x3DE0, data: 0x00 },
-            hr: U16Entry { name: String::from("hunterrank"), offset: 0x3DE4, data: 0x00 }
+            hrp: U32Entry { name: String::from("hrpoints"), offset: 0x3DE0, data: 0 },
+            hr: U16Entry { name: String::from("hunterrank"), offset: 0x3DE4, data: 0 }
         }
     }
 }

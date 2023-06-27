@@ -1,0 +1,475 @@
+No Equipment
+Iron Sword
+Iron Sword+
+Buster Sword
+Buster Sword+
+Buster Blade
+Ravager Blade
+Ravager Blade+
+Lacerator Blade
+Mutilator Blade
+Brazenwall
+Crimsonwall
+Rugged Great Sword
+Chieftain's Grt Swd
+High Chief's Grt Swd
+Carapace Sword
+Carapace Blade
+Barroth Wedge
+Barroth Smasher
+Lagiacrus Blade
+Dummy 1
+Lagia Lightning (R)
+Dummy 2
+Lagia Lightning (Y)
+Lagia Bluebolt (P)
+Lagia Bluebolt (G)
+High Lagia Blade
+Dummy 3
+Dummy 4
+Dummy 5
+Dummy 6
+Lagia Wildfire (P)
+Dummy 7
+Ludroth Bone Sword
+Ludroth Bone Sword+
+Cataclysm Sword
+Cataclysm Blade
+Viking Hornsword
+Ancharius Sword
+Red Wing
+Rathalos Firesword
+Rathalos Flamesword
+Bone Blade
+Bone Blade+
+Jawblade
+Giant Jawblade
+Wyvern Jawblade
+Golem Blade
+Golem Blade+
+Blade of Talos
+Valkyrie Blade
+Sieglinde
+Dummy 8
+Dummy 9
+Dummy 10
+Dread Ignition
+High Sieglinde (P)
+High Sieglinde (G)
+Siegmund
+High Siegmund
+Quarrel Hornsword
+Diablos Hornsword
+Rusted Great Sword
+Tarnished Great Swd
+Ancient Blade
+Elder Monument
+Worn Great Sword
+Weathered Grt Sword
+Epitaph Blade
+Vulcanis
+Dummy 11
+Vulcanvil (R)
+Vulcanvil (B)
+Vulcanvil (Y)
+Dummy 12
+Dummy 13
+Dummy 14
+Dummy 15
+Dummy 16
+Vulcamagnon (P)
+Vulcamagnon (G)
+Berserker Sword
+Dummy 17
+Dummy 18
+Dummy 19
+Dummy 20
+Anguish (P)
+Anguish (G)
+Alatreon Great Sword
+Alatreon Revolution
+Proto Razor
+Chrome Razor
+Lion's Bane
+No Equipment
+Hunter's Knife
+Hunter's Knife+
+Hunter's Dagger
+Assassin's Dagger
+Shadow Saber
+Shadow Saber+
+Toxic Fang
+Icicle Spike
+Icicle Spike+
+Nardebosche
+Soldier's Dagger
+Commander's Dagger
+Hydra Knife
+Deadly Knife
+Hypnos Knife
+Morpheus Knife
+Azi Dahaka
+Azi Dahaka+
+Dummy 21
+Dummy 22
+Dummy 23
+Dummy 24
+Almighty Dahaka (P)
+Meteora
+Carapace Mace
+Carapace Mace+
+Barroth Club
+Gigas Club
+Gigas Crusher
+Bone Kris
+Bone Kris+
+Ludroth's Nail
+Royal Claw
+Royal Claw+
+Royal Ludroth Claw
+Sea Striker
+Abyssal Striker
+Blood Tabar
+Plague Tabar
+Bone Tomahawk
+Qurupeco Chopper
+Djinn
+Blazing Falchion
+Lagia Sword
+Dummy 25
+Storm Sword (R)
+Dummy 26
+Storm Sword (Y)
+Maelstrom Sword (P)
+Maelstrom Sword (G)
+High Lagia Sword
+Dummy 27
+Dummy 28
+Dummy 29
+Dummy 30
+Dummy 31
+Takemikazuchi (G)
+Rusted Sword
+Tarnished Sword
+Eternal Strife
+Eternal Hate
+Worn Sword
+Weathered Sword
+Divine Exodus
+Tusk Gear
+Dummy 32
+Fossil Gear (R)
+Fossil Gear (B)
+Fossil Gear (Y)
+Dummy 33
+Dummy 34
+Dummy 35
+Dummy 36
+Dummy 37
+Dummy 38
+Skull's Wrath (P)
+Skull's Wrath (G)
+Chak Chak
+Chak Chak+
+Wagga Wagga
+Jhen Kodachi
+Dummy 39
+Dummy 40
+Dummy 41
+Dummy 42
+Calm Sands (P)
+Calm Sands (G)
+Alatreon Sword
+Alatreon Star
+Warrior's Sword
+Odyssey
+No Equipment
+Iron Hammer
+Iron Hammer+
+War Hammer
+War Hammer+
+War Mace
+Iron Striker
+Iron Impact
+Gun Hammer
+Gun Hammer+
+Deadeye Revolver
+Vortex Hammer
+Dummy 43
+Vortical Hammer (R)
+Dummy 44
+Vortical Hammer (Y)
+Vortiginous Hmr (P)
+Vortiginous Hmr (G)
+High Vortex Hammer
+Dummy 45
+Dummy 46
+Dummy 47
+Dummy 48
+Dummy 49
+Vortastrophe (G)
+Plume Flint
+Peco Flint
+Red Bludgeon
+Red Bludgeon+
+Dummy 50
+Dummy 51
+Dummy 52
+Dummy 53
+Huracan Hammer (P)
+Dummy 54
+Numbingbird
+Paralykeet
+Alluring Lotus
+Bone Hammer
+Bone Hammer+
+Ludroth Bone Mace
+Ludroth Bone Maul
+Ludroth Splashhammer
+Vodyanoy Hammer
+Fang Hammer "Echo"
+Fang Hammer "Ruin"
+Jhen Mohran Hammer
+Carapace Hammer
+Carapace Hammer+
+Barroth Hammer
+Brazenclout
+Crimsonclout
+Gigas Hammer
+Bone Bludgeon
+Bone Bludgeon+
+Rusted Hammer
+Tarnished Hammer
+Breath Core Hammer
+Lava Core Hammer
+Worn Hammer
+Weathered Hammer
+Pulsating Core
+Gaiasp
+Dummy 55
+Gaiarch (R)
+Gaiarch (B)
+Gaiarch (Y)
+Dummy 56
+Dummy 57
+Dummy 58
+Dummy 59
+Dummy 60
+Dummy 61
+Great Gaiarch (P)
+Great Gaiarch (G)
+Devil's Due
+Dummy 62
+Dummy 63
+Dummy 64
+Devil's Advocate
+Devil's Crush (P)
+Devil's Crush (G)
+Alatreon Hammer
+Alatreon Metamorph
+Kurogane
+Iron Devil
+No Equipment
+Thunderclap
+Thunderclap+
+Dummy 65
+Heaven's Thunder (R)
+Dummy 66
+Heaven's Thunder (Y)
+Dummy 67
+Dummy 68
+Ananta Boneblade
+Ananta Boneblade+
+Dummy 69
+Dummy 70
+Dummy 71
+Dummy 72
+Shadowbinder (P)
+Shadowbinder (G)
+Dancing Flames
+Dancing Hellfire
+Wyvern Blade "Fire"
+Wyvern Blade "Flame"
+Wyvern Blade "Flare"
+Barbarian Blade
+Barbarian Blade+
+Dummy 73
+Dummy 74
+Dummy 75
+Dummy 76
+Barbrian "Sharq" (P)
+Orochi Sword
+Guan Dao
+Dummy 77
+Dummy 78
+Dummy 79
+Dummy 80
+Yan Yue Dao (P)
+Yan Yue Dao (G)
+Reaver "Cruelty"
+Reaver "Calamity"
+Dark Claw
+Dark Claw "Demise"
+Tenebra
+Tenebra D
+Rising Soul
+No Equipment
+Bone Axe
+Bone Axe+
+Assault Axe
+Assault Axe+
+Dummy 81
+Blitzkrieg (R)
+Blitzkrieg (B)
+Dummy 82
+Dummy 83
+Dummy 84
+Dummy 85
+Dummy 86
+Dummy 87
+Dummy 88
+Bastion Blitz (P)
+Dummy 89
+Fire Tempest
+Flame Tempest
+Bolt Axe
+Dummy 90
+Volt Axe (R)
+Dummy 91
+Volt Axe (Y)
+Megavolt Axe (P)
+Megavolt Axe (G)
+High Bolt Axe
+Dummy 92
+Dummy 93
+Dummy 94
+Dummy 95
+Thunderstrike (P)
+Thunderstrike (G)
+Amber Slash
+Amber Slash+
+Amber Hoarfrost
+Inceadeus
+Inceadeus+
+Great Inceadeus
+Demonbind
+Dummy 96
+Dummy 97
+Dummy 98
+Ironblood Axe
+Great Demonbind (P)
+Great Demonbind (G)
+Rough Edge
+Dummy 99
+Tough Break (R)
+Tough Break (B)
+Tough Break (Y)
+Dummy 100
+Dummy 101
+Dummy 102
+Dummy 103
+Dummy 104
+Dummy 105
+Soulbreaker (P)
+Soulbreaker (G)
+Dark Switch Axe
+Black Harvest
+Sinister Saints
+No Equipment
+Iron Lance
+Iron Lance+
+Thane Lance
+Knight Lance
+Rampart
+Rampart+
+Babel Spear
+Babel Spear+
+Dummy 106
+Elder Babel Spr (R)
+Nega-Babylon
+Dummy 107
+Dummy 108
+Dummy 109
+Acrus Lance
+Dummy 110
+Doris Spear (R)
+Dummy 111
+Doris Spear (Y)
+Doris Fellspear (P)
+Doris Fellspear (G)
+High Acrus Lance
+Dummy 112
+Dummy 113
+Dummy 114
+Dummy 115
+Amphitrite (P)
+Dummy 116
+Tusk Lance
+Tusk Lance+
+Dummy 117
+Dummy 118
+Dummy 119
+Dummy 120
+Dummy 121
+Sabertooth (G)
+Gobulu Muruka
+Gobulu Muruka+
+Gobuluku Muraaka
+Bone Lance
+Bone Lance+
+Ploshasta
+Rhenohasta
+Azure Crest
+Azure Crest+
+Great Azure
+Rugged Lance
+Rugged Lance+
+Diablos Lance
+Diablos Spear
+Spiral Heat
+Agnaktor Firelance
+Ludroth Bone Spear
+Spiral Lance
+Spiral Lance+
+Dummy 122
+Dummy 123
+Spiral Splash (B)
+Dummy 124
+Dummy 125
+Spiral Splash (G)
+Shadow Javelin
+Toxic Javelin
+Rusted Lance
+Tarnished Lance
+Undertaker
+High Undertaker
+Worn Spear
+Weathered Spear
+Skyscraper
+Blue Crater
+Dummy 126
+Smalt Crater (R)
+Smalt Crater (B)
+Smalt Crater (Y)
+Dummy 127
+Dummy 128
+Dummy 129
+Dummy 130
+Dummy 131
+Dummy 132
+Doom Crown (P)
+Doom Crown (G)
+Grief Lance
+Dummy 133
+Dummy 134
+Dummy 135
+Dummy 136
+Fiendish Tower (P)
+Fiendish Tower (G)
+Alatreon Lance
+Alatreon Gleam
+Warrior's Lance
+Millennium
+Sharq Attaq
+ML001: Baltzenger
+Banderlance "Byakko"

@@ -1,0 +1,198 @@
+No Skills
+Negate Poison
+Double Poison
+Negate Paralysis
+Double Paralysis
+Negate Sleep
+Double Sleep
+Halve Stun
+Negate Stun
+Double Stun
+Negate Mud/Snow
+Sneak
+Taunt
+Health +20
+Health +50
+Health -10
+Health -30
+Recovery Spd +1
+Recovery Spd +2
+Recovery Spd -1
+Recovery Spd -2
+Razor Sharp
+Blunt Edge
+Sharpness +1
+Mind's Eye
+Critical Eye +1
+Critical Eye +2
+Critical Eye +3
+Critical Eye -1
+Critical Eye -2
+Critical Eye -3
+Speed Sharpening
+Slow Sharpening
+Guard +1
+Guard +2
+Guard -1
+Guard Boost
+Auto-Guard
+Reload Speed +1
+Reload Speed +2
+Reload Speed +3
+Reload Speed -1
+Reload Speed -2
+Reload Speed -3
+Recoil Down +1
+Recoil Down +2
+Recoil Down +3
+Recoil Down -1
+Recoil Down -2
+Recoil Down -3
+Normal S Boost
+Pierce S Boost
+Pellet S Boost
+Normal S All Up
+Pierce S Lv1 Up
+Pierce S All Up
+Pellet S Lv1 Up
+Pellet S All Up
+Crag S Lv1 Up
+Crag S All Up
+Clust S Lv1 Up
+Clust S All Up
+Status Atk Up
+Status Atk Down
+Element Atk Up
+Element Atk Down
+Bombardier
+Halve Hunger
+Negate Hunger
+Raise Hunger
+Double Hunger
+Gourmand
+Scavenger
+Attack Up (S)
+Attack Up (M)
+Attack Up (L)
+Attack Down (S)
+Attack Down (M)
+Attack Down (L)
+Defense Up (S)
+Defense Up (M)
+Defense Up (L)
+Defense Down (S)
+Defense Down (M)
+Defense Down (L)
+Divine Blessing
+Demonic Blessing
+Earplugs
+HG Earplugs
+Anti-Theft
+Wide-Range +1
+Wide-Range +2
+Pro Transporter
+Fire Res +10
+Fire Res +15
+Fire Res +20
+Fire Res -10
+Fire Res -15
+Water Res +10
+Water Res +15
+Water Res +20
+Water Res -10
+Water Res -15
+Thunder Res +10
+Thunder Res +15
+Thunder Res +20
+Thunder Res -10
+Thunder Res -15
+Ice Res +10
+Ice Res +15
+Ice Res +20
+Ice Res -10
+Ice Res -15
+Dragon Res +10
+Dragon Res +15
+Dragon Res +20
+Dragon Res -10
+Dragon Res -15
+Heat Cancel (Lo)
+Heat Cancel (Hi)
+Heat Surge (Lo)
+Heat Surge (Hi)
+Cold Cancel (Lo)
+Cold Cancel (Hi)
+Cold Surge (Lo)
+Cold Surge (Hi)
+Windproof (Lo)
+Windproof (Hi)
+Farsight
+Nearsight
+Gathering +1
+Gathering +2
+Gathering -1
+Speed Gatherer
+Spirit's Whim
+Divine Whim
+Spectre's Whim
+Devil's Whim
+Good Luck
+Great Luck
+Bad Luck
+Horrible Luck
+Fishing Expert
+Detect
+Autotracker
+Recovery Up
+Recovery Down
+Combination +15%
+Combination +25%
+Combination +45%
+Combination -5%
+Combination -10%
+Combination -15%
+Combination Pro
+Evasion +1
+Evasion +2
+Adrenaline +1
+Adrenaline +2
+Worrywart
+Item Use Up
+Item Use Down
+Marathon Runner
+Short Sprinter
+Load Up
+Steadiness +1
+Steadiness +2
+Steadiness -1
+Speed Eating +1
+Speed Eating +2
+Slow Eater
+Carving Pro
+Carving Master
+Tremor-Proof
+BBQ Expert
+Evasion Up
+Critical Draw
+Trap Master
+Constitution +1
+Constitution +2
+Constitution -1
+Constitution -2
+Capture Expert
+Capture Guru
+Focus
+Distraction
+Oxygen Up
+Oxygen Down
+Current Res (Lo)
+Current Res (Hi)
+Olympic Swimmer
+Doggy Paddler
+Punishing Draw
+Blightproof
+Awaken
+Fortify
+Bonus Shot
+Dung Bomb Expert
+Flaming Aura

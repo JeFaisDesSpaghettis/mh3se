@@ -1,15 +1,13 @@
 # mh3se - mh3 save editor
 
 ## Roadmap
-+ Equipment Worn + Box
+* Alternative editing method
 
 ## Notes
 
 It is not really a save editor, it just translates save files to a giant spreadsheet for you to modify it and can apply this spreadsheet back to a save file.
 
-Be careful with you saves!!! This is very much experimental please make backups before any modifications!
-
-Also i'm not at all familiar with this programming language (rust) so i can't guarantee good quality and readability
+Be careful with you saves!!! Please make backups before any modifications!
 
 ## Usage
 

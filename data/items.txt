@@ -88,7 +88,7 @@ Armor S II
 Sub S Lv1
 Sub S Lv2
 Exhaust S
-ERR89
+Dummy 89
 Slicing S
 WyvernFire Lv1
 WyvernFire Lv2
@@ -112,7 +112,7 @@ Rustshard
 Ancient Shard
 Isisium
 Gracium
-ERR113
+Dummy 113
 Godbug
 Bitterbug
 Flashbug
@@ -146,7 +146,7 @@ Unique Mushroom
 Exciteshroom
 Parashroom
 Nitroshroom
-ERR147
+Dummy 147
 Black Pearl
 Jumbo Pearl
 Broken Shell
@@ -154,19 +154,19 @@ Dragonbone Relic
 Monster Bone S
 Monster Bone M
 Monster Bone L
-ERR155
+Dummy 155
 Eldest Saturnian
-ERR157
-ERR158
-ERR159
-ERR160
-ERR161
-ERR162
+Dummy 157
+Dummy 158
+Dummy 159
+Dummy 160
+Dummy 161
+Dummy 162
 Hercudrome
-ERR164
+Dummy 164
 Chilled Meat
 Hot Meat
-ERR167
+Dummy 167
 Rathian Scale+
 Rathian Carapace
 Rath Medulla
@@ -177,7 +177,7 @@ Inferno Sac
 Rathalos Scale+
 RathalosCarapace
 Qurupeco Scale+
-ERR178
+Dummy 178
 Wonderful Beak
 Unnerving Talon
 Fearsome Maw
@@ -216,7 +216,7 @@ Glutton Tuna
 Scatterfish
 Small Goldenfish
 Goldenfish
-ERR217
+Dummy 217
 Beautiful Scale
 Giant Skull
 Pirate Booty
@@ -241,10 +241,10 @@ Pink Liver
 Ethnic Wyvrnmeat
 Ancient Skin Oil
 Queen's Spirit
-ERR242
+Dummy 242
 Funky Pheromones
 Saturnian Trap
-ERR245
+Dummy 245
 Super-sized Dung
 Fine Pelt
 Moonlight Fang
@@ -255,13 +255,13 @@ Flamboyant Quill
 Glittering Scale
 Sea-King's Scale
 Wyverngold
-ERR256
-ERR257
-ERR258
-ERR259
-ERR260
-ERR261
-ERR262
+Dummy 256
+Dummy 257
+Dummy 258
+Dummy 259
+Dummy 260
+Dummy 261
+Dummy 262
 Felvine Bomb
 Double BBQ Spit
 Dragonbone Piece
@@ -269,8 +269,8 @@ Abalone Piece
 Fossil Piece
 Odd Egg
 Mystery Bone
-ERR270
-ERR271
+Dummy 270
+Dummy 271
 Herbal Medicine
 Rathian Scale
 Rathian Shell
@@ -367,11 +367,11 @@ Armor Horn
 Farcaster
 Tranquilizer
 Dragonfell Berry
-ERR368
-ERR369
-ERR370
-ERR371
-ERR372
+Dummy 368
+Dummy 369
+Dummy 370
+Dummy 371
+Dummy 372
 Energy Drink
 Cleanser
 Garbage

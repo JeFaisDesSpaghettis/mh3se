@@ -9,8 +9,8 @@ Great Sword
 Sword and Shield
 Hammer
 Lance
-Frame
-Barrel
-Stock
+Gun Frame
+Gun Barrel
+Gun Stock
 Long Sword
 Switch Axe

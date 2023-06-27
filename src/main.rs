@@ -24,12 +24,14 @@ fn main()
     }
 
     let ids: DataIDs;
-    match DataIDs::new(&String::from("genders.txt"), &String::from("items.txt"))
+    match DataIDs::new(
+        &String::from("data/genders.txt"),
+        &String::from("data/items.txt"))
     {
         Ok(res) => ids = res,
         Err(err) =>
         {
-            eprintln!("Couldn't access data files {}", err);
+            eprintln!("Couldn't access database files {}", err);
             process::exit(1);
         }
     }
