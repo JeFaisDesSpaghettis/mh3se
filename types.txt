@@ -1,0 +1,16 @@
+NONE
+Head
+Chest
+Arms
+Waist
+Legs
+Talisman
+Great Sword
+Sword and Shield
+Hammer
+Lance
+Frame
+Barrel
+Stock
+Long Sword
+Switch Axe

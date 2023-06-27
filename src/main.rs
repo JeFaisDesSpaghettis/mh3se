@@ -122,7 +122,15 @@ fn main()
         }
 
         let mut slot: CharacterSlot = CharacterSlot::default();
-        let _ = csv_to_save(&csv, &mut slot, &ids);
+        match csv_to_save(&csv, &mut slot, &ids)
+        {
+            Ok(_) => println!("{} successfully parsed", csvpath),
+            Err(err) =>
+            {
+                eprintln!("Error parsing {} ({})", csvpath, err);
+                process::exit(1);
+            }
+        }
 
         let mut buffer: Vec<u8>;
         match file_to_buf(savepath)

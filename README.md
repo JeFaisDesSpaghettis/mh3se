@@ -3,6 +3,7 @@
 ## Roadmap
 + Equipment Worn + Box
 * HR and HRP?
++ Slots enabling/disabling
 
 ## Notes
 
