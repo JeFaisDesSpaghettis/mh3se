@@ -77,8 +77,12 @@ pub fn file_to_buf(filepath: &String) -> io::Result<Vec<u8>>
 
 pub fn buf_to_save(src: &Vec<u8>, dest: &mut CharacterSlot, slot_n: usize)
 {
+    dest.file_enabled.data     = read_u32(src,  dest.file_enabled.offset     );
+    dest.slot1_enabled.data    = read_u8(src,  dest.slot1_enabled.offset    );
+    dest.slot2_enabled.data    = read_u8(src,  dest.slot2_enabled.offset    );
+    dest.slot3_enabled.data    = read_u8(src,  dest.slot3_enabled.offset    );
     dest.gender.data    = read_u8(src,  SLOTS[slot_n] + dest.gender.offset  );
-    dest.name.data      = read_name(src, SLOTS[slot_n] + dest.name.offset    );
+    dest.name.data      = read_name(src, SLOTS[slot_n] + dest.name.offset   );
     dest.zenny.data     = read_u32(src, SLOTS[slot_n] + dest.zenny.offset   );
     dest.playtime.data  = read_u32(src, SLOTS[slot_n] + dest.playtime.offset);
     for k in 0..dest.b_pouch.data.len()
@@ -103,6 +107,10 @@ pub fn buf_to_save(src: &Vec<u8>, dest: &mut CharacterSlot, slot_n: usize)
 
 pub fn save_to_buf(src: &CharacterSlot, dest: &mut Vec<u8>, slot_n: usize)
 {
+    write_u32(dest,  src.file_enabled.offset   , src.file_enabled.data      );
+    write_u8(dest,  src.slot1_enabled.offset  , src.slot1_enabled.data     );
+    write_u8(dest,  src.slot2_enabled.offset  , src.slot2_enabled.data     );
+    write_u8(dest,  src.slot3_enabled.offset  , src.slot3_enabled.data     );
     write_u8(dest,  SLOTS[slot_n] + src.gender.offset  , src.gender.data     );
     write_name(dest, SLOTS[slot_n] + src.name.offset    , src.name.data   );
     write_u32(dest, SLOTS[slot_n] + src.zenny.offset   , src.zenny.data      );

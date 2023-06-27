@@ -23,6 +23,10 @@ fn id_to_str(list: &Vec<String>, offset: usize) -> &String
 
 pub fn save_to_csv(src: &CharacterSlot, dest: &mut Vec<String>, ids: &DataIDs)
 {
+    dest.push(format!("{}, {}", src.file_enabled.name, src.file_enabled.data));
+    dest.push(format!("{}, {}", src.slot1_enabled.name, src.slot1_enabled.data));
+    dest.push(format!("{}, {}", src.slot2_enabled.name, src.slot2_enabled.data));
+    dest.push(format!("{}, {}", src.slot3_enabled.name, src.slot3_enabled.data));
     dest.push(format!("{}, {}", src.gender.name, id_to_str(&ids.gender_list, src.gender.data as usize)));
     let mut name: String = String::from("STUBSTUB");
     match String::from_utf8(src.name.data.as_slice().to_vec())
@@ -112,7 +116,23 @@ pub fn csv_to_save(csv: &Vec<String>, dest: &mut CharacterSlot, ids: &DataIDs) -
             .map(|s| s.trim().to_string())
             .collect();
 
-        if parts[0] == dest.gender.name && parts.len() == 2
+        if parts[0] == dest.file_enabled.name && parts.len() == 2
+        {
+            dest.file_enabled.data = parts[1].parse::<u32>()?;
+        }
+        else if parts[0] == dest.slot1_enabled.name && parts.len() == 2
+        {
+            dest.slot1_enabled.data = parts[1].parse::<u8>()?;
+        }
+        else if parts[0] == dest.slot2_enabled.name && parts.len() == 2
+        {
+            dest.slot2_enabled.data = parts[1].parse::<u8>()?;
+        }
+        else if parts[0] == dest.slot3_enabled.name && parts.len() == 2
+        {
+            dest.slot3_enabled.data = parts[1].parse::<u8>()?;
+        }
+        else if parts[0] == dest.gender.name && parts.len() == 2
         {
             match str_to_id(&parts[1], &ids.gender_list, 0)
             {
