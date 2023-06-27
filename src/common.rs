@@ -64,6 +64,8 @@ pub struct CharacterSlot
     pub b_pouch: BPouch,
     pub g_pouch: GPouch,
     pub item_box: ItemBox,
+    pub hrp: U32Entry,
+    pub hr: U16Entry,
 }
 
 pub fn read_lines(filepath: &String) -> io::Result<Vec<String>>
@@ -110,7 +112,9 @@ impl CharacterSlot
             playtime: U32Entry{name: String::from("playtime"), offset: 0x1C, data: 0x00},
             b_pouch: BPouch{name: String::from("blade_pouch"), offset: 0xA0, data: [(0, 0) ; 3 * 8]},
             g_pouch: GPouch{name: String::from("gunner_pouch"), offset: 0x100, data: [(0, 0) ; 4 * 8]},
-            item_box: ItemBox { name: String::from("item_box"), offset: 0x180, data: [(0, 0) ; 100 * 8]}
+            item_box: ItemBox { name: String::from("item_box"), offset: 0x180, data: [(0, 0) ; 100 * 8]},
+            hrp: U32Entry { name: String::from("hrpoints"), offset: 0x3DE0, data: 0x0000 },
+            hr: U16Entry { name: String::from("hunterrank"), offset: 0x3DE4, data: 0x00 }
         }
     }
 }

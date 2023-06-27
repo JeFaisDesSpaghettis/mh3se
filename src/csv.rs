@@ -37,6 +37,8 @@ pub fn save_to_csv(src: &CharacterSlot, dest: &mut Vec<String>, ids: &DataIDs)
     dest.push(format!("{}, {}", src.name.name, name));
     dest.push(format!("{}, {}", src.zenny.name, src.zenny.data));
     dest.push(format!("{}, {}", src.playtime.name, src.playtime.data));
+    dest.push(format!("{}, {}", src.hrp.name, src.hrp.data));
+    dest.push(format!("{}, {}", src.hr.name, src.hr.data));
     for k in 0..src.b_pouch.data.len()
     {
         dest.push(format!("{}_{}, {}, {}",
@@ -135,6 +137,14 @@ pub fn csv_to_save(csv: &Vec<String>, dest: &mut CharacterSlot, ids: &DataIDs) -
         else if parts[0] == dest.playtime.name && parts.len() == 2
         {
             dest.playtime.data = parts[1].parse::<u32>()?;
+        }
+        else if parts[0] == dest.hrp.name && parts.len() == 2
+        {
+            dest.hrp.data = parts[1].parse::<u32>()?;
+        }
+        else if parts[0] == dest.hr.name && parts.len() == 2
+        {
+            dest.hr.data = parts[1].parse::<u16>()?;
         }
         else if parts[0].starts_with(dest.b_pouch.name.as_str()) && parts.len() == 3
         {

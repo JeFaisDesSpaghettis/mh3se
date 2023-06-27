@@ -96,6 +96,8 @@ pub fn buf_to_save(src: &Vec<u8>, dest: &mut CharacterSlot, slot_n: usize)
         dest.item_box.data[k].0 = read_u16(src, SLOTS[slot_n] + dest.item_box.offset + (k * 4));
         dest.item_box.data[k].1 = read_u16(src, SLOTS[slot_n] + dest.item_box.offset + (k * 4) + 2) as i16;
     }
+    dest.hrp.data    = read_u32(src,  SLOTS[slot_n] + dest.hrp.offset   );
+    dest.hr.data    = read_u16(src,  SLOTS[slot_n] + dest.hr.offset     );
     return
 }
 
@@ -120,6 +122,8 @@ pub fn save_to_buf(src: &CharacterSlot, dest: &mut Vec<u8>, slot_n: usize)
         write_u16(dest, SLOTS[slot_n] + src.item_box.offset + (k * 4), src.item_box.data[k].0);
         write_u16(dest, SLOTS[slot_n] + src.item_box.offset + (k * 4) + 2, src.item_box.data[k].1 as u16);
     }
+    write_u32(dest,  SLOTS[slot_n] + src.hrp.offset  , src.hrp.data     );
+    write_u16(dest,  SLOTS[slot_n] + src.hr.offset  , src.hr.data       );
 }
 
 pub fn buf_to_file(filepath: &String, buffer: &mut Vec<u8>) -> io::Result<()>
