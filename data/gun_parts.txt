@@ -15,14 +15,14 @@ No Equipment
 (Frame) Chaos Wing
 (Frame) Jhen Cannon
 (Frame) Dummy 16
-(Frame) Aquamatic "Spark"
-(Frame) Aquamatic "Longshot"
+(Frame) Aquamatic Spark
+(Frame) Aquamatic Longshot
 (Frame) Vulcannon
 No Equipment
 (Barrel) Light Bowgun
 (Barrel) Medium Bowgun
 (Barrel) Heavy Bowgun
-(Barrel) Aquamatic "Needler"
+(Barrel) Aquamatic Needler
 (Barrel) Royal Launcher
 (Barrel) Thundacrus
 (Barrel) Thundacrus Rex
@@ -35,14 +35,14 @@ No Equipment
 (Barrel) Agnablaster
 (Barrel) Chaos Wing
 (Barrel) Jhen Cannon
-(Barrel) Aquamatic "Spark"
-(Barrel) Aquamatic "Longshot"
+(Barrel) Aquamatic Spark
+(Barrel) Aquamatic Longshot
 (Barrel) Vulcannon
 No Equipment
 (Stock) Light Bowgun
 (Stock) Medium Bowgun
 (Stock) Heavy Bowgun
-(Stock) Aquamatic "Needler"
+(Stock) Aquamatic Needler
 (Stock) Royal Launcher
 (Stock) Jaggid Fire
 (Stock) Thundacrus
@@ -55,7 +55,7 @@ No Equipment
 (Stock) Diablazooka
 (Stock) Chaos Wing
 (Stock) Jhen Cannon
-(Stock) Aquamatic "Spark"
-(Stock) Aquamatic "Longshot"
+(Stock) Aquamatic Spark
+(Stock) Aquamatic Longshot
 (Stock) Vulcannon
 (Stock) Bloodguilty Maw

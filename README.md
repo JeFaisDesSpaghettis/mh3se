@@ -1,14 +1,10 @@
 # mh3se - mh3 save editor
 
-## Roadmap
-+ Split files
-* GUI?
-
 ## Notes
 
 It is not really a save editor, it just translates save files to a giant spreadsheet for you to modify it and can apply this spreadsheet back to a save file.
 
-Be careful with you saves!!! Please make backups before any modifications!
+Be careful with you saves!!! Please make backups before any modifications! I didn't make any thorough tests !
 
 ## Usage
 
@@ -17,7 +13,7 @@ Be careful with you saves!!! Please make backups before any modifications!
 #### Dolphin
 The path to saves for MHTri EU is `dolphin-emu/Wii/title/00010000/524d4850/`
 
-I don't know for US and JP unfortunately try searching in the `title` folder for files named data00, data01 etc...
+The path to saves for MHTri US "should be" `dolphin-emu/Wii/title/00010000/524d4845/`
 
 #### Wii
 You'll have to export your saves and unpack them with [FE100](https://www.wiibrew.org/wiki/FE100)
@@ -44,22 +40,18 @@ csv_file -> Input csv file that describes what to change
 character_slot -> self-explanatory
 ```
 
-### Example of the csv file
+### Some cursed things you could write in the csv file... • _ •
 ```
-NAME, DATA
-gender, female
-name, anyname
-zenny, 10000
-playtime, 60
-
-note that the playtime is in seconds
+Equipment Box 542, Dragon Talisman, 1, NONE, Handicraft, Fencing, 15, 10
+Equipment Box 543, Dragon Talisman, 1, NONE, Expert, Health, 20, -15
+Equipment Box 544, Nega-Babylon, 1, NONE, NONE, NONE
 ```
 
 ## Other
 
-Based on [this](https://github.com/sepalani/MHTrIDA/tree/master/save) and (will be based) [this](https://github.com/sepalani/MH3DB)
+Based on [this](https://github.com/sepalani/MHTrIDA/tree/master/save) and [this](https://github.com/sepalani/MH3DB)
 
-Some random pending findings
+Some random findings
 ```
 /*
     worn_weapon_type: u8, // 0x0068

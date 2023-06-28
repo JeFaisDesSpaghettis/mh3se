@@ -71,7 +71,6 @@ pub fn buf_to_save(buf: &Vec<u8>, slot: &mut CharacterSlot, slot_n: usize)
     for k in 0..slot.equipment_box.data.len() {
         match read_u8(buf, SLOTS_OFFSET[slot_n] + slot.equipment_box.offset + (k * 12))
         {
-            0 => slot.equipment_box.data[k].0 = EquipTypeE::None,
             1 => slot.equipment_box.data[k].0 = EquipTypeE::Chest,
             2 => slot.equipment_box.data[k].0 = EquipTypeE::Arms,
             3 => slot.equipment_box.data[k].0 = EquipTypeE::Waist,
@@ -87,7 +86,7 @@ pub fn buf_to_save(buf: &Vec<u8>, slot: &mut CharacterSlot, slot_n: usize)
             13 => slot.equipment_box.data[k].0 = EquipTypeE::Stock,
             14 => slot.equipment_box.data[k].0 = EquipTypeE::LS,
             15 => slot.equipment_box.data[k].0 = EquipTypeE::SA,
-            _ => { }
+            _ => slot.equipment_box.data[k].0 = EquipTypeE::None
         }
         slot.equipment_box.data[k].1 =
             read_u8(buf, SLOTS_OFFSET[slot_n] + slot.equipment_box.offset + (k * 12) + 1);

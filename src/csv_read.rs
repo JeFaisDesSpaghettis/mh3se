@@ -158,6 +158,7 @@ pub fn csv_to_save(csv: &Vec<String>, slot: &mut CharacterSlot, ids: &DataIDs) -
         let parts: Vec<String> = line
             .split(',')
             .map(|s| s.trim().to_string())
+            .filter(|s| !s.is_empty())
             .collect();
 
         if parts[0] == slot.file_enabled.name && parts.len() == 2 {

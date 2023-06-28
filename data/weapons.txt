@@ -227,8 +227,8 @@ Ludroth Bone Mace
 Ludroth Bone Maul
 Ludroth Splashhammer
 Vodyanoy Hammer
-Fang Hammer "Echo"
-Fang Hammer "Ruin"
+Fang Hammer Echo
+Fang Hammer Ruin
 Jhen Mohran Hammer
 Carapace Hammer
 Carapace Hammer+
@@ -288,16 +288,16 @@ Shadowbinder (P)
 Shadowbinder (G)
 Dancing Flames
 Dancing Hellfire
-Wyvern Blade "Fire"
-Wyvern Blade "Flame"
-Wyvern Blade "Flare"
+Wyvern Blade Fire
+Wyvern Blade Flame
+Wyvern Blade Flare
 Barbarian Blade
 Barbarian Blade+
 Dummy 295
 Dummy 296
 Dummy 297
 Dummy 298
-Barbrian "Sharq" (P)
+Barbrian Sharq (P)
 Orochi Sword
 Guan Dao
 Dummy 302
@@ -306,10 +306,10 @@ Dummy 304
 Dummy 305
 Yan Yue Dao (P)
 Yan Yue Dao (G)
-Reaver "Cruelty"
-Reaver "Calamity"
+Reaver Cruelty
+Reaver Calamity
 Dark Claw
-Dark Claw "Demise"
+Dark Claw Demise
 Tenebra
 Tenebra D
 Rising Soul
@@ -472,4 +472,4 @@ Warrior's Lance
 Millennium
 Sharq Attaq
 ML001: Baltzenger
-Banderlance "Byakko"
+Banderlance Byakko

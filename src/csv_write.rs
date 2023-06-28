@@ -16,7 +16,7 @@ fn id_to_str(list: &Vec<String>, id: usize) -> &String
     return &list[id]
 }
 
-fn item_slots_to_lines(item_slots: &ItemSlots, csv: &mut Vec<String>, ids: &DataIDs)
+fn item_slots_to_csv(item_slots: &ItemSlots, csv: &mut Vec<String>, ids: &DataIDs)
 {
     for k in 0..item_slots.data.len() {
         csv.push(format!("{} {}, {}, {}",
@@ -56,7 +56,7 @@ fn get_deco_skill_name(deco_skill: &[u16 ; 3], talisman_slots: isize, ids: &Data
     }
 }
 
-fn equip_box_to_lines(equip_box: &EquipBox, csv: &mut Vec<String>, ids: &DataIDs) -> Result<(), String>
+fn equip_box_to_csv(equip_box: &EquipBox, csv: &mut Vec<String>, ids: &DataIDs) -> Result<(), String>
 {
     for k in 0..equip_box.data.len()
     {
@@ -132,10 +132,10 @@ pub fn save_to_csv(slot: &CharacterSlot, csv: &mut Vec<String>, ids: &DataIDs)
     csv.push(format!("{}, {}", slot.playtime.name, slot.playtime.data));
     csv.push(format!("{}, {}", slot.hrp.name, slot.hrp.data));
     csv.push(format!("{}, {}", slot.hr.name, slot.hr.data));
-    item_slots_to_lines(&slot.b_pouch, csv, ids);
-    item_slots_to_lines(&slot.g_pouch, csv, ids);
-    item_slots_to_lines(&slot.item_box, csv, ids);
-    let _ = equip_box_to_lines(&slot.equipment_box, csv, ids);
+    item_slots_to_csv(&slot.b_pouch, csv, ids);
+    item_slots_to_csv(&slot.g_pouch, csv, ids);
+    item_slots_to_csv(&slot.item_box, csv, ids);
+    let _ = equip_box_to_csv(&slot.equipment_box, csv, ids);
 }
 
 
