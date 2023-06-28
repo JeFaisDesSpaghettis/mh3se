@@ -47,6 +47,8 @@ Equipment Box 543, Dragon Talisman, 1, NONE, Expert, Health, 20, -15
 Equipment Box 544, Nega-Babylon, 1, NONE, NONE, NONE
 ```
 
+[Example CSV File](/example.csv)
+
 ## Other
 
 Based on [this](https://github.com/sepalani/MHTrIDA/tree/master/save) and [this](https://github.com/sepalani/MH3DB)
