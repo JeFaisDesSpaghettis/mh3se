@@ -1,7 +1,8 @@
 # mh3se - mh3 save editor
 
 ## Roadmap
-* Alternative editing method
++ Split files
+* GUI?
 
 ## Notes
 
@@ -58,12 +59,11 @@ note that the playtime is in seconds
 
 Based on [this](https://github.com/sepalani/MHTrIDA/tree/master/save) and (will be based) [this](https://github.com/sepalani/MH3DB)
 
-Some pending findings
-
+Some random pending findings
 ```
-/* [WIP]
-    // Worn Equipment...
+/*
     worn_weapon_type: u8, // 0x0068
+    worn_weapon_lvl: u8, // 0x0069
     worn_weapon_id: u16, // 0x006A
     worn_weapon_deco_1: u16,   // 0x006E
     worn_weapon_deco_2: u16,   // 0x0070
@@ -80,9 +80,5 @@ Some pending findings
     worn_arms_deco_1: u16, // 0x009E, offset to first deco in item list
     worn_arms_deco_2: u16, // 0x00A0, offset to first deco in item list
     worn_arms_loc: u16, // 0x00DC
-    // Equipment Box...
-
-    // Hunter rank...
-    hr: u16
-    */
+*/
 ```

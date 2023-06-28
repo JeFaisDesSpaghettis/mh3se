@@ -18,19 +18,19 @@ Carapace Blade
 Barroth Wedge
 Barroth Smasher
 Lagiacrus Blade
-Dummy 1
+Dummy 20
 Lagia Lightning (R)
-Dummy 2
+Dummy 22
 Lagia Lightning (Y)
 Lagia Bluebolt (P)
 Lagia Bluebolt (G)
 High Lagia Blade
-Dummy 3
-Dummy 4
-Dummy 5
-Dummy 6
+Dummy 27
+Dummy 28
+Dummy 29
+Dummy 30
 Lagia Wildfire (P)
-Dummy 7
+Dummy 32
 Ludroth Bone Sword
 Ludroth Bone Sword+
 Cataclysm Sword
@@ -50,9 +50,9 @@ Golem Blade+
 Blade of Talos
 Valkyrie Blade
 Sieglinde
-Dummy 8
-Dummy 9
-Dummy 10
+Dummy 52
+Dummy 53
+Dummy 54
 Dread Ignition
 High Sieglinde (P)
 High Sieglinde (G)
@@ -68,22 +68,22 @@ Worn Great Sword
 Weathered Grt Sword
 Epitaph Blade
 Vulcanis
-Dummy 11
+Dummy 70
 Vulcanvil (R)
 Vulcanvil (B)
 Vulcanvil (Y)
-Dummy 12
-Dummy 13
-Dummy 14
-Dummy 15
-Dummy 16
+Dummy 74
+Dummy 75
+Dummy 76
+Dummy 77
+Dummy 78
 Vulcamagnon (P)
 Vulcamagnon (G)
 Berserker Sword
-Dummy 17
-Dummy 18
-Dummy 19
-Dummy 20
+Dummy 82
+Dummy 83
+Dummy 84
+Dummy 85
 Anguish (P)
 Anguish (G)
 Alatreon Great Sword
@@ -110,10 +110,10 @@ Hypnos Knife
 Morpheus Knife
 Azi Dahaka
 Azi Dahaka+
-Dummy 21
-Dummy 22
-Dummy 23
-Dummy 24
+Dummy 112
+Dummy 113
+Dummy 114
+Dummy 115
 Almighty Dahaka (P)
 Meteora
 Carapace Mace
@@ -136,18 +136,18 @@ Qurupeco Chopper
 Djinn
 Blazing Falchion
 Lagia Sword
-Dummy 25
+Dummy 138
 Storm Sword (R)
-Dummy 26
+Dummy 140
 Storm Sword (Y)
 Maelstrom Sword (P)
 Maelstrom Sword (G)
 High Lagia Sword
-Dummy 27
-Dummy 28
-Dummy 29
-Dummy 30
-Dummy 31
+Dummy 145
+Dummy 146
+Dummy 147
+Dummy 148
+Dummy 159
 Takemikazuchi (G)
 Rusted Sword
 Tarnished Sword
@@ -157,26 +157,26 @@ Worn Sword
 Weathered Sword
 Divine Exodus
 Tusk Gear
-Dummy 32
+Dummy 159
 Fossil Gear (R)
 Fossil Gear (B)
 Fossil Gear (Y)
-Dummy 33
-Dummy 34
-Dummy 35
-Dummy 36
-Dummy 37
-Dummy 38
+Dummy 163
+Dummy 164
+Dummy 165
+Dummy 166
+Dummy 167
+Dummy 168
 Skull's Wrath (P)
 Skull's Wrath (G)
 Chak Chak
 Chak Chak+
 Wagga Wagga
 Jhen Kodachi
-Dummy 39
-Dummy 40
-Dummy 41
-Dummy 42
+Dummy 175
+Dummy 176
+Dummy 177
+Dummy 178
 Calm Sands (P)
 Calm Sands (G)
 Alatreon Sword
@@ -195,29 +195,29 @@ Gun Hammer
 Gun Hammer+
 Deadeye Revolver
 Vortex Hammer
-Dummy 43
+Dummy 197
 Vortical Hammer (R)
-Dummy 44
+Dummy 199
 Vortical Hammer (Y)
 Vortiginous Hmr (P)
 Vortiginous Hmr (G)
 High Vortex Hammer
-Dummy 45
-Dummy 46
-Dummy 47
-Dummy 48
-Dummy 49
+Dummy 204
+Dummy 205
+Dummy 206
+Dummy 207
+Dummy 208
 Vortastrophe (G)
 Plume Flint
 Peco Flint
 Red Bludgeon
 Red Bludgeon+
-Dummy 50
-Dummy 51
-Dummy 52
-Dummy 53
+Dummy 214
+Dummy 215
+Dummy 216
+Dummy 217
 Huracan Hammer (P)
-Dummy 54
+Dummy 218
 Numbingbird
 Paralykeet
 Alluring Lotus
@@ -246,22 +246,22 @@ Worn Hammer
 Weathered Hammer
 Pulsating Core
 Gaiasp
-Dummy 55
+Dummy 248
 Gaiarch (R)
 Gaiarch (B)
 Gaiarch (Y)
-Dummy 56
-Dummy 57
-Dummy 58
-Dummy 59
-Dummy 60
-Dummy 61
+Dummy 252
+Dummy 253
+Dummy 254
+Dummy 255
+Dummy 256
+Dummy 257
 Great Gaiarch (P)
 Great Gaiarch (G)
 Devil's Due
-Dummy 62
-Dummy 63
-Dummy 64
+Dummy 261
+Dummy 262
+Dummy 263
 Devil's Advocate
 Devil's Crush (P)
 Devil's Crush (G)
@@ -272,18 +272,18 @@ Iron Devil
 No Equipment
 Thunderclap
 Thunderclap+
-Dummy 65
+Dummy 274
 Heaven's Thunder (R)
-Dummy 66
+Dummy 276
 Heaven's Thunder (Y)
-Dummy 67
-Dummy 68
+Dummy 278
+Dummy 279
 Ananta Boneblade
 Ananta Boneblade+
-Dummy 69
-Dummy 70
-Dummy 71
-Dummy 72
+Dummy 282
+Dummy 283
+Dummy 284
+Dummy 285
 Shadowbinder (P)
 Shadowbinder (G)
 Dancing Flames
@@ -293,17 +293,17 @@ Wyvern Blade "Flame"
 Wyvern Blade "Flare"
 Barbarian Blade
 Barbarian Blade+
-Dummy 73
-Dummy 74
-Dummy 75
-Dummy 76
+Dummy 295
+Dummy 296
+Dummy 297
+Dummy 298
 Barbrian "Sharq" (P)
 Orochi Sword
 Guan Dao
-Dummy 77
-Dummy 78
-Dummy 79
-Dummy 80
+Dummy 302
+Dummy 303
+Dummy 304
+Dummy 305
 Yan Yue Dao (P)
 Yan Yue Dao (G)
 Reaver "Cruelty"
@@ -318,32 +318,32 @@ Bone Axe
 Bone Axe+
 Assault Axe
 Assault Axe+
-Dummy 81
+Dummy 320
 Blitzkrieg (R)
 Blitzkrieg (B)
-Dummy 82
-Dummy 83
-Dummy 84
-Dummy 85
-Dummy 86
-Dummy 87
-Dummy 88
+Dummy 323
+Dummy 324
+Dummy 325
+Dummy 326
+Dummy 327
+Dummy 328
+Dummy 329
 Bastion Blitz (P)
-Dummy 89
+Dummy 331
 Fire Tempest
 Flame Tempest
 Bolt Axe
-Dummy 90
+Dummy 335
 Volt Axe (R)
-Dummy 91
+Dummy 337
 Volt Axe (Y)
 Megavolt Axe (P)
 Megavolt Axe (G)
 High Bolt Axe
-Dummy 92
-Dummy 93
-Dummy 94
-Dummy 95
+Dummy 342
+Dummy 343
+Dummy 344
+Dummy 345
 Thunderstrike (P)
 Thunderstrike (G)
 Amber Slash
@@ -353,23 +353,23 @@ Inceadeus
 Inceadeus+
 Great Inceadeus
 Demonbind
-Dummy 96
-Dummy 97
-Dummy 98
+Dummy 355
+Dummy 356
+Dummy 357
 Ironblood Axe
 Great Demonbind (P)
 Great Demonbind (G)
 Rough Edge
-Dummy 99
+Dummy 362
 Tough Break (R)
 Tough Break (B)
 Tough Break (Y)
-Dummy 100
-Dummy 101
-Dummy 102
-Dummy 103
-Dummy 104
-Dummy 105
+Dummy 366
+Dummy 367
+Dummy 368
+Dummy 369
+Dummy 370
+Dummy 371
 Soulbreaker (P)
 Soulbreaker (G)
 Dark Switch Axe
@@ -384,33 +384,33 @@ Rampart
 Rampart+
 Babel Spear
 Babel Spear+
-Dummy 106
+Dummy 387
 Elder Babel Spr (R)
 Nega-Babylon
-Dummy 107
-Dummy 108
-Dummy 109
+Dummy 389
+Dummy 390
+Dummy 391
 Acrus Lance
-Dummy 110
+Dummy 393
 Doris Spear (R)
-Dummy 111
+Dummy 395
 Doris Spear (Y)
 Doris Fellspear (P)
 Doris Fellspear (G)
 High Acrus Lance
-Dummy 112
-Dummy 113
-Dummy 114
-Dummy 115
+Dummy 400
+Dummy 401
+Dummy 402
+Dummy 403
 Amphitrite (P)
-Dummy 116
+Dummy 405
 Tusk Lance
 Tusk Lance+
-Dummy 117
-Dummy 118
-Dummy 119
-Dummy 120
-Dummy 121
+Dummy 408
+Dummy 409
+Dummy 410
+Dummy 411
+Dummy 412
 Sabertooth (G)
 Gobulu Muruka
 Gobulu Muruka+
@@ -431,11 +431,11 @@ Agnaktor Firelance
 Ludroth Bone Spear
 Spiral Lance
 Spiral Lance+
-Dummy 122
-Dummy 123
+Dummy 433
+Dummy 434
 Spiral Splash (B)
-Dummy 124
-Dummy 125
+Dummy 436
+Dummy 437
 Spiral Splash (G)
 Shadow Javelin
 Toxic Javelin
@@ -447,23 +447,23 @@ Worn Spear
 Weathered Spear
 Skyscraper
 Blue Crater
-Dummy 126
+Dummy 449
 Smalt Crater (R)
 Smalt Crater (B)
 Smalt Crater (Y)
-Dummy 127
-Dummy 128
-Dummy 129
-Dummy 130
-Dummy 131
-Dummy 132
+Dummy 453
+Dummy 454
+Dummy 455
+Dummy 456
+Dummy 457
+Dummy 458
 Doom Crown (P)
 Doom Crown (G)
 Grief Lance
-Dummy 133
-Dummy 134
-Dummy 135
-Dummy 136
+Dummy 462
+Dummy 463
+Dummy 464
+Dummy 465
 Fiendish Tower (P)
 Fiendish Tower (G)
 Alatreon Lance
