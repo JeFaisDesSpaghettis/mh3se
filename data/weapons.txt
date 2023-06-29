@@ -77,6 +77,7 @@ Dummy 75
 Dummy 76
 Dummy 77
 Dummy 78
+Dummy 79
 Vulcamagnon (P)
 Vulcamagnon (G)
 Berserker Sword

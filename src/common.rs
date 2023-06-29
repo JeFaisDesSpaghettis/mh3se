@@ -47,15 +47,15 @@ pub const EQUIP_TYPES: [EquipType ; 16] = [
     EquipType{etype: EquipTypeE::Legs       , group: ListGroup::Armors , start: 382, end: 506   },
     EquipType{etype: EquipTypeE::Head       , group: ListGroup::Armors , start: 507, end: 647   },
     EquipType{etype: EquipTypeE::Talisman   , group: ListGroup::Armors , start: 648, end: 655   },
-    EquipType{etype: EquipTypeE::GS         , group: ListGroup::Weapons, start: 0  , end: 92    },
-    EquipType{etype: EquipTypeE::SNS        , group: ListGroup::Weapons, start: 93 , end: 184   },
-    EquipType{etype: EquipTypeE::HA         , group: ListGroup::Weapons, start: 185, end: 270   },
-    EquipType{etype: EquipTypeE::LA         , group: ListGroup::Weapons, start: 377, end: 474   },
+    EquipType{etype: EquipTypeE::GS         , group: ListGroup::Weapons, start: 0  , end: 93    },
+    EquipType{etype: EquipTypeE::SNS        , group: ListGroup::Weapons, start: 94 , end: 185   },
+    EquipType{etype: EquipTypeE::HA         , group: ListGroup::Weapons, start: 186, end: 271   },
+    EquipType{etype: EquipTypeE::LA         , group: ListGroup::Weapons, start: 378, end: 475   },
     EquipType{etype: EquipTypeE::Frame      , group: ListGroup::Guns   , start: 0  , end: 19    },
     EquipType{etype: EquipTypeE::Barrel     , group: ListGroup::Guns   , start: 20 , end: 39    },
     EquipType{etype: EquipTypeE::Stock      , group: ListGroup::Guns   , start: 40 , end: 60    },
-    EquipType{etype: EquipTypeE::LS         , group: ListGroup::Weapons, start: 271, end: 314   },
-    EquipType{etype: EquipTypeE::SA         , group: ListGroup::Weapons, start: 315, end: 376   }
+    EquipType{etype: EquipTypeE::LS         , group: ListGroup::Weapons, start: 272, end: 315   },
+    EquipType{etype: EquipTypeE::SA         , group: ListGroup::Weapons, start: 316, end: 377   }
 ];
 
 pub const JEWEL_RANGE: (usize, usize) = (615, 746);
