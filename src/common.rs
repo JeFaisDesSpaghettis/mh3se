@@ -3,6 +3,7 @@ use std::fs::File;
 
 pub const CHECKSUM_OFFSET: usize = 0x04;
 pub const SLOTS_OFFSET: [usize; 3] = [0x0048, 0x6048, 0xC048];
+pub const SLOTS_TOGGLE_OFFSET: [usize; 3] = [0x0, 0x1, 0x2];
 
 #[derive(Clone, Copy, PartialEq, PartialOrd)]
 pub enum EquipTypeE {
@@ -116,11 +117,16 @@ pub struct EquipBox {
     pub data: [EquipSlot ; 100 * 8]
 }
 
+pub type RGBValue = (u8, u8, u8);
+
+pub struct RGBEntry {
+    pub name: String,
+    pub offset: usize,
+    pub data: RGBValue
+}
+
 pub struct CharacterSlot {
-    pub file_enabled:   U32Entry,
-    pub slot1_enabled:  U8Entry,
-    pub slot2_enabled:  U8Entry,
-    pub slot3_enabled:  U8Entry,
+    pub slot_enabled:   U8Entry,
     pub gender:         U8Entry,
     pub name:           Name,
     pub zenny:          U32Entry,
@@ -130,7 +136,29 @@ pub struct CharacterSlot {
     pub item_box:       ItemSlots,
     pub equipment_box:  EquipBox,
     pub hrp:            U32Entry,
-    pub hr:             U16Entry
+    pub hr:             U16Entry,
+
+    /*
+        (Offsets for Slot 1)
+        Face type       1-9   0x0049 u8    (0x00-0x08)
+        Hairstyle       1-11  0x004A u8    (0x00-0x0A)
+        Hair color            0x005C u8 x3 (RGB)
+        Clothing type   1-4   0x00E6 u8    (0x00-0x03)
+        Voice type      1-20  0x00E7 u8    (0x00-0x13)
+        Clothing color        0x3A04 u8 x3 (RGB)
+        Eye color       1-10  0x3E2E u8    (0x00-0x09)
+        Features        0-12  0x3E2F u8    (0x00-0x0C)
+        Skin tone       0-612 0x39E8 u16   (0x00-0x264)
+     */
+    pub face_type:      U8Entry,
+    pub hair_type:      U8Entry,
+    pub hair_color:     RGBEntry,
+    pub cloth_type:     U8Entry,
+    pub voice_type:     U8Entry,
+    pub cloth_color:    RGBEntry,
+    pub eye_color:      U8Entry,
+    pub feature_type:   U8Entry,
+    pub skin_tone:      U16Entry
 }
 
 pub struct DataIDs {
@@ -147,17 +175,8 @@ impl CharacterSlot
     pub fn default() -> Self
     {
         CharacterSlot {
-            file_enabled: U32Entry{
-                name: String::from("File Toggled"), offset: 0x00, data: 0
-            },
-            slot1_enabled: U8Entry{
-                name: String::from("Character 1 Toggled"), offset: 0x1A, data: 0
-            },
-            slot2_enabled: U8Entry{
-                name: String::from("Character 2 Toggled"), offset: 0x1B, data: 0
-            },
-            slot3_enabled: U8Entry{
-                name: String::from("Character 3 Toggled"), offset: 0x1C, data: 0
+            slot_enabled: U8Entry{
+                name: String::from("Character Toggled"), offset: 0x1A, data: 0
             },
             gender: U8Entry{
                 name: String::from("Gender"), offset: 0x00, data: 0
@@ -188,6 +207,33 @@ impl CharacterSlot
             },
             hr: U16Entry {
                 name: String::from("Hunter Rank"), offset: 0x3DE4, data: 0
+            },
+            face_type: U8Entry {
+                name: String::from("Face Type"), offset: 0x01, data: 0
+            },
+            hair_type: U8Entry {
+                name: String::from("Hair Type"), offset: 0x02, data: 0
+            },
+            hair_color: RGBEntry {
+                name: String::from("Hair RGB Color"), offset: 0x14, data: (255, 255, 255)
+            },
+            cloth_type: U8Entry {
+                name: String::from("Clothing Type"), offset: 0x9E, data: 0
+            },
+            voice_type: U8Entry {
+                name: String::from("Voice Type"), offset: 0x9F, data: 0
+            },
+            cloth_color: RGBEntry {
+                name: String::from("Clothing RGB Color"), offset: 0x39BC, data: (255, 255, 255)
+            },
+            eye_color: U8Entry {
+                name: String::from("Eye Type"), offset: 0x3DE6, data: 0
+            },
+            feature_type: U8Entry {
+                name: String::from("Feature Type"), offset: 0x3DE7, data: 0
+            },
+            skin_tone: U16Entry {
+                name: String::from("Skin Tone"), offset: 0x39A0, data: 0x200
             },
         }
     }

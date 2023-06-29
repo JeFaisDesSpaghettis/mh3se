@@ -8,7 +8,11 @@ use crate::common::{
     ListGroup,
     read_lines,
     JEWEL_RANGE,
-    EQUIP_TYPES
+    EQUIP_TYPES,
+    U8Entry,
+    U16Entry,
+    U32Entry,
+    RGBEntry
 };
 
 fn str_to_int<T>(string: &str) -> Result<T, String>
@@ -149,6 +153,61 @@ fn csv_to_equip_slot(
     Ok(())
 }
 
+fn csv_to_u8_entry(line: &Vec<String>, entry: &mut U8Entry, linecount: &usize) -> Result<usize, String>
+{
+    match str_to_int::<u8>(&line[1]) {
+        Ok(res) => entry.data = res,
+        Err(err) => {
+            return Err(format!("Error on line {} ({})", linecount, err))
+        }
+    }
+    Ok(*linecount)
+}
+
+fn csv_to_u16_entry(line: &Vec<String>, entry: &mut U16Entry, linecount: &usize) -> Result<usize, String>
+{
+    match str_to_int::<u16>(&line[1]) {
+        Ok(res) => entry.data = res,
+        Err(err) => {
+            return Err(format!("Error on line {} ({})", linecount, err))
+        }
+    }
+    Ok(*linecount)
+}
+
+fn csv_to_u32_entry(line: &Vec<String>, entry: &mut U32Entry, linecount: &usize) -> Result<usize, String>
+{
+    match str_to_int::<u32>(&line[1]) {
+        Ok(res) => entry.data = res,
+        Err(err) => {
+            return Err(format!("Error on line {} ({})", linecount, err))
+        }
+    }
+    Ok(*linecount)
+}
+
+fn csv_to_rgb_entry(line: &Vec<String>, entry: &mut RGBEntry, linecount: &usize) -> Result<usize, String>
+{
+    match str_to_int::<u8>(&line[1]) {
+        Ok(res) => entry.data.0 = res,
+        Err(err) => {
+            return Err(format!("Error on line {} ({})", linecount, err))
+        }
+    }
+    match str_to_int::<u8>(&line[2]) {
+        Ok(res) => entry.data.1 = res,
+        Err(err) => {
+            return Err(format!("Error on line {} ({})", linecount, err))
+        }
+    }
+    match str_to_int::<u8>(&line[3]) {
+        Ok(res) => entry.data.2 = res,
+        Err(err) => {
+            return Err(format!("Error on line {} ({})", linecount, err))
+        }
+    }
+    Ok(*linecount)
+}
 pub fn csv_to_save(csv: &Vec<String>, slot: &mut CharacterSlot, ids: &DataIDs) -> Result<usize, String>
 {
     let mut linecount: usize = 0;
@@ -161,37 +220,8 @@ pub fn csv_to_save(csv: &Vec<String>, slot: &mut CharacterSlot, ids: &DataIDs) -
             .filter(|s| !s.is_empty())
             .collect();
 
-        if parts[0] == slot.file_enabled.name && parts.len() == 2 {
-            match str_to_int::<u32>(&parts[1]) {
-                Ok(res) => slot.file_enabled.data = res,
-                Err(err) => {
-                    return Err(format!("Error on line {} ({})", linecount, err))
-                }
-            }
-        }
-        else if parts[0] == slot.slot1_enabled.name && parts.len() == 2 {
-            match str_to_int::<u8>(&parts[1]) {
-                Ok(res) => slot.slot1_enabled.data = res,
-                Err(err) => {
-                    return Err(format!("Error on line {} ({})", linecount, err))
-                }
-            }
-        }
-        else if parts[0] == slot.slot2_enabled.name && parts.len() == 2 {
-            match str_to_int::<u8>(&parts[1]) {
-                Ok(res) => slot.slot2_enabled.data = res,
-                Err(err) => {
-                    return Err(format!("Error on line {} ({})", linecount, err))
-                }
-            }
-        }
-        else if parts[0] == slot.slot3_enabled.name && parts.len() == 2 {
-            match str_to_int::<u8>(&parts[1]) {
-                Ok(res) => slot.slot3_enabled.data = res,
-                Err(err) => {
-                    return Err(format!("Error on line {} ({})", linecount, err))
-                }
-            }
+        if parts[0] == slot.slot_enabled.name && parts.len() == 2 {
+            linecount = csv_to_u8_entry(&parts, &mut slot.slot_enabled, &linecount)?;
         }
         else if parts[0] == slot.gender.name && parts.len() == 2 {
             match str_to_id(&parts[1], &ids.gender_list) {
@@ -207,36 +237,48 @@ pub fn csv_to_save(csv: &Vec<String>, slot: &mut CharacterSlot, ids: &DataIDs) -
             slot.name.data[..length].copy_from_slice(&bytes[..length]);
         }
         else if parts[0] == slot.zenny.name && parts.len() == 2 {
-            match str_to_int::<u32>(&parts[1]) {
-                Ok(res) => slot.zenny.data = res,
-                Err(err) => {
-                    return Err(format!("Error on line {} ({})", linecount, err))
-                }
-            }
+            linecount = csv_to_u32_entry(&parts, &mut slot.zenny, &linecount)?;
         }
         else if parts[0] == slot.playtime.name && parts.len() == 2 {
-            match str_to_int::<u32>(&parts[1]) {
-                Ok(res) => slot.playtime.data = res,
-                Err(err) => {
-                    return Err(format!("Error on line {} ({})", linecount, err))
-                }
-            }
+            linecount = csv_to_u32_entry(&parts, &mut slot.playtime, &linecount)?;
         }
         else if parts[0] == slot.hrp.name && parts.len() == 2 {
-            match str_to_int::<u32>(&parts[1]) {
-                Ok(res) => slot.hrp.data = res,
-                Err(err) => {
-                    return Err(format!("Error on line {} ({})", linecount, err))
-                }
-            }
+            linecount = csv_to_u32_entry(&parts, &mut slot.hrp, &linecount)?;
         }
         else if parts[0] == slot.hr.name && parts.len() == 2 {
-            match str_to_int::<u16>(&parts[1]) {
-                Ok(res) => slot.hr.data = res,
-                Err(err) => {
-                    return Err(format!("Error on line {} ({})", linecount, err))
-                }
-            }
+            linecount = csv_to_u16_entry(&parts, &mut slot.hr, &linecount)?;
+        }
+        else if parts[0] == slot.face_type.name && parts.len() == 2 {
+            linecount = csv_to_u8_entry(&parts, &mut slot.face_type, &linecount)?;
+            slot.face_type.data -= 1;
+        }
+        else if parts[0] == slot.hair_type.name && parts.len() == 2 {
+            linecount = csv_to_u8_entry(&parts, &mut slot.hair_type, &linecount)?;
+            slot.hair_type.data -= 1;
+        }
+        else if parts[0] == slot.hair_color.name && parts.len() == 4 {
+            linecount = csv_to_rgb_entry(&parts, &mut slot.hair_color, &linecount)?;
+        }
+        else if parts[0] == slot.cloth_type.name && parts.len() == 2 {
+            linecount = csv_to_u8_entry(&parts, &mut slot.cloth_type, &linecount)?;
+            slot.cloth_type.data -= 1;
+        }
+        else if parts[0] == slot.voice_type.name && parts.len() == 2 {
+            linecount = csv_to_u8_entry(&parts, &mut slot.voice_type, &linecount)?;
+            slot.voice_type.data -= 1;
+        }
+        else if parts[0] == slot.cloth_color.name && parts.len() == 4 {
+            linecount = csv_to_rgb_entry(&parts, &mut slot.cloth_color, &linecount)?;
+        }
+        else if parts[0] == slot.eye_color.name && parts.len() == 2 {
+            linecount = csv_to_u8_entry(&parts, &mut slot.eye_color, &linecount)?;
+            slot.eye_color.data -= 1;
+        }
+        else if parts[0] == slot.feature_type.name && parts.len() == 2 {
+            linecount = csv_to_u8_entry(&parts, &mut slot.feature_type, &linecount)?;
+        }
+        else if parts[0] == slot.skin_tone.name && parts.len() == 2 {
+            linecount = csv_to_u16_entry(&parts, &mut slot.skin_tone, &linecount)?;
         }
         else if parts[0].starts_with(slot.b_pouch.name.as_str()) && parts.len() == 3 {
             match csv_to_item_slot(&slot.b_pouch.name, &mut slot.b_pouch.data, &parts, &ids) {

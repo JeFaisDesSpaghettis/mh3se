@@ -1,7 +1,7 @@
 use std::io::{ Read };
 use std::fs::File;
 
-use crate::common::{CharacterSlot, ItemSlots, EquipTypeE, SLOTS_OFFSET };
+use crate::common::{CharacterSlot, ItemSlots, EquipTypeE, SLOTS_OFFSET, SLOTS_TOGGLE_OFFSET, RGBValue };
 
 fn read_u8(buf: &Vec<u8>, address: usize) -> u8
 {
@@ -36,6 +36,11 @@ fn read_name(buf: &Vec<u8>, address: usize) -> [u8; 8]
     }
 }
 
+fn read_rgb(buf: &Vec<u8>, address: usize) -> RGBValue
+{
+    (buf[address + 0], buf[address + 1], buf[address + 2])
+}
+
 pub fn file_to_buf(filepath: &String) -> Result<Vec<u8>, std::io::Error>
 {
     let mut file = File::open(filepath)?;
@@ -57,14 +62,11 @@ fn buf_to_item_slots(buf: &Vec<u8>, container: &mut ItemSlots, slot_n: usize)
 
 pub fn buf_to_save(buf: &Vec<u8>, slot: &mut CharacterSlot, slot_n: usize)
 {
-    slot.file_enabled.data     = read_u32(buf,  slot.file_enabled.offset    );
-    slot.slot1_enabled.data    = read_u8(buf,  slot.slot1_enabled.offset    );
-    slot.slot2_enabled.data    = read_u8(buf,  slot.slot2_enabled.offset    );
-    slot.slot3_enabled.data    = read_u8(buf,  slot.slot3_enabled.offset    );
-    slot.gender.data    = read_u8(buf,  SLOTS_OFFSET[slot_n] + slot.gender.offset  );
-    slot.name.data      = read_name(buf, SLOTS_OFFSET[slot_n] + slot.name.offset   );
-    slot.zenny.data     = read_u32(buf, SLOTS_OFFSET[slot_n] + slot.zenny.offset   );
-    slot.playtime.data  = read_u32(buf, SLOTS_OFFSET[slot_n] + slot.playtime.offset);
+    slot.slot_enabled.data = read_u8(buf,  SLOTS_TOGGLE_OFFSET[slot_n] + slot.slot_enabled.offset    );
+    slot.gender.data       = read_u8(buf,  SLOTS_OFFSET[slot_n] + slot.gender.offset  );
+    slot.name.data         = read_name(buf, SLOTS_OFFSET[slot_n] + slot.name.offset   );
+    slot.zenny.data        = read_u32(buf, SLOTS_OFFSET[slot_n] + slot.zenny.offset   );
+    slot.playtime.data     = read_u32(buf, SLOTS_OFFSET[slot_n] + slot.playtime.offset);
     buf_to_item_slots(buf, &mut slot.b_pouch, slot_n);
     buf_to_item_slots(buf, &mut slot.g_pouch, slot_n);
     buf_to_item_slots(buf, &mut slot.item_box, slot_n);
@@ -102,6 +104,16 @@ pub fn buf_to_save(buf: &Vec<u8>, slot: &mut CharacterSlot, slot_n: usize)
             read_u16(buf, SLOTS_OFFSET[slot_n] + slot.equipment_box.offset + (k * 12) + 10)
         ]
     }
-    slot.hrp.data    = read_u32(buf,  SLOTS_OFFSET[slot_n] + slot.hrp.offset   );
-    slot.hr.data     = read_u16(buf,  SLOTS_OFFSET[slot_n] + slot.hr.offset     );
+    slot.hrp.data           = read_u32(buf,  SLOTS_OFFSET[slot_n] + slot.hrp.offset         );
+    slot.hr.data            = read_u16(buf,  SLOTS_OFFSET[slot_n] + slot.hr.offset          );
+
+    slot.face_type.data     = read_u8(buf ,  SLOTS_OFFSET[slot_n] + slot.face_type.offset   );
+    slot.hair_type.data     = read_u8(buf ,  SLOTS_OFFSET[slot_n] + slot.hair_type.offset   );
+    slot.hair_color.data    = read_rgb(buf,  SLOTS_OFFSET[slot_n] + slot.hair_color.offset  );
+    slot.cloth_type.data    = read_u8(buf ,  SLOTS_OFFSET[slot_n] + slot.cloth_type.offset  );
+    slot.voice_type.data    = read_u8(buf ,  SLOTS_OFFSET[slot_n] + slot.voice_type.offset  );
+    slot.cloth_color.data   = read_rgb(buf,  SLOTS_OFFSET[slot_n] + slot.cloth_color.offset );
+    slot.eye_color.data     = read_u8(buf ,  SLOTS_OFFSET[slot_n] + slot.eye_color.offset   );
+    slot.feature_type.data  = read_u8(buf ,  SLOTS_OFFSET[slot_n] + slot.feature_type.offset);
+    slot.skin_tone.data     = read_u16(buf,  SLOTS_OFFSET[slot_n] + slot.skin_tone.offset   );
 }

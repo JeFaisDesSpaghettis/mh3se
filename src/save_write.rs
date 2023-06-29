@@ -1,7 +1,7 @@
 use std::io::{ Write };
 use std::fs::File;
 
-use crate::common::{CharacterSlot, ItemSlots, CHECKSUM_OFFSET, SLOTS_OFFSET };
+use crate::common::{CharacterSlot, ItemSlots, CHECKSUM_OFFSET, SLOTS_OFFSET, SLOTS_TOGGLE_OFFSET, RGBValue };
 
 fn write_u8(buf: &mut Vec<u8>, address: usize, data: u8)
 {
@@ -29,6 +29,13 @@ fn write_name(buf: &mut Vec<u8>, address: usize, str: [u8; 8])
     }
 }
 
+fn write_rgb(buf: &mut Vec<u8>, address: usize, data: RGBValue)
+{
+    buf[address    ] = data.0;
+    buf[address + 1] = data.1;
+    buf[address + 2] = data.2;
+}
+
 fn item_slots_to_buf(container: &ItemSlots, buf: &mut Vec<u8>, slot_n: usize)
 {
     for k in 0..container.data.len() {
@@ -41,10 +48,7 @@ fn item_slots_to_buf(container: &ItemSlots, buf: &mut Vec<u8>, slot_n: usize)
 
 pub fn save_to_buf(slot: &CharacterSlot, buf: &mut Vec<u8>, slot_n: usize)
 {
-    write_u32(buf,  slot.file_enabled.offset  , slot.file_enabled.data      );
-    write_u8(buf,  slot.slot1_enabled.offset  , slot.slot1_enabled.data     );
-    write_u8(buf,  slot.slot2_enabled.offset  , slot.slot2_enabled.data     );
-    write_u8(buf,  slot.slot3_enabled.offset  , slot.slot3_enabled.data     );
+    write_u8(buf,  SLOTS_TOGGLE_OFFSET[slot_n] + slot.slot_enabled.offset, slot.slot_enabled.data );
     write_u8(buf,  SLOTS_OFFSET[slot_n] + slot.gender.offset  , slot.gender.data     );
     write_name(buf, SLOTS_OFFSET[slot_n] + slot.name.offset    , slot.name.data  );
     write_u32(buf, SLOTS_OFFSET[slot_n] + slot.zenny.offset   , slot.zenny.data      );
@@ -72,6 +76,16 @@ pub fn save_to_buf(slot: &CharacterSlot, buf: &mut Vec<u8>, slot_n: usize)
     }
     write_u32(buf,  SLOTS_OFFSET[slot_n] + slot.hrp.offset , slot.hrp.data     );
     write_u16(buf,  SLOTS_OFFSET[slot_n] + slot.hr.offset  , slot.hr.data      );
+
+    write_u8(buf ,  SLOTS_OFFSET[slot_n] + slot.face_type.offset   , slot.face_type.data     );
+    write_u8(buf ,  SLOTS_OFFSET[slot_n] + slot.hair_type.offset   , slot.hair_type.data     );
+    write_rgb(buf,  SLOTS_OFFSET[slot_n] + slot.hair_color.offset  , slot.hair_color.data    );
+    write_u8(buf ,  SLOTS_OFFSET[slot_n] + slot.cloth_type.offset  , slot.cloth_type.data    );
+    write_u8(buf ,  SLOTS_OFFSET[slot_n] + slot.voice_type.offset  , slot.voice_type.data    );
+    write_rgb(buf,  SLOTS_OFFSET[slot_n] + slot.cloth_color.offset , slot.cloth_color.data   );
+    write_u8(buf ,  SLOTS_OFFSET[slot_n] + slot.eye_color.offset   , slot.eye_color.data     );
+    write_u8(buf ,  SLOTS_OFFSET[slot_n] + slot.feature_type.offset, slot.feature_type.data  );
+    write_u16(buf,  SLOTS_OFFSET[slot_n] + slot.skin_tone.offset   , slot.skin_tone.data     );
 }
 
 pub fn buf_to_file(filepath: &String, buf: &mut Vec<u8>) -> Result<(), std::io::Error>

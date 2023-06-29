@@ -1,59 +1,66 @@
 # mh3se - mh3 save editor
 
-## Notes
+## Warning
+Be careful with you saves!!! Please make backups before any modifications! I didn't make any thorough tests!
 
-It is not really a save editor, it just translates save files to a giant spreadsheet for you to modify it and can apply this spreadsheet back to a save file.
+Based on [this](https://github.com/sepalani/MHTrIDA/tree/master/save) and [this](https://github.com/sepalani/MH3DB)
 
-Be careful with you saves!!! Please make backups before any modifications! I didn't make any thorough tests !
+## Features
+```
+• Character Toggle Flags
+• Gender
+• Name
+• Zenny
+• Playtime
+• HR points
+• HR
+• All character customization characteristics: voice, skin tone etc...
+• Blademaster and Gunner Pouches
+• Item Box
+• Equipment Box, including custom talismans
+```
 
 ## Usage
 
-### Getting the save files
+### 1. Getting the save files
 
-#### Dolphin
+#### On dolphin-emu
 The path to saves for MHTri EU is `dolphin-emu/Wii/title/00010000/524d4850/`
 
-The path to saves for MHTri US "should be" `dolphin-emu/Wii/title/00010000/524d4845/`
+The path to saves for MHTri US *should be* `dolphin-emu/Wii/title/00010000/524d4845/`
 
-#### Wii
+#### On a real console
 You'll have to export your saves and unpack them with [FE100](https://www.wiibrew.org/wiki/FE100)
 
-### Read save file to a csv file
+### 2. Read save file to a csv file
 ```
 mh3se decode [save_file] [csv_file] [character_slot]
 
-save_file -> Save file you want to decode like data00, data01 etc...
-
-csv_file -> Output csv file you can modify according to what you want to change name, gender etc...
-
-character_slot -> self-explanatory
+save_file       -> Save file you want to decode like data00, data01 etc...
+csv_file        -> Output csv file you can modify according to what you want to change name, gender etc...
+character_slot  -> self-explanatory
 ```
 
-### Apply csv file to a save file
+### 3. Add some cursed things in the csv file... ( • _ • )
+
+| Entry Name        | Equipment Name  |Lvl / Slots|  Deco / Skill   |  Deco / Skill   |  Deco / Skill  | Points 1| Points 2 |
+| :-----------------|:----------------|----------:|:----------------|:----------------|:---------------|--------:|---------:|
+| Equipment Box 542 | Dragon Talisman |     1     | NONE            | Handicraft      | Fencing        |    15   |    10    |
+| Equipment Box 543 | Dragon Talisman |     1     | NONE            | Expert          | Health         |    20   |    -15   |
+| Equipment Box 544 | Nega-Babylon    |     1     | Onslaught Jewel | Onslaught Jewel | Onslaught Jewe |         |          |
+
+### 4. Apply csv file to a save file
 ```
 mh3se encode [save_file] [csv_file] [character_slot]
 
-save_file -> Save file on which you want to apply the modifications
-
-csv_file -> Input csv file that describes what to change
-
-character_slot -> self-explanatory
-```
-
-### Some cursed things you could write in the csv file... • _ •
-```
-Equipment Box 542, Dragon Talisman, 1, NONE, Handicraft, Fencing, 15, 10
-Equipment Box 543, Dragon Talisman, 1, NONE, Expert, Health, 20, -15
-Equipment Box 544, Nega-Babylon, 1, NONE, NONE, NONE
+save_file       -> Save file on which you want to apply the modifications
+csv_file        -> Input csv file that describes what to change
+character_slot  -> self-explanatory
 ```
 
 [Example CSV File](/example.csv)
 
-## Other
-
-Based on [this](https://github.com/sepalani/MHTrIDA/tree/master/save) and [this](https://github.com/sepalani/MH3DB)
-
-Some random findings
+## Some random findings
 ```
 /*
     worn_weapon_type: u8, // 0x0068

@@ -1,6 +1,6 @@
 [package]
 name = "mh3se"
-version = "0.7.0"
+version = "0.8.0"
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
@@ -8,4 +8,4 @@ edition = "2021"
 [dependencies]
 
 [target.x86_64-pc-windows-gnu]
-rustflags = ["-C", "linker=x86_64-w64-mingw32-gcc"]
+rustflags = ["", "-C", "linker=x86_64-w64-mingw32-gcc"]

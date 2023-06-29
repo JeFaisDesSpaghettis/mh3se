@@ -115,10 +115,7 @@ fn equip_box_to_csv(equip_box: &EquipBox, csv: &mut Vec<String>, ids: &DataIDs) 
 
 pub fn save_to_csv(slot: &CharacterSlot, csv: &mut Vec<String>, ids: &DataIDs)
 {
-    csv.push(format!("{}, {}", slot.file_enabled.name, slot.file_enabled.data));
-    csv.push(format!("{}, {}", slot.slot1_enabled.name, slot.slot1_enabled.data));
-    csv.push(format!("{}, {}", slot.slot2_enabled.name, slot.slot2_enabled.data));
-    csv.push(format!("{}, {}", slot.slot3_enabled.name, slot.slot3_enabled.data));
+    csv.push(format!("{}, {}", slot.slot_enabled.name, slot.slot_enabled.data));
     csv.push(format!("{}, {}", slot.gender.name, id_to_str(&ids.gender_list, slot.gender.data as usize)));
     let mut name: String = String::from("STUBSTUB");
     match String::from_utf8(slot.name.data.as_slice().to_vec()) {
@@ -132,6 +129,17 @@ pub fn save_to_csv(slot: &CharacterSlot, csv: &mut Vec<String>, ids: &DataIDs)
     csv.push(format!("{}, {}", slot.playtime.name, slot.playtime.data));
     csv.push(format!("{}, {}", slot.hrp.name, slot.hrp.data));
     csv.push(format!("{}, {}", slot.hr.name, slot.hr.data));
+
+    csv.push(format!("{}, {}", slot.face_type.name, slot.face_type.data + 1));
+    csv.push(format!("{}, {}", slot.hair_type.name, slot.hair_type.data + 1));
+    csv.push(format!("{}, {}, {}, {}", slot.hair_color.name, slot.hair_color.data.0, slot.hair_color.data.1, slot.hair_color.data.2));
+    csv.push(format!("{}, {}", slot.cloth_type.name, slot.cloth_type.data + 1));
+    csv.push(format!("{}, {}", slot.voice_type.name, slot.voice_type.data + 1));
+    csv.push(format!("{}, {}, {}, {}", slot.cloth_color.name, slot.cloth_color.data.0, slot.cloth_color.data.1, slot.cloth_color.data.2));
+    csv.push(format!("{}, {}", slot.eye_color.name, slot.eye_color.data + 1));
+    csv.push(format!("{}, {}", slot.feature_type.name, slot.feature_type.data));
+    csv.push(format!("{}, {}", slot.skin_tone.name, slot.skin_tone.data));
+
     item_slots_to_csv(&slot.b_pouch, csv, ids);
     item_slots_to_csv(&slot.g_pouch, csv, ids);
     item_slots_to_csv(&slot.item_box, csv, ids);
