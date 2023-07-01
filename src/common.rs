@@ -3,7 +3,9 @@ use std::fs::File;
 
 pub const CHECKSUM_OFFSET: usize = 0x04;
 pub const SLOTS_OFFSET: [usize; 3] = [0x0048, 0x6048, 0xC048];
+pub const SLOTS_TOGGLE_START: usize = 0x1A;
 pub const SLOTS_TOGGLE_OFFSET: [usize; 3] = [0x0, 0x1, 0x2];
+pub const SLOT_SIZE: usize = 0x6000;
 
 #[derive(Clone, Copy, PartialEq, PartialOrd)]
 pub enum EquipTypeE {
@@ -176,7 +178,7 @@ impl CharacterSlot
     {
         CharacterSlot {
             slot_enabled: U8Entry{
-                name: String::from("Character Toggled"), offset: 0x1A, data: 0
+                name: String::from("Character Toggled"), offset: SLOTS_TOGGLE_START, data: 0
             },
             gender: U8Entry{
                 name: String::from("Gender"), offset: 0x00, data: 0
