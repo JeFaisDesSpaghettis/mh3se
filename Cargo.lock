@@ -4,4 +4,4 @@ version = 3
 
 [[package]]
 name = "mh3se"
-version = "0.8.0"
+version = "0.9.0"
