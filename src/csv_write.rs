@@ -124,7 +124,7 @@ pub fn save_to_csv(slot: &CharacterSlot, csv: &mut Vec<String>, ids: &DataIDs)
             eprintln!("Name replaced with a placeholder ({})", err);
         }
     }
-    csv.push(format!("{}, {}", slot.name.name, name));
+    csv.push(format!("{}, {}", slot.name.name, name.replace('\0', "")));
     csv.push(format!("{}, {}", slot.zenny.name, slot.zenny.data));
     csv.push(format!("{}, {}", slot.playtime.name, slot.playtime.data));
     csv.push(format!("{}, {}", slot.hrp.name, slot.hrp.data));

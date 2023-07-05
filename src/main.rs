@@ -89,6 +89,172 @@ fn print_help()
     println!("\tmh3se swap [save_file] [slot_a] [slot_b]");
 }
 
+fn process_args(args: &Vec<String>) -> ()
+{
+    if args[0] == "copy" || args[0] == "swap"
+    {
+        let slot_a: usize;
+        match args[2].parse::<usize>() {
+            Ok(number) => {
+                slot_a = number - 1;
+                println!("Slot {} selected !", slot_a + 1);
+            },
+            Err(err) => {
+                eprintln!("Couldn't select requested slot {} !", err);
+                process::exit(1);
+            }
+        }
+        let slot_b: usize;
+        match args[3].parse::<usize>() {
+            Ok(number) => {
+                slot_b = number - 1;
+                println!("Slot {} selected !", slot_b + 1);
+            },
+            Err(err) => {
+                eprintln!("Couldn't select requested slot {} !", err);
+                process::exit(1);
+            }
+        }
+        if args[0] == "copy"
+        {
+            match copy_slots(&args[1], slot_a, slot_b)
+            {
+                Ok(_) => println!("Successfully copied slot {} to slot {} !", slot_a + 1, slot_b + 1),
+                Err(err) => {
+                    eprintln!("Couldn't copy slot {} to slot {} ({}) !", slot_a + 1, slot_b + 1, err);
+                    process::exit(1);
+                }
+            }
+        }
+        else
+        {
+            match swap_slots(&args[1], slot_a, slot_b)
+            {
+                Ok(_) => println!("Successfully swapped slot {} and slot {} !", slot_a + 1, slot_b + 1),
+                Err(err) => {
+                    eprintln!("Couldn't swap slot {} and slot {} ({}) !", slot_a + 1, slot_b + 1, err);
+                    process::exit(1);
+                }
+            }
+        }
+    }
+    else if args[0] == "decode" || args[0] == "encode"
+    {
+        let ids: DataIDs;
+        match DataIDs::new(
+            &String::from("data/genders.txt"),
+            &String::from("data/items.txt"),
+            &String::from("data/armors.txt"),
+            &String::from("data/weapons.txt"),
+            &String::from("data/gun_parts.txt"),
+            &String::from("data/skills.txt")
+        )
+        {
+            Ok(res) => {
+                ids = res;
+                println!("Loaded database files successfully !");
+            }
+            Err(err) => {
+                eprintln!("Couldn't load database files {} !", err);
+                process::exit(1);
+            }
+        }
+
+        let save_path = &args[1];
+        let csv_path = &args[2];
+        let character_slot: usize;
+
+        match args[3].parse::<usize>() {
+            Ok(number) => {
+                character_slot = number - 1;
+                println!("Slot {} selected !", character_slot + 1);
+            },
+            Err(err) => {
+                eprintln!("Couldn't select requested slot {} !", err);
+                process::exit(1);
+            }
+        }
+
+        if args[0] == "decode"
+        {
+            let buffer: Vec<u8>;
+            match file_to_buf(&String::from(save_path)) {
+                Ok(buf) => {
+                    buffer = buf;
+                    println!("Loaded save file {} successfully !", save_path);
+                },
+                Err(err) => {
+                    eprintln!("Couldn't load save file {} ({}) !", save_path, err);
+                    process::exit(1);
+                }
+            }
+            let mut slot: CharacterSlot = CharacterSlot::default();
+            let mut csv: Vec<String> = Vec::new();
+            buf_to_save(&buffer, &mut slot, character_slot);
+            save_to_csv(&slot, &mut csv, &ids);
+            match csv_to_file(&String::from(csv_path), &csv) {
+                Ok(_) => {
+                    println!("Data written to csv file {} successfully !", csv_path);
+                },
+                Err(err) => {
+                    eprintln!("Couldn't write data to csv file {} ({}) !", csv_path, err);
+                    process::exit(1);
+                }
+            }
+
+        }
+        else
+        {
+            let csv: Vec<String>;
+            match file_to_csv(csv_path) {
+                Ok(res) => {
+                    csv = res;
+                    println!("Loaded csv file {} successfully !", csv_path);
+                }
+                Err(err) => {
+                    eprintln!("Couldn't load csv file {} ({}) !", csv_path, err);
+                    process::exit(1);
+                }
+            }
+
+            let mut slot: CharacterSlot = CharacterSlot::default();
+            match csv_to_save(&csv, &mut slot, &ids) {
+                Ok(_) => println!("Parsed csv file {} successfully !", csv_path),
+                Err(err) => {
+                    eprintln!("Couldn't parse csv file {} ({})", csv_path, err);
+                    process::exit(1);
+                }
+            }
+
+            let mut buffer: Vec<u8>;
+            match file_to_buf(save_path) {
+                Ok(buf) => {
+                    buffer = buf;
+                    println!("Loaded save file {} successfully !", save_path);
+                },
+                Err(err) => {
+                    eprintln!("Couldn't load save file {} ({}) !", save_path, err);
+                    process::exit(1);
+                }
+            }
+            save_to_buf(&slot, &mut buffer, character_slot);
+            match buf_to_file(save_path, &mut buffer) {
+                Ok(_) => {
+                    println!("Data written to save file {} successfully !", save_path);
+                },
+                Err(err) => {
+                    eprintln!("Couldn't write data to save file {} ({}) !", save_path, err);
+                    process::exit(1);
+                }
+            }
+        }
+    }
+    else {
+        print_help();
+        process::exit(1);
+    }
+}
+
 fn main()
 {
     const VERSION: &str = env!("CARGO_PKG_VERSION");
@@ -96,176 +262,44 @@ fn main()
 
     let args: Vec<String> = env::args().skip(1).collect();
 
-    if args.len() == 4
-    {
-        if args[0] == "copy" || args[0] == "swap"
-        {
-            let slot_a: usize;
-            match args[2].parse::<usize>() {
-                Ok(number) => {
-                    slot_a = number - 1;
-                    println!("Slot {} selected !", slot_a + 1);
-                },
-                Err(err) => {
-                    eprintln!("Couldn't select requested slot {} !", err);
-                    process::exit(1);
-                }
-            }
-            let slot_b: usize;
-            match args[3].parse::<usize>() {
-                Ok(number) => {
-                    slot_b = number - 1;
-                    println!("Slot {} selected !", slot_b + 1);
-                },
-                Err(err) => {
-                    eprintln!("Couldn't select requested slot {} !", err);
-                    process::exit(1);
-                }
-            }
-            if args[0] == "copy"
-            {
-                match copy_slots(&args[1], slot_a, slot_b)
-                {
-                    Ok(_) => println!("Successfully copied slot {} to slot {} !", slot_a + 1, slot_b + 1),
-                    Err(err) => {
-                        eprintln!("Couldn't copy slot {} to slot {} ({}) !", slot_a + 1, slot_b + 1, err);
-                        process::exit(1);
-                    }
-                }
-            }
-            else
-            {
-                match swap_slots(&args[1], slot_a, slot_b)
-                {
-                    Ok(_) => println!("Successfully swapped slot {} and slot {} !", slot_a + 1, slot_b + 1),
-                    Err(err) => {
-                        eprintln!("Couldn't swap slot {} and slot {} ({}) !", slot_a + 1, slot_b + 1, err);
-                        process::exit(1);
-                    }
-                }
-            }
-        }
-        else if args[0] == "decode" || args[0] == "encode"
-        {
-            let ids: DataIDs;
-            match DataIDs::new(
-                &String::from("data/genders.txt"),
-                &String::from("data/items.txt"),
-                &String::from("data/armors.txt"),
-                &String::from("data/weapons.txt"),
-                &String::from("data/gun_parts.txt"),
-                &String::from("data/skills.txt")
-            )
-            {
-                Ok(res) => {
-                    ids = res;
-                    println!("Loaded database files successfully !");
-                }
-                Err(err) => {
-                    eprintln!("Couldn't load database files {} !", err);
-                    process::exit(1);
-                }
-            }
-
-            let save_path = &args[1];
-            let csv_path = &args[2];
-            let character_slot: usize;
-
-            match args[3].parse::<usize>() {
-                Ok(number) => {
-                    character_slot = number - 1;
-                    println!("Slot {} selected !", character_slot + 1);
-                },
-                Err(err) => {
-                    eprintln!("Couldn't select requested slot {} !", err);
-                    process::exit(1);
-                }
-            }
-
-            if args[0] == "decode"
-            {
-                let buffer: Vec<u8>;
-                match file_to_buf(&String::from(save_path)) {
-                    Ok(buf) => {
-                        buffer = buf;
-                        println!("Loaded save file {} successfully !", save_path);
-                    },
-                    Err(err) => {
-                        eprintln!("Couldn't load save file {} ({}) !", save_path, err);
-                        process::exit(1);
-                    }
-                }
-                let mut slot: CharacterSlot = CharacterSlot::default();
-                let mut csv: Vec<String> = Vec::new();
-                buf_to_save(&buffer, &mut slot, character_slot);
-                save_to_csv(&slot, &mut csv, &ids);
-                match csv_to_file(&String::from(csv_path), &csv) {
-                    Ok(_) => {
-                        println!("Data written to csv file {} successfully !", csv_path);
-                    },
-                    Err(err) => {
-                        eprintln!("Couldn't write data to csv file {} ({}) !", csv_path, err);
-                        process::exit(1);
-                    }
-                }
-
-            }
-            else
-            {
-                let csv: Vec<String>;
-                match file_to_csv(csv_path) {
-                    Ok(res) => {
-                        csv = res;
-                        println!("Loaded csv file {} successfully !", csv_path);
-                    }
-                    Err(err) => {
-                        eprintln!("Couldn't load csv file {} ({}) !", csv_path, err);
-                        process::exit(1);
-                    }
-                }
-
-                let mut slot: CharacterSlot = CharacterSlot::default();
-                match csv_to_save(&csv, &mut slot, &ids) {
-                    Ok(_) => println!("Parsed csv file {} successfully !", csv_path),
-                    Err(err) => {
-                        eprintln!("Couldn't parse csv file {} ({})", csv_path, err);
-                        process::exit(1);
-                    }
-                }
-
-                let mut buffer: Vec<u8>;
-                match file_to_buf(save_path) {
-                    Ok(buf) => {
-                        buffer = buf;
-                        println!("Loaded save file {} successfully !", save_path);
-                    },
-                    Err(err) => {
-                        eprintln!("Couldn't load save file {} ({}) !", save_path, err);
-                        process::exit(1);
-                    }
-                }
-                save_to_buf(&slot, &mut buffer, character_slot);
-                match buf_to_file(save_path, &mut buffer) {
-                    Ok(_) => {
-                        println!("Data written to save file {} successfully !", save_path);
-                    },
-                    Err(err) => {
-                        eprintln!("Couldn't write data to save file {} ({}) !", save_path, err);
-                        process::exit(1);
-                    }
-                }
-            }
-        }
-        else {
-            print_help();
-            process::exit(1);
-        }
+    if args.len() == 4 {
+        process_args(&args);
     }
     else {
-        print_help();
-        println!("Press any key to exit...");
-        let _ = std::io::stdin().lines().next();
-        process::exit(1);
+        let mut manual_args: Vec<String> = vec![ String::from("") ; 4 ];
+        println!("Enter the desired operation (encode, decode, copy or swap) : ");
+        let _ = std::io::stdin().read_line(&mut manual_args[0]);
+        println!("Enter the save file path : ");
+        let _ = std::io::stdin().read_line(&mut manual_args[1]);
+
+        manual_args[0] = manual_args[0].trim().to_string();
+        manual_args[1] = manual_args[1].trim().to_string();
+
+        if manual_args[0] == "encode" || manual_args[0] == "decode" {
+            println!("Enter the spreadsheet path : ");
+            let _ = std::io::stdin().read_line(&mut manual_args[2]);
+            println!("Enter the character slot (1, 2, 3) : ");
+            let _ = std::io::stdin().read_line(&mut manual_args[3]);
+        }
+        else if manual_args[0] == "copy" {
+            println!("Enter the character origin slot (1, 2, 3) : ");
+            let _ = std::io::stdin().read_line(&mut manual_args[2]);
+            println!("Enter the character destination slot (1, 2, 3) : ");
+            let _ = std::io::stdin().read_line(&mut manual_args[3]);
+        }
+        else if manual_args[0] == "swap" {
+            println!("Enter the character slot a (1, 2, 3) : ");
+            let _ = std::io::stdin().read_line(&mut manual_args[2]);
+            println!("Enter the character slot b (1, 2, 3) : ");
+            let _ = std::io::stdin().read_line(&mut manual_args[3]);
+        }
+        else {
+            println!("Unknown operation ({})", manual_args[0]);
+            process::exit(1);
+        }
+        manual_args[2] = manual_args[2].trim().to_string();
+        manual_args[3] = manual_args[3].trim().to_string();
+        process_args(&manual_args);
     }
     process::exit(0);
 }
