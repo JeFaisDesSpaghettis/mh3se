@@ -89,7 +89,7 @@ fn print_help()
     println!("\tmh3se swap [save_file] [slot_a] [slot_b]");
 }
 
-fn process_args(args: &Vec<String>) -> ()
+fn process_args(args: &Vec<String>) -> Result<(), ()>
 {
     if args[0] == "copy" || args[0] == "swap"
     {
@@ -101,7 +101,7 @@ fn process_args(args: &Vec<String>) -> ()
             },
             Err(err) => {
                 eprintln!("Couldn't select requested slot {} !", err);
-                process::exit(1);
+                return Err(());
             }
         }
         let slot_b: usize;
@@ -112,7 +112,7 @@ fn process_args(args: &Vec<String>) -> ()
             },
             Err(err) => {
                 eprintln!("Couldn't select requested slot {} !", err);
-                process::exit(1);
+                return Err(());
             }
         }
         if args[0] == "copy"
@@ -122,7 +122,7 @@ fn process_args(args: &Vec<String>) -> ()
                 Ok(_) => println!("Successfully copied slot {} to slot {} !", slot_a + 1, slot_b + 1),
                 Err(err) => {
                     eprintln!("Couldn't copy slot {} to slot {} ({}) !", slot_a + 1, slot_b + 1, err);
-                    process::exit(1);
+                    return Err(());
                 }
             }
         }
@@ -133,7 +133,7 @@ fn process_args(args: &Vec<String>) -> ()
                 Ok(_) => println!("Successfully swapped slot {} and slot {} !", slot_a + 1, slot_b + 1),
                 Err(err) => {
                     eprintln!("Couldn't swap slot {} and slot {} ({}) !", slot_a + 1, slot_b + 1, err);
-                    process::exit(1);
+                    return Err(());
                 }
             }
         }
@@ -141,22 +141,46 @@ fn process_args(args: &Vec<String>) -> ()
     else if args[0] == "decode" || args[0] == "encode"
     {
         let ids: DataIDs;
-        match DataIDs::new(
-            &String::from("data/genders.txt"),
-            &String::from("data/items.txt"),
-            &String::from("data/armors.txt"),
-            &String::from("data/weapons.txt"),
-            &String::from("data/gun_parts.txt"),
-            &String::from("data/skills.txt")
-        )
+        #[cfg(target_os = "windows")]
         {
-            Ok(res) => {
-                ids = res;
-                println!("Loaded database files successfully !");
+            match DataIDs::new(
+                &String::from("data\\genders.txt"),
+                &String::from("data\\items.txt"),
+                &String::from("data\\armors.txt"),
+                &String::from("data\\weapons.txt"),
+                &String::from("data\\gun_parts.txt"),
+                &String::from("data\\skills.txt")
+            )
+            {
+                Ok(res) => {
+                    ids = res;
+                    println!("Loaded database files successfully !");
+                }
+                Err(err) => {
+                    eprintln!("Couldn't load database files {} !", err);
+                    return Err(());
+                }
             }
-            Err(err) => {
-                eprintln!("Couldn't load database files {} !", err);
-                process::exit(1);
+        }
+        #[cfg(not(target_os = "windows"))]
+        {
+            match DataIDs::new(
+                &String::from("data/genders.txt"),
+                &String::from("data/items.txt"),
+                &String::from("data/armors.txt"),
+                &String::from("data/weapons.txt"),
+                &String::from("data/gun_parts.txt"),
+                &String::from("data/skills.txt")
+            )
+            {
+                Ok(res) => {
+                    ids = res;
+                    println!("Loaded database files successfully !");
+                }
+                Err(err) => {
+                    eprintln!("Couldn't load database files {} !", err);
+                    return Err(());
+                }
             }
         }
 
@@ -171,7 +195,7 @@ fn process_args(args: &Vec<String>) -> ()
             },
             Err(err) => {
                 eprintln!("Couldn't select requested slot {} !", err);
-                process::exit(1);
+                return Err(());
             }
         }
 
@@ -185,7 +209,7 @@ fn process_args(args: &Vec<String>) -> ()
                 },
                 Err(err) => {
                     eprintln!("Couldn't load save file {} ({}) !", save_path, err);
-                    process::exit(1);
+                    return Err(());
                 }
             }
             let mut slot: CharacterSlot = CharacterSlot::default();
@@ -198,7 +222,7 @@ fn process_args(args: &Vec<String>) -> ()
                 },
                 Err(err) => {
                     eprintln!("Couldn't write data to csv file {} ({}) !", csv_path, err);
-                    process::exit(1);
+                    return Err(());
                 }
             }
 
@@ -213,7 +237,7 @@ fn process_args(args: &Vec<String>) -> ()
                 }
                 Err(err) => {
                     eprintln!("Couldn't load csv file {} ({}) !", csv_path, err);
-                    process::exit(1);
+                    return Err(());
                 }
             }
 
@@ -222,7 +246,7 @@ fn process_args(args: &Vec<String>) -> ()
                 Ok(_) => println!("Parsed csv file {} successfully !", csv_path),
                 Err(err) => {
                     eprintln!("Couldn't parse csv file {} ({})", csv_path, err);
-                    process::exit(1);
+                    return Err(());
                 }
             }
 
@@ -234,7 +258,7 @@ fn process_args(args: &Vec<String>) -> ()
                 },
                 Err(err) => {
                     eprintln!("Couldn't load save file {} ({}) !", save_path, err);
-                    process::exit(1);
+                    return Err(());
                 }
             }
             save_to_buf(&slot, &mut buffer, character_slot);
@@ -244,15 +268,16 @@ fn process_args(args: &Vec<String>) -> ()
                 },
                 Err(err) => {
                     eprintln!("Couldn't write data to save file {} ({}) !", save_path, err);
-                    process::exit(1);
+                    return Err(());
                 }
             }
         }
     }
     else {
         print_help();
-        process::exit(1);
+        return Err(());
     }
+    Ok(())
 }
 
 fn main()
@@ -263,7 +288,7 @@ fn main()
     let args: Vec<String> = env::args().skip(1).collect();
 
     if args.len() == 4 {
-        process_args(&args);
+        let _ = process_args(&args);
     }
     else {
         let mut manual_args: Vec<String> = vec![ String::from("") ; 4 ];
@@ -295,11 +320,16 @@ fn main()
         }
         else {
             println!("Unknown operation ({})", manual_args[0]);
-            process::exit(1);
         }
         manual_args[2] = manual_args[2].trim().to_string();
         manual_args[3] = manual_args[3].trim().to_string();
-        process_args(&manual_args);
+        let res = process_args(&manual_args);
+        print!("Press any key to exit...");
+        let _ = std::io::stdin().lines().next();
+        match res {
+            Ok(_) => process::exit(0),
+            Err(_) => process::exit(1)
+        }
     }
     process::exit(0);
 }
