@@ -263,6 +263,8 @@ fn main()
     }
     else {
         print_help();
+        println!("Press any key to exit...");
+        let _ = std::io::stdin().lines().next();
         process::exit(1);
     }
     process::exit(0);
