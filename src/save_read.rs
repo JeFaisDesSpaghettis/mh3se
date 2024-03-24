@@ -1,119 +1,191 @@
-use std::io::{ Read };
 use std::fs::File;
+use std::io::Read;
 
-use crate::common::{CharacterSlot, ItemSlots, EquipTypeE, SLOTS_OFFSET, SLOTS_TOGGLE_OFFSET, RGBValue };
+use crate::common::*;
 
-fn read_u8(buf: &Vec<u8>, address: usize) -> u8
-{
-    buf[address]
+fn read_u8(buffer: &[u8; SAVE_SIZE], offset: usize) -> Result<u8, String> {
+    if SAVE_SIZE < offset + 1 {
+        return Err(format!("Cannot read u8 at {:06X}", offset));
+    }
+    Ok(buffer[offset])
+}
+fn read_u16(buffer: &[u8; SAVE_SIZE], offset: usize) -> Result<u16, String> {
+    if SAVE_SIZE < offset + 2 {
+        return Err(format!("Cannot read u16 at {:06X}", offset));
+    }
+    Ok(u16::from_be_bytes([buffer[offset], buffer[offset + 1]]))
+}
+fn read_u32(buffer: &[u8; SAVE_SIZE], offset: usize) -> Result<u32, String> {
+    if SAVE_SIZE < offset + 4 {
+        return Err(format!("Cannot read u32 at {:06X}", offset));
+    }
+    Ok(u32::from_be_bytes([
+        buffer[offset],
+        buffer[offset + 1],
+        buffer[offset + 2],
+        buffer[offset + 3],]))
+}
+fn read_name(buffer: &[u8; SAVE_SIZE], offset: usize) -> Result<[u8; 8], String> {
+    if SAVE_SIZE < offset + 8 {
+        return Err(format!("Cannot read name at {:06X}", offset));
+    }
+    let mut array = [0; 8];
+    array.copy_from_slice(&buffer[offset..offset + 8]);
+    Ok(array)
+}
+fn read_rgb(buffer: &[u8; SAVE_SIZE], offset: usize) -> Result<[u8; 3], String> {
+    if SAVE_SIZE < offset + 3 {
+        return Err(format!("Cannot read rgb at {:06X}", offset));
+    }
+    let mut array = [0; 3];
+    array.copy_from_slice(&buffer[offset..offset + 3]);
+    Ok(array)
 }
 
-fn read_u16(buf: &Vec<u8>, address: usize) -> u16
-{
-    ((buf[address + 0] as u16) << 8) |
-     (buf[address + 1] as u16)
+impl ItemSlot {
+    pub fn from_buf(buffer: &[u8; SAVE_SIZE], offset: usize) -> Result<Self, String> {
+        let id = read_u16(buffer, offset)?;
+        let qty = read_u16(buffer, offset + 2)?;
+        Ok(ItemSlot{id, qty})
+    }
 }
 
-fn read_u32(buf: &Vec<u8>, address: usize) -> u32
-{
-    ((buf[address + 0] as u32) << 24) |
-    ((buf[address + 1] as u32) << 16) |
-    ((buf[address + 2] as u32) << 8)  |
-     (buf[address + 3] as u32)
-}
-
-fn read_name(buf: &Vec<u8>, address: usize) -> [u8; 8]
-{
-    let segment = &buf[address..address + 8];
-    let array: Result<[u8; 8], _> = segment.try_into();
-
-    match array {
-        Ok(fixed_array) => return fixed_array,
-        Err(_) => {
-            eprintln!("Couldn't read name, replacing with a placeholder...");
-            return b"STUBSTUB".to_owned()
+impl EquipSlot {
+    pub fn from_buf(buffer: &[u8; SAVE_SIZE], offset: usize) -> Result<Self, String> {
+        let type_id = read_u8(buffer, offset)?;
+        match TypeID::from_u8(type_id) {
+            TypeID::Head | TypeID::Chest | TypeID::Arms | TypeID::Waist | TypeID::Legs => {
+                Ok(EquipSlot::Armor(Armor{
+                    type_id: type_id,
+                    lvl: read_u8(buffer, offset + 1)?,
+                    id: read_u16(buffer, offset + 2)?,
+                    deco1: read_u16(buffer, offset + 6)?,
+                    deco2: read_u16(buffer, offset + 8)?,
+                    deco3: read_u16(buffer, offset + 10)?,
+                }))
+            },
+            TypeID::GS | TypeID::SNS | TypeID::HA | TypeID::LA | TypeID::LS | TypeID::SA => {
+                Ok(EquipSlot::MeleeWeapon(MeleeWeapon{
+                    type_id: type_id,
+                    id: read_u16(buffer, offset + 2)?,
+                    deco1: read_u16(buffer, offset + 6)?,
+                    deco2: read_u16(buffer, offset + 8)?,
+                    deco3: read_u16(buffer, offset + 10)?,
+                }))
+            },
+            TypeID::Frame | TypeID::Barrel | TypeID::Stock  => {
+                Ok(EquipSlot::RangedWeapon(RangedWeapon{
+                    type_id: type_id,
+                    lvl: read_u8(buffer, offset + 1)?,
+                    id: read_u16(buffer, offset + 2)?,
+                    deco1: read_u16(buffer, offset + 6)?,
+                    deco2: read_u16(buffer, offset + 8)?,
+                    deco3: read_u16(buffer, offset + 10)?,
+                }))
+            },
+            TypeID::Talisman => {
+                let slot_count = read_u8(buffer, offset + 1)?;
+                match slot_count {
+                    0 => {
+                        Ok(EquipSlot::ZeroSlotTalisman(ZeroSlotTalisman{
+                            type_id: type_id,
+                            slot_count: read_u8(buffer, offset + 1)?,
+                            id: read_u16(buffer, offset + 2)?,
+                            skill1_pt: read_u8(buffer, offset + 5)?,
+                            skill2_pt: read_u8(buffer, offset + 4)?,
+                            skill1_id: read_u16(buffer, offset + 6)?,
+                            skill2_id: read_u16(buffer, offset + 8)?,
+                        }))
+                    },
+                    1 => {
+                        Ok(EquipSlot::OneSlotTalisman(OneSlotTalisman{
+                            type_id: type_id,
+                            slot_count: read_u8(buffer, offset + 1)?,
+                            id: read_u16(buffer, offset + 2)?,
+                            skill1_pt: read_u8(buffer, offset + 5)?,
+                            skill2_pt: read_u8(buffer, offset + 4)?,
+                            deco1: read_u16(buffer, offset + 6)?,
+                            skill1_id: read_u16(buffer, offset + 8)?,
+                            skill2_id: read_u16(buffer, offset + 10)?,
+                        }))
+                    },
+                    2 => {
+                        Ok(EquipSlot::TwoSlotTalisman(TwoSlotTalisman{
+                            type_id: type_id,
+                            slot_count: read_u8(buffer, offset + 1)?,
+                            id: read_u16(buffer, offset + 2)?,
+                            skill1_pt: read_u8(buffer, offset + 5)?,
+                            deco1: read_u16(buffer, offset + 6)?,
+                            deco2: read_u16(buffer, offset + 8)?,
+                            skill1_id: read_u16(buffer, offset + 10)?,
+                        }))
+                    },
+                    3 => {
+                        Ok(EquipSlot::ThreeSlotTalisman(ThreeSlotTalisman{
+                            type_id: type_id,
+                            slot_count: read_u8(buffer, offset + 1)?,
+                            id: read_u16(buffer, offset + 2)?,
+                            deco1: read_u16(buffer, offset + 6)?,
+                            deco2: read_u16(buffer, offset + 8)?,
+                            deco3: read_u16(buffer, offset + 10)?,
+                        }))
+                    }
+                    _ => {
+                        Err(format!("Unrecognized talisman slot at 0x{:06X}", offset))
+                    }
+                }
+            }
+            TypeID::None => {
+                Ok(EquipSlot::BlankEquipSlot(BlankEquipSlot::default()))
+            }
         }
     }
 }
 
-fn read_rgb(buf: &Vec<u8>, address: usize) -> RGBValue
+pub fn file_to_buf(filepath: &str) -> Result<[u8; SAVE_SIZE], std::io::Error>
 {
-    (buf[address + 0], buf[address + 1], buf[address + 2])
-}
-
-pub fn file_to_buf(filepath: &String) -> Result<Vec<u8>, std::io::Error>
-{
+    let mut buffer = [0; SAVE_SIZE];
     let mut file = File::open(filepath)?;
-    let mut buf = Vec::new();
-
-    file.read_to_end(&mut buf)?;
-    Ok(buf)
+    file.read_exact(&mut buffer)?;
+    Ok(buffer)
 }
 
-fn buf_to_item_slots(buf: &Vec<u8>, container: &mut ItemSlots, slot_n: usize)
-{
-    for k in 0..container.data.len() {
-        container.data[k].id =
-            read_u16(buf, SLOTS_OFFSET[slot_n] + container.offset + (k * 4));
-        container.data[k].qty =
-            read_u16(buf, SLOTS_OFFSET[slot_n] + container.offset + (k * 4) + 2) as i16;
-    }
-}
-
-pub fn buf_to_save(buf: &Vec<u8>, slot: &mut CharacterSlot, slot_n: usize)
-{
-    slot.slot_enabled.data = read_u8(buf,  SLOTS_TOGGLE_OFFSET[slot_n] + slot.slot_enabled.offset    );
-    slot.gender.data       = read_u8(buf,  SLOTS_OFFSET[slot_n] + slot.gender.offset  );
-    slot.name.data         = read_name(buf, SLOTS_OFFSET[slot_n] + slot.name.offset   );
-    slot.zenny.data        = read_u32(buf, SLOTS_OFFSET[slot_n] + slot.zenny.offset   );
-    slot.playtime.data     = read_u32(buf, SLOTS_OFFSET[slot_n] + slot.playtime.offset);
-    buf_to_item_slots(buf, &mut slot.b_pouch, slot_n);
-    buf_to_item_slots(buf, &mut slot.g_pouch, slot_n);
-    buf_to_item_slots(buf, &mut slot.item_box, slot_n);
-    for k in 0..slot.equipment_box.data.len() {
-        match read_u8(buf, SLOTS_OFFSET[slot_n] + slot.equipment_box.offset + (k * 12))
-        {
-            1 => slot.equipment_box.data[k].0 = EquipTypeE::Chest,
-            2 => slot.equipment_box.data[k].0 = EquipTypeE::Arms,
-            3 => slot.equipment_box.data[k].0 = EquipTypeE::Waist,
-            4 => slot.equipment_box.data[k].0 = EquipTypeE::Legs,
-            5 => slot.equipment_box.data[k].0 = EquipTypeE::Head,
-            6 => slot.equipment_box.data[k].0 = EquipTypeE::Talisman,
-            7 => slot.equipment_box.data[k].0 = EquipTypeE::GS,
-            8 => slot.equipment_box.data[k].0 = EquipTypeE::SNS,
-            9 => slot.equipment_box.data[k].0 = EquipTypeE::HA,
-            10 => slot.equipment_box.data[k].0 = EquipTypeE::LA,
-            11 => slot.equipment_box.data[k].0 = EquipTypeE::Frame,
-            12 => slot.equipment_box.data[k].0 = EquipTypeE::Barrel,
-            13 => slot.equipment_box.data[k].0 = EquipTypeE::Stock,
-            14 => slot.equipment_box.data[k].0 = EquipTypeE::LS,
-            15 => slot.equipment_box.data[k].0 = EquipTypeE::SA,
-            _ => slot.equipment_box.data[k].0 = EquipTypeE::None
+impl CharacterSlot {
+    pub fn from_buf(buf: &[u8; SAVE_SIZE], nth_slot: usize) -> Result<Self, String>
+    {
+        let nth_slot_offset = SLOT_OFFSET + nth_slot * SLOT_SIZE;
+        let mut slot = CharacterSlot::default();
+        slot.gender     = read_u8(buf, nth_slot_offset + GENDER_OFFSET)?;
+        slot.name       = read_name(buf, nth_slot_offset + NAME_OFFSET)?;
+        slot.zenny      = read_u32(buf, nth_slot_offset + ZENNY_OFFSET)?;
+        slot.playtime   = read_u32(buf, nth_slot_offset + PLAYTIME_OFFSET)?;
+        for k in 0..slot.melee_pouch.len() {
+            slot.melee_pouch[k] = ItemSlot::from_buf(buf,
+                nth_slot_offset + MELEE_POUCH_OFFSET + k * std::mem::size_of::<ItemSlot>())?;
         }
-        slot.equipment_box.data[k].1 =
-            read_u8(buf, SLOTS_OFFSET[slot_n] + slot.equipment_box.offset + (k * 12) + 1);
-        slot.equipment_box.data[k].2 =
-            read_u16(buf, SLOTS_OFFSET[slot_n] + slot.equipment_box.offset + (k * 12) + 2);
-        slot.equipment_box.data[k].3 =
-            read_u8(buf, SLOTS_OFFSET[slot_n] + slot.equipment_box.offset + (k * 12) + 4);
-        slot.equipment_box.data[k].4 =
-            read_u8(buf, SLOTS_OFFSET[slot_n] + slot.equipment_box.offset + (k * 12) + 5);
-        slot.equipment_box.data[k].5 = [
-            read_u16(buf, SLOTS_OFFSET[slot_n] + slot.equipment_box.offset + (k * 12) + 6),
-            read_u16(buf, SLOTS_OFFSET[slot_n] + slot.equipment_box.offset + (k * 12) + 8),
-            read_u16(buf, SLOTS_OFFSET[slot_n] + slot.equipment_box.offset + (k * 12) + 10)
-        ]
-    }
-    slot.hrp.data           = read_u32(buf,  SLOTS_OFFSET[slot_n] + slot.hrp.offset         );
-    slot.hr.data            = read_u16(buf,  SLOTS_OFFSET[slot_n] + slot.hr.offset          );
+        for k in 0..slot.ranged_pouch.len() {
+            slot.ranged_pouch[k] = ItemSlot::from_buf(buf,
+                nth_slot_offset + RANGE_POUCH_OFFSET + k * std::mem::size_of::<ItemSlot>())?;
+        }
+        for k in 0..slot.item_box.len() {
+            slot.item_box[k] = ItemSlot::from_buf(buf,
+                nth_slot_offset + ITEM_BOX_OFFSET + k * std::mem::size_of::<ItemSlot>())?;
+        }
+        for k in 0..slot.equip_box.len() {
+            slot.equip_box[k] = EquipSlot::from_buf(buf, nth_slot_offset + EQUIP_BOX_OFFSET + k * std::mem::size_of::<BlankEquipSlot>())?;
+        }
+        slot.hrp = read_u32(buf, nth_slot_offset + HRP_OFFSET)?;
+        slot.hr  = read_u16(buf, nth_slot_offset + HR_OFFSET)?;
 
-    slot.face_type.data     = read_u8(buf ,  SLOTS_OFFSET[slot_n] + slot.face_type.offset   );
-    slot.hair_type.data     = read_u8(buf ,  SLOTS_OFFSET[slot_n] + slot.hair_type.offset   );
-    slot.hair_color.data    = read_rgb(buf,  SLOTS_OFFSET[slot_n] + slot.hair_color.offset  );
-    slot.cloth_type.data    = read_u8(buf ,  SLOTS_OFFSET[slot_n] + slot.cloth_type.offset  );
-    slot.voice_type.data    = read_u8(buf ,  SLOTS_OFFSET[slot_n] + slot.voice_type.offset  );
-    slot.cloth_color.data   = read_rgb(buf,  SLOTS_OFFSET[slot_n] + slot.cloth_color.offset );
-    slot.eye_color.data     = read_u8(buf ,  SLOTS_OFFSET[slot_n] + slot.eye_color.offset   );
-    slot.feature_type.data  = read_u8(buf ,  SLOTS_OFFSET[slot_n] + slot.feature_type.offset);
-    slot.skin_tone.data     = read_u16(buf,  SLOTS_OFFSET[slot_n] + slot.skin_tone.offset   );
+        slot.face_type      = read_u8(buf, nth_slot_offset + FACE_TYPE_OFFSET)?;
+        slot.hair_type      = read_u8(buf, nth_slot_offset + HAIR_TYPE_OFFSET)?;
+        slot.hair_color     = read_rgb(buf, nth_slot_offset + HAIR_COLOR_OFFSET)?;
+        slot.cloth_type     = read_u8(buf, nth_slot_offset + CLOTH_TYPE_OFFSET)?;
+        slot.voice_type     = read_u8(buf, nth_slot_offset + VOICE_TYPE_OFFSET)?;
+        slot.cloth_color    = read_rgb(buf, nth_slot_offset + CLOTH_COLOR_OFFSET)?;
+        slot.eye_color      = read_u8(buf, nth_slot_offset + EYE_COLOR_OFFSET)?;
+        slot.feature_type   = read_u8(buf, nth_slot_offset + FEATURE_TYPE_OFFSET)?;
+        slot.skin_tone      = read_u16(buf, nth_slot_offset + SKIN_TONE_OFFSET)?;
+        Ok(slot)
+    }
 }

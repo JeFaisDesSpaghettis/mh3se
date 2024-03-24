@@ -1,11 +1,15 @@
 [package]
 name = "mh3se"
-version = "0.10.2"
+version = "1.0.0"
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+serde = {version = "1.0.195", features = ["derive"]}
+serde_derive = "1.0.195"
+serde_json = "1.0.111"
+serde_with = "3.7.0"
 
 [target.x86_64-pc-windows-gnu]
 rustflags = ["", "-C", "linker=x86_64-w64-mingw32-gcc"]
