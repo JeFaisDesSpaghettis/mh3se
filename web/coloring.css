@@ -1,0 +1,113 @@
+.__palette {
+    color:#ffd090;
+    color:#e92376;
+    color:#6f12cc;
+    color:#f52fc3;
+    color:#ffb9f9;
+    color:#4b0082;
+    color:#8f38e0;
+    color:#afa6ff;
+    color:#2e54ff;
+    color:#4cdb4c;
+    color:#156e5f;
+}
+
+@font-face {
+    font-family: "Sixtyfour";
+    src: url("fonts/Sixtyfour/Sixtyfour-Regular-VariableFont_BLED,SCAN.ttf") format('truetype');
+}
+
+html {
+    background-color: #000000;
+    background-image: url(img/CasA_nircam_2048.avif);
+    background-repeat: repeat-y;
+    background-size: cover;
+
+    color: #E0E0E0;
+    font-family: "Sixtyfour";
+    font-variation-settings: 'SCAN' 20;
+    text-shadow: 0px 0px 12px #8F38E0;
+}
+
+#navbar {
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+    background-color: #0000005F;
+    box-shadow: 0px 0px 12px #03A288;
+}
+#navbar a::after {
+    color: #E0E0E0;
+}
+
+.main_div {
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+    background-color: #0000005F;
+    box-shadow: 0px 0px 24px #6000E0;
+}
+
+video {
+    box-shadow: 0px 0px 12px #afa6ff;
+}
+img {
+    box-shadow: 0px 0px 12px #ffb9f9;
+}
+
+video, img {
+    background-color: #00000000;
+}
+
+a {
+    color: #8dc0fa;
+    cursor: pointer;
+}
+a:hover {
+    color: #ffafaf;
+    transition: color 0.5s ease;
+}
+a:not(:hover) {
+    color: #8dc0fa;
+    transition: color 0.5s ease;
+}
+
+.versioning {
+    color: #FFFFFF;
+}
+
+.error_main_div {
+    box-shadow:
+        0px 0px 1024px #6000E0,
+        inset 0px 0px 64px #4B008280 !important;
+}
+
+.message {
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+    background-color: #00000080;
+    box-shadow: 0px 0px 12px #e92376;
+}
+.message_info {
+    color: #00ffd4;
+}
+
+input, textarea {
+    color: #E0E0E0;
+    font-family: "Sixtyfour";
+    font-variation-settings: 'SCAN' 20;
+
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+    background-color: #00000080;
+    box-shadow: 0px 0px 12px #e64343;
+}
+
+button {
+    color: #E0E0E0;
+    font-family: "Sixtyfour";
+    font-variation-settings: 'SCAN' 20;
+
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+    background-color: #00000080;
+    box-shadow: 0px 0px 12px #e64343;
+}
