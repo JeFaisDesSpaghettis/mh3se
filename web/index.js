@@ -31,144 +31,72 @@ const TypeIdToField = [
     "sa",
 ];
 
-function DefaultBlankSlot() {
-    return {
-        BlankEquipSlot: {
-            buf: [
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-            ]
-        }
-    };
-}
-
-function DefaultMeleeWeapon(type_id) {
-    return {
-        MeleeWeapon: {
-            type_id: type_id,
-            unused_lvl: 0,
-            id: 0,
-            unused_skill2_pt: 0,
-            unused_skill1_pt: 0,
-            deco1: 0,
-            deco2: 0,
-            deco3: 0
-        }
-    };
-}
-function DefaultRangedWeapon(type_id) {
-    return {
-        RangedWeapon: {
-            type_id: type_id,
-            lvl: 0,
-            id: 0,
-            unused_skill2_pt: 0,
-            unused_skill1_pt: 0,
-            deco1: 0,
-            deco2: 0,
-            deco3: 0
-        }
-    };
-}
-function DefaultArmor(type_id) {
-    return {
-        Armor: {
-            type_id: type_id,
-            lvl: 0,
-            id: 0,
-            unused_skill2_pt: 0,
-            unused_skill1_pt: 0,
-            deco1: 0,
-            deco2: 0,
-            deco3: 0
-        }
-    };
-}
-function DefaultOneSlotTalisman() {
-    return {
-        OneSlotTalisman: {
-            type_id: 6,
-            slot_count: 1,
-            id: 0,
-            skill2_pt: 0,
-            skill1_pt: 0,
-            deco1: 0,
-            skill1_id: 0,
-            skill2_id: 0
-        }
-    };
-}
-function DefaultZeroSlotTalisman() {
-    return {
-        ZeroSlotTalisman: {
-            type_id: 6,
-            slot_count: 0,
-            id: 0,
-            skill2_pt: 0,
-            skill1_pt: 0,
-            skill1_id: 0,
-            skill2_id: 0,
-            unused_deco3: 0
-        }
-    };
-}
-function DefaultTwoSlotTalisman() {
-    return {
-        TwoSlotTalisman: {
-            type_id: 6,
-            slot_count: 2,
-            id: 0,
-            unused_skill2_pt: 0,
-            skill1_pt: 0,
-            deco1: 0,
-            deco2: 0,
-            skill1_id: 0
-        }
-    };
-}
-function DefaultThreeSlotTalisman() {
-    return {
-        ThreeSlotTalisman: {
-            type_id: 6,
-            slot_count: 3,
-            id: 0,
-            unused_skill2_pt: 0,
-            unused_skill1_pt: 0,
-            deco1: 0,
-            deco2: 0,
-            deco3: 0
-        }
-    };
-}
-
 function onTypeChange(target) {
-    let type_id = IdToName.type.indexOf(target.value);
+    let typeId = IdToName.type.indexOf(target.value);
 
     const row = target.parentElement.parentElement;
-    if ((type_id >= 7 && type_id <= 10) || (type_id >= 14 && type_id <= 15)) {
-        row.replaceWith(generateMeleeWeapon(DefaultMeleeWeapon(type_id)));
+    if ((typeId >= 7 && typeId <= 10) || (typeId >= 14 && typeId <= 15)) {
+        row.replaceWith(generateMeleeWeapon({
+            MeleeWeapon: {
+                typeId: typeId,
+                unused_lvl: 0,
+                id: 0,
+                unused_skill2_pt: 0,
+                unused_skill1_pt: 0,
+                deco1: 0,
+                deco2: 0,
+                deco3: 0
+            }
+        }));
     }
-    else if (type_id >= 11 && type_id <= 13) {
-        row.replaceWith(generateRangedWeapon(DefaultRangedWeapon(type_id)));
+    else if (typeId >= 11 && typeId <= 13) {
+        row.replaceWith(generateRangedWeapon({
+            RangedWeapon: {
+                typeId: typeId,
+                lvl: 0,
+                id: 0,
+                unused_skill2_pt: 0,
+                unused_skill1_pt: 0,
+                deco1: 0,
+                deco2: 0,
+                deco3: 0
+            }
+        }));
     }
-    else if (type_id >= 1 && type_id <= 5) {
-        row.replaceWith(generateArmor(DefaultArmor(type_id)));
+    else if (typeId >= 1 && typeId <= 5) {
+        row.replaceWith(generateArmor({
+            Armor: {
+                typeId: typeId,
+                lvl: 0,
+                id: 0,
+                unused_skill2_pt: 0,
+                unused_skill1_pt: 0,
+                deco1: 0,
+                deco2: 0,
+                deco3: 0
+            }
+        }));
     }
-    else if (type_id == 6) {
-        row.replaceWith(generateOneSlotTalisman(DefaultOneSlotTalisman()));
+    else if (typeId == 6) {
+        row.replaceWith(generateOneSlotTalisman({
+            OneSlotTalisman: {
+                typeId: 6,
+                slot_count: 1,
+                id: 0,
+                skill2_pt: 0,
+                skill1_pt: 0,
+                deco1: 0,
+                skill1_id: 0,
+                skill2_id: 0
+            }
+        }));
     }
     else {
-        row.replaceWith(generateBlankEquipSlot(DefaultBlankSlot()));
+        row.replaceWith(generateBlankEquipSlot({
+            BlankEquipSlot: {
+                buf: [0,0,0,0,0,0,0,0,0,0,0,0]
+            }
+        }));
     }
 }
 
@@ -177,19 +105,63 @@ function onSlotCountChange(target) {
 
     switch (parseInt(target.value)) {
         case 0: {
-            currentRow.replaceWith(generateZeroSlotTalisman(DefaultZeroSlotTalisman()));
+            currentRow.replaceWith(generateZeroSlotTalisman({
+                ZeroSlotTalisman: {
+                    typeId: 6,
+                    slot_count: 0,
+                    id: 0,
+                    skill2_pt: 0,
+                    skill1_pt: 0,
+                    skill1_id: 0,
+                    skill2_id: 0,
+                    unused_deco3: 0
+                }
+            }));
             break;
         }
         case 1: {
-            currentRow.replaceWith(generateOneSlotTalisman(DefaultOneSlotTalisman()));
+            currentRow.replaceWith(generateOneSlotTalisman({
+                OneSlotTalisman: {
+                    typeId: 6,
+                    slot_count: 1,
+                    id: 0,
+                    skill2_pt: 0,
+                    skill1_pt: 0,
+                    deco1: 0,
+                    skill1_id: 0,
+                    skill2_id: 0
+                }
+            }));
             break;
         }
         case 2: {
-            currentRow.replaceWith(generateTwoSlotTalisman(DefaultTwoSlotTalisman()));
+            currentRow.replaceWith(generateTwoSlotTalisman({
+                TwoSlotTalisman: {
+                    typeId: 6,
+                    slot_count: 2,
+                    id: 0,
+                    unused_skill2_pt: 0,
+                    skill1_pt: 0,
+                    deco1: 0,
+                    deco2: 0,
+                    skill1_id: 0
+                }
+            }));
             break;
         }
         case 3: {
-            currentRow.replaceWith(generateThreeSlotTalisman(DefaultThreeSlotTalisman()));
+            currentRow.replaceWith(generateThreeSlotTalisman({
+                ThreeSlotTalisman: {
+                    typeId: 6,
+                    slot_count: 3,
+                    id: 0,
+                    unused_skill2_pt: 0,
+                    unused_skill1_pt: 0,
+                    deco1: 0,
+                    deco2: 0,
+                    deco3: 0
+                }
+            }));
             break;
         }
         default: {
@@ -264,7 +236,7 @@ function generateTypeCell(typeName)
 }
 
 function generateBlankEquipSlot(item) {
-    let typeName = IdToName.type[item.BlankEquipSlot.type_id];
+    let typeName = IdToName.type[item.BlankEquipSlot.typeId];
 
     const row = document.createElement("tr");
 
@@ -289,8 +261,8 @@ function generateBlankEquipSlot(item) {
 }
 
 function generateOneSlotTalisman(item) {
-    let typeName = IdToName.type[item.OneSlotTalisman.type_id];
-    let equipName = IdToName[TypeIdToField[item.OneSlotTalisman.type_id]][item.OneSlotTalisman.id];
+    let typeName = IdToName.type[item.OneSlotTalisman.typeId];
+    let equipName = IdToName[TypeIdToField[item.OneSlotTalisman.typeId]][item.OneSlotTalisman.id];
     let slotsCount = item.OneSlotTalisman.slot_count;
     let skill1Pt = item.OneSlotTalisman.skill1_pt;
     let skill2Pt = item.OneSlotTalisman.skill2_pt;
@@ -302,7 +274,7 @@ function generateOneSlotTalisman(item) {
 
     row.appendChild(generateTypeCell(typeName));
     row.appendChild(generateSlotCountCell(slotsCount));
-    row.appendChild(generateSelectCell(equipOptList[item.OneSlotTalisman.type_id], equipName));
+    row.appendChild(generateSelectCell(equipOptList[item.OneSlotTalisman.typeId], equipName));
     row.appendChild(generateIntSelectCell(skill1Pt - 10, -10, 245));
     row.appendChild(generateIntSelectCell(skill2Pt - 10, -10, 245));
     row.appendChild(generateSelectCell(jewelOptList, deco1Name));
@@ -313,8 +285,8 @@ function generateOneSlotTalisman(item) {
 }
 
 function generateZeroSlotTalisman(item) {
-    let typeName = IdToName.type[item.ZeroSlotTalisman.type_id];
-    let equipName = IdToName[TypeIdToField[item.ZeroSlotTalisman.type_id]][item.ZeroSlotTalisman.id];
+    let typeName = IdToName.type[item.ZeroSlotTalisman.typeId];
+    let equipName = IdToName[TypeIdToField[item.ZeroSlotTalisman.typeId]][item.ZeroSlotTalisman.id];
     let slotsCount = item.ZeroSlotTalisman.slot_count;
     let skill1Pt = item.ZeroSlotTalisman.skill1_pt;
     let skill2Pt = item.ZeroSlotTalisman.skill2_pt;
@@ -325,7 +297,7 @@ function generateZeroSlotTalisman(item) {
 
     row.appendChild(generateTypeCell(typeName));
     row.appendChild(generateSlotCountCell(slotsCount));
-    row.appendChild(generateSelectCell(equipOptList[item.ZeroSlotTalisman.type_id], equipName));
+    row.appendChild(generateSelectCell(equipOptList[item.ZeroSlotTalisman.typeId], equipName));
     row.appendChild(generateIntSelectCell(skill1Pt - 10, -10, 245));
     row.appendChild(generateIntSelectCell(skill2Pt - 10, -10, 245));
     row.appendChild(generateSelectCell(skillOptList, skill1Name));
@@ -336,8 +308,8 @@ function generateZeroSlotTalisman(item) {
 }
 
 function generateTwoSlotTalisman(item) {
-    let typeName = IdToName.type[item.TwoSlotTalisman.type_id];
-    let equipName = IdToName[TypeIdToField[item.TwoSlotTalisman.type_id]][item.TwoSlotTalisman.id];
+    let typeName = IdToName.type[item.TwoSlotTalisman.typeId];
+    let equipName = IdToName[TypeIdToField[item.TwoSlotTalisman.typeId]][item.TwoSlotTalisman.id];
     let slotsCount = item.TwoSlotTalisman.slot_count;
     let skill1Pt = item.TwoSlotTalisman.skill1_pt;
     let skill1Name = IdToName.skill[item.TwoSlotTalisman.skill1_id];
@@ -348,7 +320,7 @@ function generateTwoSlotTalisman(item) {
 
     row.appendChild(generateTypeCell(typeName));
     row.appendChild(generateSlotCountCell(slotsCount));
-    row.appendChild(generateSelectCell(equipOptList[item.TwoSlotTalisman.type_id], equipName));
+    row.appendChild(generateSelectCell(equipOptList[item.TwoSlotTalisman.typeId], equipName));
     row.appendChild(generateIntSelectCell(skill1Pt - 10, -10, 245));
     row.appendChild(generateBlankCell());
     row.appendChild(generateSelectCell(jewelOptList, deco1Name));
@@ -359,8 +331,8 @@ function generateTwoSlotTalisman(item) {
 }
 
 function generateThreeSlotTalisman(item) {
-    let typeName = IdToName.type[item.ThreeSlotTalisman.type_id];
-    let equipName = IdToName[TypeIdToField[item.ThreeSlotTalisman.type_id]][item.ThreeSlotTalisman.id];
+    let typeName = IdToName.type[item.ThreeSlotTalisman.typeId];
+    let equipName = IdToName[TypeIdToField[item.ThreeSlotTalisman.typeId]][item.ThreeSlotTalisman.id];
     let slotsCount = item.ThreeSlotTalisman.slot_count;
     let deco1Name = IdToName.jewel[item.ThreeSlotTalisman.deco1];
     let deco2Name = IdToName.jewel[item.ThreeSlotTalisman.deco2];
@@ -370,7 +342,7 @@ function generateThreeSlotTalisman(item) {
 
     row.appendChild(generateTypeCell(typeName));
     row.appendChild(generateSlotCountCell(slotsCount));
-    row.appendChild(generateSelectCell(equipOptList[item.ThreeSlotTalisman.type_id], equipName));
+    row.appendChild(generateSelectCell(equipOptList[item.ThreeSlotTalisman.typeId], equipName));
     row.appendChild(generateBlankCell());
     row.appendChild(generateBlankCell());
     row.appendChild(generateSelectCell(jewelOptList, deco1Name));
@@ -381,8 +353,8 @@ function generateThreeSlotTalisman(item) {
 }
 
 function generateArmor(item) {
-    let typeName = IdToName.type[item.Armor.type_id];
-    let equipName = IdToName[TypeIdToField[item.Armor.type_id]][item.Armor.id];
+    let typeName = IdToName.type[item.Armor.typeId];
+    let equipName = IdToName[TypeIdToField[item.Armor.typeId]][item.Armor.id];
     let equipLevel = item.Armor.lvl;
     let deco1Name = IdToName.jewel[item.Armor.deco1];
     let deco2Name = IdToName.jewel[item.Armor.deco2];
@@ -392,7 +364,7 @@ function generateArmor(item) {
 
     row.appendChild(generateTypeCell(typeName));
     row.appendChild(generateIntSelectCell(equipLevel + 1, 0, 32));
-    row.appendChild(generateSelectCell(equipOptList[item.Armor.type_id], equipName));
+    row.appendChild(generateSelectCell(equipOptList[item.Armor.typeId], equipName));
     row.appendChild(generateBlankCell());
     row.appendChild(generateBlankCell());
     row.appendChild(generateSelectCell(jewelOptList, deco1Name));
@@ -401,9 +373,10 @@ function generateArmor(item) {
 
     return row;
 }
+
 function generateMeleeWeapon(item) {
-    let typeName = IdToName.type[item.MeleeWeapon.type_id];
-    let equipName = IdToName[TypeIdToField[item.MeleeWeapon.type_id]][item.MeleeWeapon.id];
+    let typeName = IdToName.type[item.MeleeWeapon.typeId];
+    let equipName = IdToName[TypeIdToField[item.MeleeWeapon.typeId]][item.MeleeWeapon.id];
     let deco1Name = IdToName.jewel[item.MeleeWeapon.deco1];
     let deco2Name = IdToName.jewel[item.MeleeWeapon.deco2];
     let deco3Name = IdToName.jewel[item.MeleeWeapon.deco3];
@@ -412,7 +385,7 @@ function generateMeleeWeapon(item) {
 
     row.appendChild(generateTypeCell(typeName));
     row.appendChild(generateBlankCell());
-    row.appendChild(generateSelectCell(equipOptList[item.MeleeWeapon.type_id], equipName));
+    row.appendChild(generateSelectCell(equipOptList[item.MeleeWeapon.typeId], equipName));
     row.appendChild(generateBlankCell());
     row.appendChild(generateBlankCell());
     row.appendChild(generateSelectCell(jewelOptList, deco1Name));
@@ -423,8 +396,8 @@ function generateMeleeWeapon(item) {
 }
 
 function generateRangedWeapon(item) {
-    let typeName = IdToName.type[item.RangedWeapon.type_id];
-    let equipName = IdToName[TypeIdToField[item.RangedWeapon.type_id]][item.RangedWeapon.id];
+    let typeName = IdToName.type[item.RangedWeapon.typeId];
+    let equipName = IdToName[TypeIdToField[item.RangedWeapon.typeId]][item.RangedWeapon.id];
     let equipLevel = item.RangedWeapon.lvl;
     let deco1Name = IdToName.jewel[item.RangedWeapon.deco1];
     let deco2Name = IdToName.jewel[item.RangedWeapon.deco2];
@@ -434,7 +407,7 @@ function generateRangedWeapon(item) {
 
     row.appendChild(generateTypeCell(typeName));
     row.appendChild(generateIntSelectCell(equipLevel + 1, 0, 32));
-    row.appendChild(generateSelectCell(equipOptList[item.RangedWeapon.type_id], equipName));
+    row.appendChild(generateSelectCell(equipOptList[item.RangedWeapon.typeId], equipName));
     row.appendChild(generateBlankCell());
     row.appendChild(generateBlankCell());
     row.appendChild(generateSelectCell(jewelOptList, deco1Name));
@@ -461,32 +434,18 @@ async function loadJson(url) {
     }
 }
 
-function generateDropdown(optName, optList, optDefault) {
-    const dropdown = document.getElementById(optName);
-    dropdown.innerHTML = "";
-
-    optList.forEach(option => {
-        const optionElement = document.createElement("option");
-        optionElement.textContent = option;
-        dropdown.appendChild(optionElement);
-    });
-
-    dropdown.value = optDefault;
-}
-
 function generateItemList(optName, optData, optList) {
     const tbody = document.querySelector(`#${optName} tbody`);
 
     const itemOptList = optList.map(itemName => `<option value="${itemName}">${itemName}</option>`).join('');
 
     optData.forEach(data => {
-        const dataName = optList[data.id];
         const row = document.createElement("tr");
 
         const itemCell = document.createElement("td");
         const itemSelect = document.createElement("select");
         itemSelect.innerHTML = itemOptList
-        itemSelect.value = dataName;
+        itemSelect.value = optList[data.id];
         itemCell.appendChild(itemSelect);
 
         const quantityCell = document.createElement("td");
@@ -502,16 +461,8 @@ function generateItemList(optName, optData, optList) {
     });
 }
 
-function generateEquipBox(optName, optData, IdToName) {
+function generateEquipBox(optName, optData) {
     const tbody = document.querySelector(`#${optName} tbody`);
-
-    typeIdOptList = IdToName.type.map(typeName => `<option value="${typeName}">${typeName}</option>`).join('');
-    equipOptList = new Array(16);
-    for (let i = 1; i <= 15; i++) {
-        equipOptList[i] = IdToName[TypeIdToField[i]].map(equipName => `<option value="${equipName}">${equipName}</option>`).join('');
-    }
-    jewelOptList = IdToName.jewel.map(decoName => `<option value="${decoName}">${decoName}</option>`).join('');
-    skillOptList = IdToName.skill.map(skillName => `<option value="${skillName}">${skillName}</option>`).join('');
 
     optData.forEach(item => {
         if (item.hasOwnProperty('MeleeWeapon')) {
@@ -544,7 +495,7 @@ function generateEquipBox(optName, optData, IdToName) {
     });
 }
 
-function swap_page(target) {
+function swapPage(target) {
     let choice = parseInt(target.value);
 
     switch (choice) {
@@ -552,8 +503,8 @@ function swap_page(target) {
         case 2:
         case 3: {
             if (lastChoice != "" && lastChoice != `mpouch${choice}_opt`) {
-                let last_table = document.getElementById(lastChoice);
-                last_table.style.display = "none";
+                let lastTable = document.getElementById(lastChoice);
+                lastTable.style.display = "none";
             }
             let table = document.getElementById(`mpouch${choice}_opt`);
             if (table.getAttribute("init") == "no") {
@@ -569,8 +520,8 @@ function swap_page(target) {
         case 6:
         case 7: {
             if (lastChoice != "" && lastChoice != `rpouch${choice - 3}_opt`) {
-                let last_table = document.getElementById(lastChoice);
-                last_table.style.display = "none";
+                let lastTable = document.getElementById(lastChoice);
+                lastTable.style.display = "none";
             }
             let table = document.getElementById(`rpouch${choice - 3}_opt`);
             if (table.getAttribute("init") == "no") {
@@ -590,8 +541,8 @@ function swap_page(target) {
         case 14:
         case 15: {
             if (lastChoice != "" && lastChoice != `ibox${choice - 7}_opt`) {
-                let last_table = document.getElementById(lastChoice);
-                last_table.style.display = "none";
+                let lastTable = document.getElementById(lastChoice);
+                lastTable.style.display = "none";
             }
             let table = document.getElementById(`ibox${choice - 7}_opt`);
             if (table.getAttribute("init") == "no") {
@@ -611,13 +562,13 @@ function swap_page(target) {
         case 22:
         case 23: {
             if (lastChoice != "" && lastChoice != `ebox${choice - 15}_opt`) {
-                let last_table = document.getElementById(lastChoice);
-                last_table.style.display = "none";
+                let lastTable = document.getElementById(lastChoice);
+                lastTable.style.display = "none";
             }
             let table = document.getElementById(`ebox${choice - 15}_opt`);
             if (table.getAttribute("init") == "no") {
                 table.setAttribute("init", "yes");
-                generateEquipBox(`ebox${choice - 15}_opt`, SaveSlot.equip_box.slice(100 * (choice - 16), 100 * (choice - 15)), IdToName);
+                generateEquipBox(`ebox${choice - 15}_opt`, SaveSlot.equip_box.slice(100 * (choice - 16), 100 * (choice - 15)));
             }
             table.style.display = "block";
             lastChoice = `ebox${choice - 15}_opt`;
@@ -637,7 +588,25 @@ Promise.all([
 .then(([dataJson, saveJson]) => {
     IdToName = dataJson;
     SaveSlot = saveJson;
-    generateDropdown("gender_opt", IdToName.gender, IdToName.gender[SaveSlot.gender]);
+
+    typeIdOptList = IdToName.type.map(typeName => `<option value="${typeName}">${typeName}</option>`).join('');
+    equipOptList = new Array(16);
+    for (let i = 1; i <= 15; i++) {
+        equipOptList[i] = IdToName[TypeIdToField[i]].map(equipName => `<option value="${equipName}">${equipName}</option>`).join('');
+    }
+    jewelOptList = IdToName.jewel.map(decoName => `<option value="${decoName}">${decoName}</option>`).join('');
+    skillOptList = IdToName.skill.map(skillName => `<option value="${skillName}">${skillName}</option>`).join('');
+
+    const gender_opt_dropdown = document.getElementById("gender_opt");
+    gender_opt_dropdown.innerHTML = "";
+
+    IdToName.gender.forEach(option => {
+        const optionElement = document.createElement("option");
+        optionElement.textContent = option;
+        gender_opt_dropdown.appendChild(optionElement);
+    });
+
+    gender_opt_dropdown.value = IdToName.gender[SaveSlot.gender];
 
     document.getElementById("name_opt").value =
         String.fromCharCode.apply(null, SaveSlot.name);
