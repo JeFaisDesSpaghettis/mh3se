@@ -19,7 +19,7 @@
                 <input type="text" id="name_opt" maxlength="8">
                 <br>
                 <label for="zenny_opt">Zenny:</label>
-                <input type="number" id="zenny_opt" min="0" step="1">
+                <input type="number" id="zenny_opt" min="0" max="9999999" step="1">
                 <br>
                 <label for="playtime_opt">Playtime (in seconds):</label>
                 <input type="number" id="playtime_opt" min="0" max="4294967295" step="1">
@@ -31,34 +31,34 @@
                 <input type="number" id="hr_opt" min="0" max="999" step="1">
                 <br>
                 <label for="face_type_opt">Face Type:</label>
-                <input type="number" id="face_type_opt" min="0" max="999" step="1">
+                <input type="number" id="face_type_opt" min="1" max="9" step="1">
                 <br>
-                <label for="hair_type_opt">HR:</label>
-                <input type="number" id="hair_type_opt" min="0" max="999" step="1">
+                <label for="hair_type_opt">Hair Type:</label>
+                <input type="number" id="hair_type_opt" min="1" max="11" step="1">
                 <br>
-                <label for="hair_color_opt">HR:</label>
-                <input type="color" id="hair_color_opt" min="0" max="999" step="1">
+                <label for="hair_color_opt">Hair Color:</label>
+                <input type="color" id="hair_color_opt">
                 <br>
-                <label for="cloth_type_opt">HR:</label>
-                <input type="number" id="cloth_type_opt" min="0" max="999" step="1">
+                <label for="cloth_type_opt">Cloth Type:</label>
+                <input type="number" id="cloth_type_opt" min="1" max="4" step="1">
                 <br>
-                <label for="voice_type_opt">HR:</label>
-                <input type="number" id="voice_type_opt" min="0" max="999" step="1">
+                <label for="voice_type_opt">Voice Type:</label>
+                <input type="number" id="voice_type_opt" min="1" max="20" step="1">
                 <br>
-                <label for="cloth_color_opt">HR:</label>
-                <input type="color" id="cloth_color_opt" min="0" max="999" step="1">
+                <label for="cloth_color_opt">Cloth Color:</label>
+                <input type="color" id="cloth_color_opt">
                 <br>
-                <label for="eye_color_opt">HR:</label>
-                <input type="number" id="eye_color_opt" min="0" max="999" step="1">
+                <label for="eye_color_opt">Eye Color:</label>
+                <input type="number" id="eye_color_opt" min="1" max="10" step="1">
                 <br>
-                <label for="feature_type_opt">HR:</label>
-                <input type="number" id="feature_type_opt" min="0" max="999" step="1">
+                <label for="feature_type_opt">Feature Type:</label>
+                <input type="number" id="feature_type_opt" min="0" max="12" step="1">
                 <br>
-                <label for="skin_tone_opt">HR:</label>
-                <input type="number" id="skin_tone_opt" min="0" max="999" step="1">
+                <label for="skin_tone_opt">Skin Tone:</label>
+                <input type="number" id="skin_tone_opt" min="0" max="612" step="1">
                 <br>
                 <label for="page_opt">Choose page:</label>
-                <select id="page_opt" onchange="swap_page(this)">
+                <select id="page_opt" onchange="swapPage(this)">
                     <option value="1">Melee Pouch 1</option>
                     <option value="2">Melee Pouch 2</option>
                     <option value="3">Melee Pouch 3</option>
