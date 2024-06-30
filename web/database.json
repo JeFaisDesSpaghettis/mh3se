@@ -2192,10 +2192,6 @@
       "Dungmaster",
       "Flame Aura"
     ],
-    "gender": [
-      "male",
-      "female"
-    ],
     "type": [
       "None",
       "Chest",
@@ -2214,4 +2210,4 @@
       "Long Sword",
       "Switch Axe"
     ]
-  }
+}

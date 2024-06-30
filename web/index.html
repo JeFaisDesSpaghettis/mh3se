@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="fr">
+<html lang="en">
     <head>
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,365 +9,126 @@
     </head>
     <body>
         <div class="main_div">
-            <h1>Save Editor</h1>
-            <p>
-                <label for="gender_opt">Gender:</label>
-                <select id="gender_opt">
+            <h1>MHTri Save Editor</h1>
+            <h3>Notes:</h3>
+            <ul>
+                <li>Playtime is expressed in seconds</li>
+                <li>Changing HR and HRP is not advised until all HR related unlocks are done</li>
+                <li>For Face-, Hair-, Cloth-, Voice- and Feature Types please refer to the ingame creation menu</li>
+                <li>Skin tone value ranges from 0 to 612, darkest to lightest</li>
+            </ul>
+            <div>
+                <label for="gender">Gender:</label>
+                <select id="gender">
+                    <option value="0">Male</option>
+                    <option value="1">Female</option>
                 </select>
-                <br>
-                <label for="name_opt">Name:</label>
-                <input type="text" id="name_opt" maxlength="8">
-                <br>
-                <label for="zenny_opt">Zenny:</label>
-                <input type="number" id="zenny_opt" min="0" max="9999999" step="1">
-                <br>
-                <label for="playtime_opt">Playtime (in seconds):</label>
-                <input type="number" id="playtime_opt" min="0" max="4294967295" step="1">
-                <br>
-                <label for="hrp_opt">HRP:</label>
-                <input type="number" id="hrp_opt" min="0" max="8930350" step="1">
-                <br>
-                <label for="hr_opt">HR:</label>
-                <input type="number" id="hr_opt" min="0" max="999" step="1">
-                <br>
-                <label for="face_type_opt">Face Type:</label>
-                <input type="number" id="face_type_opt" min="1" max="9" step="1">
-                <br>
-                <label for="hair_type_opt">Hair Type:</label>
-                <input type="number" id="hair_type_opt" min="1" max="11" step="1">
-                <br>
-                <label for="hair_color_opt">Hair Color:</label>
-                <input type="color" id="hair_color_opt">
-                <br>
-                <label for="cloth_type_opt">Cloth Type:</label>
-                <input type="number" id="cloth_type_opt" min="1" max="4" step="1">
-                <br>
-                <label for="voice_type_opt">Voice Type:</label>
-                <input type="number" id="voice_type_opt" min="1" max="20" step="1">
-                <br>
-                <label for="cloth_color_opt">Cloth Color:</label>
-                <input type="color" id="cloth_color_opt">
-                <br>
-                <label for="eye_color_opt">Eye Color:</label>
-                <input type="number" id="eye_color_opt" min="1" max="10" step="1">
-                <br>
-                <label for="feature_type_opt">Feature Type:</label>
-                <input type="number" id="feature_type_opt" min="0" max="12" step="1">
-                <br>
-                <label for="skin_tone_opt">Skin Tone:</label>
-                <input type="number" id="skin_tone_opt" min="0" max="612" step="1">
-                <br>
-                <label for="page_opt">Choose page:</label>
-                <select id="page_opt" onchange="swapPage(this)">
-                    <option value="1">Melee Pouch 1</option>
-                    <option value="2">Melee Pouch 2</option>
-                    <option value="3">Melee Pouch 3</option>
 
-                    <option value="4">Ranged Pouch 1</option>
-                    <option value="5">Ranged Pouch 2</option>
-                    <option value="6">Ranged Pouch 3</option>
-                    <option value="7">Ranged Pouch 4</option>
+                <br>
 
-                    <option value="8">Item Box 1</option>
-                    <option value="9">Item Box 2</option>
-                    <option value="10">Item Box 3</option>
-                    <option value="11">Item Box 4</option>
-                    <option value="12">Item Box 5</option>
-                    <option value="13">Item Box 6</option>
-                    <option value="14">Item Box 7</option>
-                    <option value="15">Item Box 8</option>
+                <label for="name">Name:</label>
+                <input type="text" id="name" maxlength="8">
+                <label for="zenny">Zenny:</label>
+                <input type="number" id="zenny" min="0" max="9999999" step="1">
+                <label for="playtime">Playtime:</label>
+                <input type="number" id="playtime" min="0" max="4294967295" step="1">
 
-                    <option value="16">Equip Box 1</option>
-                    <option value="17">Equip Box 2</option>
-                    <option value="18">Equip Box 3</option>
-                    <option value="19">Equip Box 4</option>
-                    <option value="20">Equip Box 5</option>
-                    <option value="21">Equip Box 6</option>
-                    <option value="22">Equip Box 7</option>
-                    <option value="23">Equip Box 8</option>
+                <br>
+
+                <label for="hrp">HRP:</label>
+                <input type="number" id="hrp" min="0" max="9999999" step="1">
+                <label for="hr">HR:</label>
+                <input type="number" id="hr" min="0" max="999" step="1">
+
+                <br>
+
+                <label for="face_type">Face Type:</label>
+                <input type="number" id="face_type" min="1" max="9" step="1">
+                <label for="hair_type">Hair Type:</label>
+                <input type="number" id="hair_type" min="1" max="11" step="1">
+                <label for="hair_color">Hair Color:</label>
+                <input type="color" id="hair_color">
+
+                <br>
+
+                <label for="voice_type">Voice Type:</label>
+                <input type="number" id="voice_type" min="1" max="20" step="1">
+                <label for="cloth_type">Cloth Type:</label>
+                <input type="number" id="cloth_type" min="1" max="4" step="1">
+                <label for="cloth_color">Cloth Color:</label>
+                <input type="color" id="cloth_color">
+
+                <br>
+
+                <label for="eye_color">Eye Color:</label>
+                <input type="number" id="eye_color" min="1" max="10" step="1">
+                <label for="feature_type">Feature Type:</label>
+                <input type="number" id="feature_type" min="0" max="12" step="1">
+                <label for="skin_tone">Skin Tone:</label>
+                <input type="number" id="skin_tone" min="0" max="612" step="1">
+
+                <br>
+
+                <label for="page">Choose page:</label>
+                <select id="page" onchange="swapPage(this)">
+                    <option value="0">Melee Pouch</option>
+                    <option value="1">Ranged Pouch</option>
+                    <option value="2">Item Box</option>
+                    <option value="3">Equip Box</option>
                 </select>
-                <table style="display: none;" id="mpouch1_opt" init="no">
-                    <thead>
-                    <tr>
-                        <th>Item</th>
-                        <th>Qty</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-                <table style="display: none;" id="mpouch2_opt" init="no">
-                    <thead>
-                    <tr>
-                        <th>Item</th>
-                        <th>Qty</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-                <table style="display: none;" id="mpouch3_opt" init="no">
-                    <thead>
-                    <tr>
-                        <th>Item</th>
-                        <th>Qty</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-                <table style="display: none;" id="rpouch1_opt" init="no">
-                    <thead>
-                    <tr>
-                        <th>Item</th>
-                        <th>Qty</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-                <table style="display: none;" id="rpouch2_opt" init="no">
-                    <thead>
-                    <tr>
-                        <th>Item</th>
-                        <th>Qty</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-                <table style="display: none;" id="rpouch3_opt" init="no">
-                    <thead>
-                    <tr>
-                        <th>Item</th>
-                        <th>Qty</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-                <table style="display: none;" id="rpouch4_opt" init="no">
-                    <thead>
-                    <tr>
-                        <th>Item</th>
-                        <th>Qty</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-                <table style="display: none;" id="ibox1_opt" init="no">
-                    <thead>
-                    <tr>
-                        <th>Item</th>
-                        <th>Qty</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-                <table style="display: none;" id="ibox2_opt" init="no">
-                    <thead>
-                    <tr>
-                        <th>Item</th>
-                        <th>Qty</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-                <table style="display: none;" id="ibox3_opt" init="no">
-                    <thead>
-                    <tr>
-                        <th>Item</th>
-                        <th>Qty</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-                <table style="display: none;" id="ibox4_opt" init="no">
-                    <thead>
-                    <tr>
-                        <th>Item</th>
-                        <th>Qty</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-                <table style="display: none;" id="ibox5_opt" init="no">
-                    <thead>
-                    <tr>
-                        <th>Item</th>
-                        <th>Qty</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-                <table style="display: none;" id="ibox6_opt" init="no">
-                    <thead>
-                    <tr>
-                        <th>Item</th>
-                        <th>Qty</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-                <table style="display: none;" id="ibox7_opt" init="no">
-                    <thead>
-                    <tr>
-                        <th>Item</th>
-                        <th>Qty</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-                <table style="display: none;" id="ibox8_opt" init="no">
-                    <thead>
-                    <tr>
-                        <th>Item</th>
-                        <th>Qty</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-                <table style="display: none;" id="ebox1_opt" init="no">
-                    <thead>
-                      <tr>
-                        <th>Type</th>
-                        <th>Level</th>
-                        <th>Equipment</th>
-                        <th>Skill1 Pt</th>
-                        <th>Skill2 Pt</th>
-                        <th>Deco/Skill 1</th>
-                        <th>Deco/Skill 2</th>
-                        <th>Deco/Skill 3</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-                <table style="display: none;" id="ebox2_opt" init="no">
-                    <thead>
-                      <tr>
-                        <th>Type</th>
-                        <th>Level</th>
-                        <th>Equipment</th>
-                        <th>Skill1 Pt</th>
-                        <th>Skill2 Pt</th>
-                        <th>Deco/Skill 1</th>
-                        <th>Deco/Skill 2</th>
-                        <th>Deco/Skill 3</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-                <table style="display: none;" id="ebox3_opt" init="no">
-                    <thead>
-                      <tr>
-                        <th>Type</th>
-                        <th>Level</th>
-                        <th>Equipment</th>
-                        <th>Skill1 Pt</th>
-                        <th>Skill2 Pt</th>
-                        <th>Deco/Skill 1</th>
-                        <th>Deco/Skill 2</th>
-                        <th>Deco/Skill 3</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-                <table style="display: none;" id="ebox4_opt" init="no">
-                    <thead>
-                      <tr>
-                        <th>Type</th>
-                        <th>Level</th>
-                        <th>Equipment</th>
-                        <th>Skill1 Pt</th>
-                        <th>Skill2 Pt</th>
-                        <th>Deco/Skill 1</th>
-                        <th>Deco/Skill 2</th>
-                        <th>Deco/Skill 3</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-                <table style="display: none;" id="ebox5_opt" init="no">
-                    <thead>
-                      <tr>
-                        <th>Type</th>
-                        <th>Level</th>
-                        <th>Equipment</th>
-                        <th>Skill1 Pt</th>
-                        <th>Skill2 Pt</th>
-                        <th>Deco/Skill 1</th>
-                        <th>Deco/Skill 2</th>
-                        <th>Deco/Skill 3</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-                <table style="display: none;" id="ebox6_opt" init="no">
-                    <thead>
-                      <tr>
-                        <th>Type</th>
-                        <th>Level</th>
-                        <th>Equipment</th>
-                        <th>Skill1 Pt</th>
-                        <th>Skill2 Pt</th>
-                        <th>Deco/Skill 1</th>
-                        <th>Deco/Skill 2</th>
-                        <th>Deco/Skill 3</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-                <table style="display: none;" id="ebox7_opt" init="no">
-                    <thead>
-                      <tr>
-                        <th>Type</th>
-                        <th>Level</th>
-                        <th>Equipment</th>
-                        <th>Skill1 Pt</th>
-                        <th>Skill2 Pt</th>
-                        <th>Deco/Skill 1</th>
-                        <th>Deco/Skill 2</th>
-                        <th>Deco/Skill 3</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-                <table style="display: none;" id="ebox8_opt" init="no">
-                    <thead>
-                      <tr>
-                        <th>Type</th>
-                        <th>Level</th>
-                        <th>Equipment</th>
-                        <th>Skill1 Pt</th>
-                        <th>Skill2 Pt</th>
-                        <th>Deco/Skill 1</th>
-                        <th>Deco/Skill 2</th>
-                        <th>Deco/Skill 3</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
+
                 <br>
-            </p>
+
+                <table style="display: none;" id="mpouch">
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Qty</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+                <table style="display: none;" id="rpouch">
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Qty</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+                <table style="display: none;" id="ibox">
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Qty</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+                <table style="display: none;" id="ebox">
+                    <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Level</th>
+                            <th>Equipment</th>
+                            <th>Skill1 Pt</th>
+                            <th>Skill2 Pt</th>
+                            <th>Deco/Skill 1</th>
+                            <th>Deco/Skill 2</th>
+                            <th>Deco/Skill 3</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
         </div>
         <div class="versioning"><a href="https://github.com/jenskutilek/homecomputer-fonts">Font used under OFL terms</a></div>
+        <div class="versioning"><a href="https://github.com/JeSuisSurGithub/mh3se">MH3SE Project Link</a></div>
         <script src="index.js"></script>
     </body>
 </html>

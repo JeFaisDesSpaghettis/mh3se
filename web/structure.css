@@ -33,20 +33,25 @@ ul {
 input, textarea {
     border: none;
     outline: none;
-    background-color: transparent;
     resize: none;
 
     border-radius: 3px;
 
-    font-size: 90%;
+    font-size: 80%;
     margin: 1%;
-    padding: 1%;
+    padding: 0.4rem;
+    width: 8rem;
+    height: 2rem;
+}
+
+td {
+    padding-left:  0.3rem;
+    padding-right: 0.3rem;
 }
 
 button {
     border: none;
     outline: none;
-    background-color: transparent;
 
     cursor: pointer;
 
@@ -55,4 +60,24 @@ button {
     font-size: 90%;
     margin: 1%;
     padding: 1%;
+}
+
+.suggestions {
+    position: absolute;
+    z-index: 1000;
+    overflow-y: auto;
+
+    max-height: 200px;
+    width: 16rem;
+
+    border-radius: 5px;
+}
+
+.suggestion-item {
+    padding: 8px;
+    cursor: pointer;
+}
+
+.suggestion-item:hover {
+    background-color: #FFFFFF80;
 }

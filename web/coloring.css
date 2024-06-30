@@ -31,7 +31,7 @@ html {
 
 .main_div {
     backdrop-filter: blur(3px);
-    -webkit-backdrop-filter: blur(3px);
+    transform: translateZ(0);
     background-color: #0000005F;
     box-shadow: 0px 0px 24px #6000E0;
 }
@@ -44,10 +44,6 @@ a:hover {
     color: #ffafaf;
     transition: color 0.5s ease;
 }
-a:not(:hover) {
-    color: #8dc0fa;
-    transition: color 0.5s ease;
-}
 
 .versioning {
     color: #FFFFFF;
@@ -58,8 +54,6 @@ input, textarea {
     font-family: "Sixtyfour";
     font-variation-settings: 'SCAN' 20;
 
-    backdrop-filter: blur(3px);
-    -webkit-backdrop-filter: blur(3px);
     background-color: #00000080;
     box-shadow: 0px 0px 12px #e64343;
 }
@@ -69,8 +63,15 @@ button {
     font-family: "Sixtyfour";
     font-variation-settings: 'SCAN' 20;
 
-    backdrop-filter: blur(3px);
-    -webkit-backdrop-filter: blur(3px);
     background-color: #00000080;
     box-shadow: 0px 0px 12px #e64343;
+}
+
+.suggestions {
+    background-color: #00000080;
+    box-shadow: 0px 0px 12px #f52fc3;
+}
+
+.suggestion-item:hover {
+    background-color: #FFFFFF40;
 }

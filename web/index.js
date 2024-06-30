@@ -1,16 +1,11 @@
+"use strict";
+
 let lastChoice = "";
 
-let typeIdOptList = [];
-let equipOptList = [];
-let jewelOptList = [];
-let skillOptList = [];
-
-let IdToName = {};
+let Database = {};
 let SaveSlot = {};
 
-const pages = document.getElementById("pages");
-
-const TypeIdToField = [
+const IdToType = [
     "NONE",
     "chest",
     "arms",
@@ -29,8 +24,20 @@ const TypeIdToField = [
     "sa",
 ];
 
+function rgbToHex(r, g, b) {
+    return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1).toUpperCase();
+}
+
+function hexToRgb(hex) {
+    let bigint = parseInt(hex.slice(1), 16);
+    let r = (bigint >> 16) & 255;
+    let g = (bigint >> 8) & 255;
+    let b = bigint & 255;
+    return [r, g, b];
+}
+
 function onTypeChange(target) {
-    let typeId = IdToName.type.indexOf(target.value);
+    let typeId = Database.type.indexOf(target.value);
 
     const row = target.parentElement.parentElement;
     if ((typeId >= 7 && typeId <= 10) || (typeId >= 14 && typeId <= 15)) {
@@ -45,7 +52,7 @@ function onTypeChange(target) {
                 deco2: 0,
                 deco3: 0
             }
-        }));
+        }, row.id));
     }
     else if (typeId >= 11 && typeId <= 13) {
         row.replaceWith(generateRangedWeapon({
@@ -59,7 +66,7 @@ function onTypeChange(target) {
                 deco2: 0,
                 deco3: 0
             }
-        }));
+        }, row.id));
     }
     else if (typeId >= 1 && typeId <= 5) {
         row.replaceWith(generateArmor({
@@ -73,7 +80,7 @@ function onTypeChange(target) {
                 deco2: 0,
                 deco3: 0
             }
-        }));
+        }, row.id));
     }
     else if (typeId == 6) {
         row.replaceWith(generateOneSlotTalisman({
@@ -87,14 +94,14 @@ function onTypeChange(target) {
                 skill1_id: 0,
                 skill2_id: 0
             }
-        }));
+        }, row.id));
     }
     else {
         row.replaceWith(generateBlankEquipSlot({
             BlankEquipSlot: {
                 buf: [0,0,0,0,0,0,0,0,0,0,0,0]
             }
-        }));
+        }, row.id));
     }
 }
 
@@ -114,7 +121,7 @@ function onSlotCountChange(target) {
                     skill2_id: 0,
                     unused_deco3: 0
                 }
-            }));
+            }, currentRow.id));
             break;
         }
         case 1: {
@@ -129,7 +136,7 @@ function onSlotCountChange(target) {
                     skill1_id: 0,
                     skill2_id: 0
                 }
-            }));
+            }, currentRow.id));
             break;
         }
         case 2: {
@@ -144,7 +151,7 @@ function onSlotCountChange(target) {
                     deco2: 0,
                     skill1_id: 0
                 }
-            }));
+            }, currentRow.id));
             break;
         }
         case 3: {
@@ -159,7 +166,7 @@ function onSlotCountChange(target) {
                     deco2: 0,
                     deco3: 0
                 }
-            }));
+            }, currentRow.id));
             break;
         }
         default: {
@@ -174,25 +181,20 @@ function generateBlankCell()
     const blankCell = document.createElement("td");
     const blankText = document.createElement("p");
     blankText.style.textAlign = "center";
-    blankText.innerHTML = 'X';
+    blankText.textContent = 'X';
     blankCell.appendChild(blankText);
     return blankCell;
 }
 
-function generateSelectCell(optList, optSelect)
-{
-    const selectCell = document.createElement("td");
-    const selectSelect = document.createElement("select");
-    selectSelect.innerHTML = optList;
-    selectSelect.value = optSelect;
-    selectCell.appendChild(selectSelect);
-    return selectCell;
-}
-
-function generateIntSelectCell(value, min, max)
+function generateIntSelectCell(value, min, max, talismanSlotCount = false)
 {
     const intSelectCell = document.createElement("td");
     const intSelectInput = document.createElement("input");
+    if (talismanSlotCount) {
+        intSelectInput.onchange = function () {
+            onSlotCountChange(intSelectInput);
+        };
+    }
     intSelectInput.type = "number";
     intSelectInput.min = min;
     intSelectInput.max = max;
@@ -201,55 +203,50 @@ function generateIntSelectCell(value, min, max)
     return intSelectCell;
 }
 
-function generateSlotCountCell(slotsCount)
+function generateSelectCell(optList, optSelect, typeChange = false)
 {
-    const slotCountCell = document.createElement("td");
-    const slotCountInput = document.createElement("input");
-    slotCountInput.onchange = function () {
-        onSlotCountChange(slotCountInput);
-    };
-    slotCountInput.type = "number";
-    slotCountInput.min = 0;
-    slotCountInput.max = 3;
-    slotCountInput.value = slotsCount;
-    slotCountCell.appendChild(slotCountInput);
+    const suggestCell = document.createElement("td");
+    const suggestInput = document.createElement("textarea");
 
-    return slotCountCell;
+    suggestInput.value = optList[optSelect];
+    suggestInput.placeholder = "Search...";
+
+    const suggestBox = document.createElement("div");
+    suggestBox.className = "suggestions";
+
+    suggestInput.oninput = function () {
+        const query = this.value.toLowerCase();
+        suggestBox.innerHTML = '';
+
+        if (query.length > 0) {
+            const inferedSuggest = optList.filter(item => item.toLowerCase().includes(query));
+            inferedSuggest.forEach(suggestion => {
+                const suggestionItem = document.createElement('div');
+                suggestionItem.className = 'suggestion-item';
+                suggestionItem.textContent = suggestion;
+                suggestionItem.onclick = function () {
+                    suggestInput.value = suggestion;
+                    suggestBox.innerHTML = '';
+                    if (typeChange) {
+                        onTypeChange(suggestInput);
+                    }
+                };
+                suggestBox.appendChild(suggestionItem);
+            });
+        }
+    };
+
+    suggestCell.appendChild(suggestInput);
+    suggestCell.appendChild(suggestBox);
+
+    return suggestCell;
 }
 
-function generateTypeCell(typeName)
-{
-    const typeCell = document.createElement("td");
-    const typeSelect = document.createElement("select");
-
-    typeSelect.onchange = function () {
-        onTypeChange(this);
-    };
-
-    typeSelect.innerHTML = typeIdOptList;
-    typeSelect.value = typeName;
-    typeCell.appendChild(typeSelect);
-
-    return typeCell;
-}
-
-function generateBlankEquipSlot(item) {
-    let typeName = IdToName.type[item.BlankEquipSlot.type_id];
-
+function generateBlankEquipSlot(item, id) {
     const row = document.createElement("tr");
+    row.id = id;
 
-    const typeCell = document.createElement("td");
-    const typeSelect = document.createElement("select");
-
-    typeSelect.onchange = function () {
-        onTypeChange(this);
-    };
-
-    typeSelect.innerHTML = typeIdOptList;
-    typeSelect.value = typeName;
-    typeCell.appendChild(typeSelect);
-
-    row.appendChild(typeCell);
+    row.appendChild(generateSelectCell(Database.type, 0, true));
 
     for (let i = 0; i < 7; i++) {
         row.appendChild(generateBlankCell());
@@ -258,161 +255,192 @@ function generateBlankEquipSlot(item) {
     return row;
 }
 
-function generateOneSlotTalisman(item) {
-    let typeName = IdToName.type[item.OneSlotTalisman.type_id];
-    let equipName = IdToName[TypeIdToField[item.OneSlotTalisman.type_id]][item.OneSlotTalisman.id];
+function generateOneSlotTalisman(item, id) {
     let slotsCount = item.OneSlotTalisman.slot_count;
     let skill1Pt = item.OneSlotTalisman.skill1_pt;
     let skill2Pt = item.OneSlotTalisman.skill2_pt;
-    let skill1Name = IdToName.skill[item.OneSlotTalisman.skill1_id];
-    let skill2Name = IdToName.skill[item.OneSlotTalisman.skill2_id];
-    let deco1Name = IdToName.jewel[item.OneSlotTalisman.deco1];
 
     const row = document.createElement("tr");
+    row.id = id;
 
-    row.appendChild(generateTypeCell(typeName));
-    row.appendChild(generateSlotCountCell(slotsCount));
-    row.appendChild(generateSelectCell(equipOptList[item.OneSlotTalisman.type_id], equipName));
+    row.appendChild(generateSelectCell(Database.type, item.OneSlotTalisman.type_id, true));
+    row.appendChild(generateIntSelectCell(slotsCount, 0, 3, true));
+    row.appendChild(generateSelectCell(Database[IdToType[[item.OneSlotTalisman.type_id]]], item.OneSlotTalisman.id));
     row.appendChild(generateIntSelectCell(skill1Pt - 10, -10, 245));
     row.appendChild(generateIntSelectCell(skill2Pt - 10, -10, 245));
-    row.appendChild(generateSelectCell(jewelOptList, deco1Name));
-    row.appendChild(generateSelectCell(skillOptList, skill1Name));
-    row.appendChild(generateSelectCell(skillOptList, skill2Name));
+    row.appendChild(generateSelectCell(Database.jewel, item.OneSlotTalisman.deco1));
+    row.appendChild(generateSelectCell(Database.skill, item.OneSlotTalisman.skill1_id));
+    row.appendChild(generateSelectCell(Database.skill, item.OneSlotTalisman.skill2_id));
 
     return row;
 }
 
-function generateZeroSlotTalisman(item) {
-    let typeName = IdToName.type[item.ZeroSlotTalisman.type_id];
-    let equipName = IdToName[TypeIdToField[item.ZeroSlotTalisman.type_id]][item.ZeroSlotTalisman.id];
+function generateZeroSlotTalisman(item, id) {
     let slotsCount = item.ZeroSlotTalisman.slot_count;
     let skill1Pt = item.ZeroSlotTalisman.skill1_pt;
     let skill2Pt = item.ZeroSlotTalisman.skill2_pt;
-    let skill1Name = IdToName.skill[item.ZeroSlotTalisman.skill1_id];
-    let skill2Name = IdToName.skill[item.ZeroSlotTalisman.skill2_id];
 
     const row = document.createElement("tr");
+    row.id = id;
 
-    row.appendChild(generateTypeCell(typeName));
-    row.appendChild(generateSlotCountCell(slotsCount));
-    row.appendChild(generateSelectCell(equipOptList[item.ZeroSlotTalisman.type_id], equipName));
+    row.appendChild(generateSelectCell(Database.type, item.ZeroSlotTalisman.type_id, true));
+    row.appendChild(generateIntSelectCell(slotsCount, 0, 3, true));
+    row.appendChild(generateSelectCell(Database[IdToType[[item.ZeroSlotTalisman.type_id]]], item.ZeroSlotTalisman.id));
     row.appendChild(generateIntSelectCell(skill1Pt - 10, -10, 245));
     row.appendChild(generateIntSelectCell(skill2Pt - 10, -10, 245));
-    row.appendChild(generateSelectCell(skillOptList, skill1Name));
-    row.appendChild(generateSelectCell(skillOptList, skill2Name));
+    row.appendChild(generateSelectCell(Database.skill, item.ZeroSlotTalisman.skill1_id));
+    row.appendChild(generateSelectCell(Database.skill, item.ZeroSlotTalisman.skill2_id));
     row.appendChild(generateBlankCell());
 
     return row;
 }
 
-function generateTwoSlotTalisman(item) {
-    let typeName = IdToName.type[item.TwoSlotTalisman.type_id];
-    let equipName = IdToName[TypeIdToField[item.TwoSlotTalisman.type_id]][item.TwoSlotTalisman.id];
+function generateTwoSlotTalisman(item, id) {
     let slotsCount = item.TwoSlotTalisman.slot_count;
     let skill1Pt = item.TwoSlotTalisman.skill1_pt;
-    let skill1Name = IdToName.skill[item.TwoSlotTalisman.skill1_id];
-    let deco1Name = IdToName.jewel[item.TwoSlotTalisman.deco1];
-    let deco2Name = IdToName.jewel[item.TwoSlotTalisman.deco2];
 
     const row = document.createElement("tr");
+    row.id = id;
 
-    row.appendChild(generateTypeCell(typeName));
-    row.appendChild(generateSlotCountCell(slotsCount));
-    row.appendChild(generateSelectCell(equipOptList[item.TwoSlotTalisman.type_id], equipName));
+    row.appendChild(generateSelectCell(Database.type, item.TwoSlotTalisman.type_id, true));
+    row.appendChild(generateIntSelectCell(slotsCount, 0, 3, true));
+    row.appendChild(generateSelectCell(Database[IdToType[[item.TwoSlotTalisman.type_id]]], item.TwoSlotTalisman.id));
     row.appendChild(generateIntSelectCell(skill1Pt - 10, -10, 245));
     row.appendChild(generateBlankCell());
-    row.appendChild(generateSelectCell(jewelOptList, deco1Name));
-    row.appendChild(generateSelectCell(jewelOptList, deco2Name));
-    row.appendChild(generateSelectCell(skillOptList, skill1Name));
+    row.appendChild(generateSelectCell(Database.jewel, item.TwoSlotTalisman.deco1));
+    row.appendChild(generateSelectCell(Database.jewel, item.TwoSlotTalisman.deco2));
+    row.appendChild(generateSelectCell(Database.skill, item.TwoSlotTalisman.skill1_id));
 
     return row;
 }
 
-function generateThreeSlotTalisman(item) {
-    let typeName = IdToName.type[item.ThreeSlotTalisman.type_id];
-    let equipName = IdToName[TypeIdToField[item.ThreeSlotTalisman.type_id]][item.ThreeSlotTalisman.id];
+function generateThreeSlotTalisman(item, id) {
     let slotsCount = item.ThreeSlotTalisman.slot_count;
-    let deco1Name = IdToName.jewel[item.ThreeSlotTalisman.deco1];
-    let deco2Name = IdToName.jewel[item.ThreeSlotTalisman.deco2];
-    let deco3Name = IdToName.jewel[item.ThreeSlotTalisman.deco3];
 
     const row = document.createElement("tr");
+    row.id = id;
 
-    row.appendChild(generateTypeCell(typeName));
-    row.appendChild(generateSlotCountCell(slotsCount));
-    row.appendChild(generateSelectCell(equipOptList[item.ThreeSlotTalisman.type_id], equipName));
+    row.appendChild(generateSelectCell(Database.type, item.ThreeSlotTalisman.type_id, true));
+    row.appendChild(generateIntSelectCell(slotsCount, 0, 3, true));
+    row.appendChild(generateSelectCell(Database[IdToType[[item.ThreeSlotTalisman.type_id]]], item.ThreeSlotTalisman.id));
     row.appendChild(generateBlankCell());
     row.appendChild(generateBlankCell());
-    row.appendChild(generateSelectCell(jewelOptList, deco1Name));
-    row.appendChild(generateSelectCell(jewelOptList, deco2Name));
-    row.appendChild(generateSelectCell(jewelOptList, deco3Name));
+    row.appendChild(generateSelectCell(Database.jewel, item.ThreeSlotTalisman.deco1));
+    row.appendChild(generateSelectCell(Database.jewel, item.ThreeSlotTalisman.deco2));
+    row.appendChild(generateSelectCell(Database.jewel, item.ThreeSlotTalisman.deco3));
 
     return row;
 }
 
-function generateArmor(item) {
-    let typeName = IdToName.type[item.Armor.type_id];
-    let equipName = IdToName[TypeIdToField[item.Armor.type_id]][item.Armor.id];
+function generateArmor(item, id) {
     let equipLevel = item.Armor.lvl;
-    let deco1Name = IdToName.jewel[item.Armor.deco1];
-    let deco2Name = IdToName.jewel[item.Armor.deco2];
-    let deco3Name = IdToName.jewel[item.Armor.deco3];
 
     const row = document.createElement("tr");
+    row.id = id;
 
-    row.appendChild(generateTypeCell(typeName));
+    row.appendChild(generateSelectCell(Database.type, item.Armor.type_id, true));
     row.appendChild(generateIntSelectCell(equipLevel + 1, 0, 32));
-    row.appendChild(generateSelectCell(equipOptList[item.Armor.type_id], equipName));
+    row.appendChild(generateSelectCell(Database[IdToType[[item.Armor.type_id]]], item.Armor.id));
     row.appendChild(generateBlankCell());
     row.appendChild(generateBlankCell());
-    row.appendChild(generateSelectCell(jewelOptList, deco1Name));
-    row.appendChild(generateSelectCell(jewelOptList, deco2Name));
-    row.appendChild(generateSelectCell(jewelOptList, deco3Name));
+    row.appendChild(generateSelectCell(Database.jewel, item.Armor.deco1));
+    row.appendChild(generateSelectCell(Database.jewel, item.Armor.deco2));
+    row.appendChild(generateSelectCell(Database.jewel, item.Armor.deco3));
 
     return row;
 }
 
-function generateMeleeWeapon(item) {
-    let typeName = IdToName.type[item.MeleeWeapon.type_id];
-    let equipName = IdToName[TypeIdToField[item.MeleeWeapon.type_id]][item.MeleeWeapon.id];
-    let deco1Name = IdToName.jewel[item.MeleeWeapon.deco1];
-    let deco2Name = IdToName.jewel[item.MeleeWeapon.deco2];
-    let deco3Name = IdToName.jewel[item.MeleeWeapon.deco3];
-
+function generateMeleeWeapon(item, id) {
     const row = document.createElement("tr");
+    row.id = id;
 
-    row.appendChild(generateTypeCell(typeName));
+    row.appendChild(generateSelectCell(Database.type, item.MeleeWeapon.type_id, true));
     row.appendChild(generateBlankCell());
-    row.appendChild(generateSelectCell(equipOptList[item.MeleeWeapon.type_id], equipName));
+    row.appendChild(generateSelectCell(Database[IdToType[[item.MeleeWeapon.type_id]]], item.MeleeWeapon.id));
     row.appendChild(generateBlankCell());
     row.appendChild(generateBlankCell());
-    row.appendChild(generateSelectCell(jewelOptList, deco1Name));
-    row.appendChild(generateSelectCell(jewelOptList, deco2Name));
-    row.appendChild(generateSelectCell(jewelOptList, deco3Name));
+    row.appendChild(generateSelectCell(Database.jewel, item.MeleeWeapon.deco1));
+    row.appendChild(generateSelectCell(Database.jewel, item.MeleeWeapon.deco2));
+    row.appendChild(generateSelectCell(Database.jewel, item.MeleeWeapon.deco3));
 
     return row;
 }
 
-function generateRangedWeapon(item) {
-    let typeName = IdToName.type[item.RangedWeapon.type_id];
-    let equipName = IdToName[TypeIdToField[item.RangedWeapon.type_id]][item.RangedWeapon.id];
+function generateRangedWeapon(item, id) {
     let equipLevel = item.RangedWeapon.lvl;
-    let deco1Name = IdToName.jewel[item.RangedWeapon.deco1];
-    let deco2Name = IdToName.jewel[item.RangedWeapon.deco2];
-    let deco3Name = IdToName.jewel[item.RangedWeapon.deco3];
 
     const row = document.createElement("tr");
+    row.id = id;
 
-    row.appendChild(generateTypeCell(typeName));
+    row.appendChild(generateSelectCell(Database.type, item.RangedWeapon.type_id, true));
     row.appendChild(generateIntSelectCell(equipLevel + 1, 0, 32));
-    row.appendChild(generateSelectCell(equipOptList[item.RangedWeapon.type_id], equipName));
+    row.appendChild(generateSelectCell(Database[IdToType[[item.RangedWeapon.type_id]]], item.RangedWeapon.id));
     row.appendChild(generateBlankCell());
     row.appendChild(generateBlankCell());
-    row.appendChild(generateSelectCell(jewelOptList, deco1Name));
-    row.appendChild(generateSelectCell(jewelOptList, deco2Name));
-    row.appendChild(generateSelectCell(jewelOptList, deco3Name));
+    row.appendChild(generateSelectCell(Database.jewel, item.RangedWeapon.deco1));
+    row.appendChild(generateSelectCell(Database.jewel, item.RangedWeapon.deco2));
+    row.appendChild(generateSelectCell(Database.jewel, item.RangedWeapon.deco3));
 
     return row;
+}
+
+function generateItemList(optName, optData) {
+    const tbody = document.querySelector(`#${optName} tbody`);
+    optData.forEach((data, index) => {
+        const row = document.createElement("tr");
+        row.id = `${optName}_slot${index}`;
+
+        row.appendChild(generateSelectCell(Database.item, data.id));
+        row.appendChild(generateIntSelectCell(data.qty, 0, 99));
+
+        tbody.appendChild(row);
+    });
+}
+
+function generateEquipBox(optName, optData) {
+    const tbody = document.querySelector(`#${optName} tbody`);
+
+    optData.forEach((item, index) => {
+        if (item.hasOwnProperty('MeleeWeapon')) {
+            tbody.appendChild(generateMeleeWeapon(item, `${optName}_slot${index}`));
+
+        } else if (item.hasOwnProperty('RangedWeapon')) {
+            tbody.appendChild(generateRangedWeapon(item, `${optName}_slot${index}`));
+
+        } else if (item.hasOwnProperty('Armor')) {
+            tbody.appendChild(generateArmor(item, `${optName}_slot${index}`));
+
+        } else if (item.hasOwnProperty('ZeroSlotTalisman')) {
+            tbody.appendChild(generateZeroSlotTalisman(item, `${optName}_slot${index}`));
+
+        } else if (item.hasOwnProperty('OneSlotTalisman')) {
+            tbody.appendChild(generateOneSlotTalisman(item, `${optName}_slot${index}`));
+
+        } else if (item.hasOwnProperty('TwoSlotTalisman')) {
+            tbody.appendChild(generateTwoSlotTalisman(item, `${optName}_slot${index}`));
+
+        } else if (item.hasOwnProperty('ThreeSlotTalisman')) {
+            tbody.appendChild(generateThreeSlotTalisman(item, `${optName}_slot${index}`));
+
+        } else if (item.hasOwnProperty('BlankEquipSlot')) {
+            tbody.appendChild(generateBlankEquipSlot(item, `${optName}_slot${index}`));
+
+        } else {
+            console.log("Something's Wrong!");
+        }
+    });
+}
+
+function swapPage(target) {
+    let pageId = ["mpouch", "rpouch", "ibox" ,"ebox"][parseInt(target.value)];
+
+    if (lastChoice != "" && lastChoice != pageId) {
+        document.getElementById(lastChoice).style.display = "none";
+    }
+
+    document.getElementById(pageId).style.display = "block";
+
+    lastChoice = pageId;
 }
 
 async function loadJson(url) {
@@ -432,171 +460,114 @@ async function loadJson(url) {
     }
 }
 
-function generateItemList(optName, optData) {
-    const tbody = document.querySelector(`#${optName} tbody`);
-
-    const itemOptList = IdToName.item.map(itemName => `<option value="${itemName}">${itemName}</option>`).join('');
-
-    optData.forEach(data => {
-        const row = document.createElement("tr");
-
-        const itemCell = document.createElement("td");
-        const itemSelect = document.createElement("select");
-        itemSelect.innerHTML = itemOptList
-        itemSelect.value = IdToName.item[data.id];
-        itemCell.appendChild(itemSelect);
-
-        const quantityCell = document.createElement("td");
-        const quantityInput = document.createElement("input");
-        quantityInput.type = "number";
-        quantityInput.value = data.qty;
-        quantityCell.appendChild(quantityInput);
-
-        row.appendChild(itemCell);
-        row.appendChild(quantityCell);
-
-        tbody.appendChild(row);
-    });
-}
-
-function generateEquipBox(optName, optData) {
-    const tbody = document.querySelector(`#${optName} tbody`);
-
-    optData.forEach(item => {
-        if (item.hasOwnProperty('MeleeWeapon')) {
-            tbody.appendChild(generateMeleeWeapon(item));
-
-        } else if (item.hasOwnProperty('RangedWeapon')) {
-            tbody.appendChild(generateRangedWeapon(item));
-
-        } else if (item.hasOwnProperty('Armor')) {
-            tbody.appendChild(generateArmor(item));
-
-        } else if (item.hasOwnProperty('ZeroSlotTalisman')) {
-            tbody.appendChild(generateZeroSlotTalisman(item));
-
-        } else if (item.hasOwnProperty('OneSlotTalisman')) {
-            tbody.appendChild(generateOneSlotTalisman(item));
-
-        } else if (item.hasOwnProperty('TwoSlotTalisman')) {
-            tbody.appendChild(generateTwoSlotTalisman(item));
-
-        } else if (item.hasOwnProperty('ThreeSlotTalisman')) {
-            tbody.appendChild(generateThreeSlotTalisman(item));
-
-        } else if (item.hasOwnProperty('BlankEquipSlot')) {
-            tbody.appendChild(generateBlankEquipSlot(item));
-
-        } else {
-            console.log("Something's Wrong!");
-        }
-    });
-}
-
-function swapPage(target) {
-    let choice = parseInt(target.value);
-    let pageId = null;
-    let pageData = null;
-    let pageFct = null;
-
-    switch (choice) {
-        case 1:
-        case 2:
-        case 3: {
-            pageId = `mpouch${choice}_opt`;
-            pageData = SaveSlot.melee_pouch.slice(8 * (choice - 1), 8 * choice);
-            pageFct = generateItemList;
-            break;
-        }
-        case 4:
-        case 5:
-        case 6:
-        case 7: {
-            pageId = `rpouch${choice - 3}_opt`;
-            pageData = SaveSlot.ranged_pouch.slice(8 * (choice - 4), 8 * (choice - 3));
-            pageFct = generateItemList;
-            break;
-        }
-        case 8:
-        case 9:
-        case 10:
-        case 11:
-        case 12:
-        case 13:
-        case 14:
-        case 15: {
-            pageId = `ibox${choice - 7}_opt`;
-            pageData = SaveSlot.item_box.slice(100 * (choice - 8), 100 * (choice - 7));
-            pageFct = generateItemList;
-            break;
-        }
-        case 16:
-        case 17:
-        case 18:
-        case 19:
-        case 20:
-        case 21:
-        case 22:
-        case 23: {
-            pageId = `ebox${choice - 15}_opt`;
-            pageData = SaveSlot.equip_box.slice(100 * (choice - 16), 100 * (choice - 15));
-            pageFct = generateEquipBox;
-            break;
-        }
-        default:
-            return;
-    }
-
-    // To be finished...
-    if (lastChoice != "" && lastChoice != pageId) {
-        let lastTable = document.getElementById(lastChoice);
-        lastTable.style.display = "none";
-    }
-    let table = document.getElementById(pageId);
-    if (table.getAttribute("init") == "no") {
-        table.setAttribute("init", "yes");
-        pageFct(pageId, pageData);
-    }
-    table.style.display = "block";
-    lastChoice = pageId;
-}
-
-
 Promise.all([
-    loadJson('data.json'),
-    loadJson('save.json')
+    loadJson('database.json'),
+    loadJson('savefile.json')
 ])
 .then(([dataJson, saveJson]) => {
-    IdToName = dataJson;
+    // Init
+
+    Database = dataJson;
     SaveSlot = saveJson;
 
-    typeIdOptList = IdToName.type.map(typeName => `<option value="${typeName}">${typeName}</option>`).join('');
-    equipOptList = new Array(16);
-    for (let i = 1; i <= 15; i++) {
-        equipOptList[i] = IdToName[TypeIdToField[i]].map(equipName => `<option value="${equipName}">${equipName}</option>`).join('');
-    }
-    jewelOptList = IdToName.jewel.map(decoName => `<option value="${decoName}">${decoName}</option>`).join('');
-    skillOptList = IdToName.skill.map(skillName => `<option value="${skillName}">${skillName}</option>`).join('');
+    // Read
 
-    const gender_opt = document.getElementById("gender_opt");
-    gender_opt.innerHTML = "";
+    const gender = document.getElementById("gender")
+    gender.value = SaveSlot.gender;
+    gender.onchange = function () {
+        SaveSlot.gender = gender.value;
+    };
 
-    IdToName.gender.forEach(option => {
-        const optionElement = document.createElement("option");
-        optionElement.textContent = option;
-        gender_opt.appendChild(optionElement);
-    });
+    const name = document.getElementById("name")
+    name.value = String.fromCharCode.apply(null, SaveSlot.name);
+    name.onchange = function () {
+        SaveSlot.name = Array.from(name.value).map(char => char.charCodeAt(0));
+    };
 
-    gender_opt.value = IdToName.gender[SaveSlot.gender];
+    const zenny = document.getElementById("zenny")
+    zenny.value = SaveSlot.zenny;
+    zenny.onchange = function () {
+        SaveSlot.zenny = zenny.value;
+    };
 
-    document.getElementById("name_opt").value =
-        String.fromCharCode.apply(null, SaveSlot.name);
-    document.getElementById("zenny_opt").value =
-        SaveSlot.zenny;
-    document.getElementById("playtime_opt").value =
-        SaveSlot.playtime;
+    const playtime = document.getElementById("playtime")
+    playtime.value = SaveSlot.playtime;
+    playtime.onchange = function () {
+        SaveSlot.playtime = playtime.value;
+    };
 
-    swapPage(document.getElementById("page_opt"));
+    const hrp = document.getElementById("hrp")
+    hrp.value = SaveSlot.hrp;
+    hrp.onchange = function () {
+        SaveSlot.hrp = hrp.value;
+    };
+
+    const hr = document.getElementById("hr")
+    hr.value = SaveSlot.hr;
+    hr.onchange = function () {
+        SaveSlot.hr = hr.value;
+    };
+
+    const face_type = document.getElementById("face_type")
+    face_type.value    = SaveSlot.face_type + 1;
+    face_type.onchange = function () {
+        SaveSlot.face_type = face_type.value - 1;
+    };
+
+    const hair_type = document.getElementById("hair_type")
+    hair_type.value    = SaveSlot.hair_type + 1;
+    hair_type.onchange = function () {
+        SaveSlot.hair_type = hair_type.value - 1;
+    };
+
+    const hair_color = document.getElementById("hair_color")
+    hair_color.value   = rgbToHex(SaveSlot.hair_color[0], SaveSlot.hair_color[1], SaveSlot.hair_color[2]);
+    hair_color.onchange = function () {
+        SaveSlot.hair_color = hexToRgb(hair_color.value);
+    };
+
+    const cloth_type = document.getElementById("cloth_type")
+    cloth_type.value   = SaveSlot.cloth_type + 1;
+    cloth_type.onchange = function () {
+        SaveSlot.cloth_type = cloth_type.value - 1;
+    };
+
+    const voice_type = document.getElementById("voice_type")
+    voice_type.value   = SaveSlot.voice_type + 1;
+    voice_type.onchange = function () {
+        SaveSlot.voice_type = voice_type.value - 1;
+    };
+
+    const cloth_color = document.getElementById("cloth_color")
+    cloth_color.value  = rgbToHex(SaveSlot.cloth_color[0], SaveSlot.cloth_color[1], SaveSlot.cloth_color[2]);
+    cloth_color.onchange = function () {
+        SaveSlot.cloth_color = hexToRgb(cloth_color.value);
+    };
+
+    const eye_color = document.getElementById("eye_color")
+    eye_color.value    = SaveSlot.eye_color + 1;
+    eye_color.onchange = function () {
+        SaveSlot.eye_color = eye_color.value - 1;
+    };
+
+    const feature_type = document.getElementById("feature_type")
+    feature_type.value = SaveSlot.feature_type;
+    feature_type.onchange = function () {
+        SaveSlot.feature_type = feature_type.value;
+    };
+
+    const skin_tone = document.getElementById("skin_tone")
+    skin_tone.value    = SaveSlot.skin_tone;
+    skin_tone.onchange = function () {
+        SaveSlot.skin_tone = skin_tone.value;
+    };
+
+    generateItemList("mpouch", SaveSlot.melee_pouch);
+    generateItemList("rpouch", SaveSlot.ranged_pouch);
+    generateItemList("ibox", SaveSlot.item_box);
+    generateEquipBox("ebox", SaveSlot.equip_box);
+
+    swapPage(document.getElementById("page"));
 })
 .catch(error => {
     console.error('An error occurred:', error);
