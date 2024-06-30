@@ -226,6 +226,11 @@ function generateSelectCell(optList, optSelect, typeChange = false)
                 suggestionItem.textContent = suggestion;
                 suggestionItem.onclick = function () {
                     suggestInput.value = suggestion;
+                    const event = new Event('input', {
+                        bubbles: true,
+                        cancelable: true
+                    });
+                    suggestInput.dispatchEvent(event);
                     suggestBox.innerHTML = '';
                     if (typeChange) {
                         onTypeChange(suggestInput);
@@ -389,6 +394,15 @@ function generateItemList(optName, optData) {
     optData.forEach((data, index) => {
         const row = document.createElement("tr");
         row.id = `${optName}_slot${index}`;
+        row.oninput = function(event) {
+            if (event.target.tagName.toLowerCase() === "textarea" ) {
+                SaveSlot[optName][index].id = Database.item.indexOf(event.target.value);
+            }
+            else if (event.target.tagName.toLowerCase() === "input")
+            {
+                SaveSlot[optName][index].qty = event.target.value;
+            }
+        };
 
         row.appendChild(generateSelectCell(Database.item, data.id));
         row.appendChild(generateIntSelectCell(data.qty, 0, 99));
@@ -432,7 +446,7 @@ function generateEquipBox(optName, optData) {
 }
 
 function swapPage(target) {
-    let pageId = ["mpouch", "rpouch", "ibox" ,"ebox"][parseInt(target.value)];
+    let pageId = ["melee_pouch", "ranged_pouch", "item_box" ,"equip_box"][parseInt(target.value)];
 
     if (lastChoice != "" && lastChoice != pageId) {
         document.getElementById(lastChoice).style.display = "none";
@@ -562,10 +576,10 @@ Promise.all([
         SaveSlot.skin_tone = skin_tone.value;
     };
 
-    generateItemList("mpouch", SaveSlot.melee_pouch);
-    generateItemList("rpouch", SaveSlot.ranged_pouch);
-    generateItemList("ibox", SaveSlot.item_box);
-    generateEquipBox("ebox", SaveSlot.equip_box);
+    generateItemList("melee_pouch", SaveSlot.melee_pouch);
+    generateItemList("ranged_pouch", SaveSlot.ranged_pouch);
+    generateItemList("item_box", SaveSlot.item_box);
+    generateEquipBox("equip_box", SaveSlot.equip_box);
 
     swapPage(document.getElementById("page"));
 })
