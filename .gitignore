@@ -1,3 +1,4 @@
 /target
 /tmp
 /saves
+**/__pycache__/
