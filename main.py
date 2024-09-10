@@ -59,10 +59,9 @@ async def save2json(data: Save2Json):
         str(data.slot)
     ]
 
-    subprocess.run(decode_cmd)
-
-    with open(f"tmp/{jsonfname}", "r") as f:
-        return {"status": "OK", "payload": f.read()}
+    if subprocess.run(decode_cmd, check=True).returncode == 1:
+        with open(f"tmp/{jsonfname}", "r") as f:
+            return {"status": "OK", "payload": f.read()}
 
     return  {"status": "ERR", "payload": None}
 
@@ -89,10 +88,11 @@ async def json2save(data: Json2Save):
         str(data.slot)
     ]
 
-    subprocess.run(encode_cmd)
+    if subprocess.run(encode_cmd, check=True).returncode == 1:
+        with open(f"tmp/{outbinfname}", "rb") as f:
+            return {"status": "OK", "payload": base64.b64encode(f.read())}
 
-    with open(f"tmp/{outbinfname}", "rb") as f:
-        return {"status": "OK", "payload": base64.b64encode(f.read())}
+    return  {"status": "ERR", "payload": None}
 
 if __name__ == "__main__":
     uvicorn.run(app, port=8000, host="127.0.0.1")
