@@ -158,12 +158,14 @@ fn print_help()
     println!("\tmh3se encode [json_file] [base_save_file] [output_save_file] [slot]");
     println!("\tmh3se copy [save_file] [origin_slot] [destination_slot]");
     println!("\tmh3se wipe [save_file] [slot]");
+    println!("This program is licensed under GPLv3 terms.");
 }
 
 fn main()
 {
     const VERSION: &str = env!("CARGO_PKG_VERSION");
     println!("mh3se v{} | mh3 save-editor", VERSION);
+    println!("Project link: https://github.com/JeSuisSurGithub/mh3se");
 
     let args: Vec<String> = env::args().skip(1).collect();
 

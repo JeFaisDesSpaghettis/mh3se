@@ -767,8 +767,18 @@ async function save2json() {
         const binfile = event.target.result.split(',')[1];
         const slot = slot_tag.value - 1;
         const res = await fastApiPost("/save2json", { binfile, slot });
+        if (res === undefined) {
+            window.alert("Error: Please check the command line logs!");
+            return;
+        }
+        if (res["status"] === "ERR") {
+            window.alert(res["payload"]);
+            return;
+        }
         SaveSlot = JSON.parse(res["payload"]);
         initEditing();
+
+        window.alert("Loaded save file!")
     };
     lecteur.readAsDataURL(savebinfname);
 }
@@ -796,6 +806,14 @@ async function json2save() {
         const jsonfile = JSON.stringify(SaveSlot);
         const slot = slot_tag.value - 1;
         const res = await fastApiPost("/json2save", { binfile, jsonfile, slot });
+        if (res === undefined) {
+            window.alert("Error: Please check the command line logs!");
+            return;
+        }
+        if (res["status"] === "ERR") {
+            window.alert(res["payload"]);
+            return;
+        }
 
         const byteCharacters = atob(res["payload"]);
         const byteNumbers = new Array(byteCharacters.length);
@@ -805,7 +823,7 @@ async function json2save() {
         }
 
         const byteArray = new Uint8Array(byteNumbers);
-        const blob = new Blob([byteArray]);
+        const blob = new Blob([byteArray], { type: 'application/octet-stream' });
 
         const link = document.createElement('a');
         link.href = URL.createObjectURL(blob);

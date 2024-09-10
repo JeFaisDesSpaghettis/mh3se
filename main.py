@@ -9,8 +9,9 @@ import uvicorn
 
 import base64
 import json
-import string
 import os
+import platform
+import string
 import subprocess
 import random
 from pathlib import Path
@@ -26,15 +27,19 @@ class Json2Save(BaseModel):
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
+    Path("tmp").mkdir(parents=True, exist_ok=True)
     yield
-
-BASE_DIR = Path(__file__).parent
-
-Path("tmp").mkdir(parents=True, exist_ok=True)
 
 app = FastAPI(lifespan=lifespan)
 
 app.mount("/web", StaticFiles(directory="web"), name="web")
+
+os_type = platform.system()
+
+if os_type == "Windows":
+    mh3se_exec = "./mh3se.exe"
+else:
+    mh3se_exec = "./mh3se"
 
 def genid(size=8, chars=string.ascii_uppercase + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
@@ -52,18 +57,23 @@ async def save2json(data: Save2Json):
         f.write(base64.b64decode(data.binfile))
 
     decode_cmd = [
-        "./mh3se",
+        mh3se_exec,
         "decode",
         f"tmp/{binfname}",
         f"tmp/{jsonfname}",
         str(data.slot)
     ]
 
-    if subprocess.run(decode_cmd, check=True).returncode == 1:
+    res = subprocess.run(decode_cmd, check=True, capture_output=True, text=True)
+    if res.returncode == 0:
         with open(f"tmp/{jsonfname}", "r") as f:
+            os.remove(f"tmp/{binfname}")
+            os.remove(f"tmp/{jsonfname}")
             return {"status": "OK", "payload": f.read()}
 
-    return  {"status": "ERR", "payload": None}
+    os.remove(f"tmp/{binfname}")
+    os.remove(f"tmp/{jsonfname}")
+    return  {"status": "ERR", "payload": res.stdout + res.stderr}
 
 @app.post("/json2save")
 async def json2save(data: Json2Save):
@@ -80,7 +90,7 @@ async def json2save(data: Json2Save):
     open(f"tmp/{outbinfname}", "xb")
 
     encode_cmd = [
-        "./mh3se",
+        mh3se_exec,
         "encode",
         f"tmp/{jsonfname}",
         f"tmp/{inbinfname}",
@@ -88,11 +98,21 @@ async def json2save(data: Json2Save):
         str(data.slot)
     ]
 
-    if subprocess.run(encode_cmd, check=True).returncode == 1:
+    res = subprocess.run(encode_cmd, check=True, capture_output=True, text=True)
+    if res.returncode == 0:
         with open(f"tmp/{outbinfname}", "rb") as f:
+            os.remove(f"tmp/{jsonfname}")
+            os.remove(f"tmp/{inbinfname}")
+            os.remove(f"tmp/{outbinfname}")
             return {"status": "OK", "payload": base64.b64encode(f.read())}
 
-    return  {"status": "ERR", "payload": None}
+    os.remove(f"tmp/{jsonfname}")
+    os.remove(f"tmp/{inbinfname}")
+    os.remove(f"tmp/{outbinfname}")
+    return  {"status": "ERR", "payload": res.stdout + res.stderr}
 
 if __name__ == "__main__":
+    print("mh3 save-editor")
+    print("Project link: https://github.com/JeSuisSurGithub/mh3se")
+    print("This program is licensed under GPLv3 terms.")
     uvicorn.run(app, port=8000, host="127.0.0.1")
