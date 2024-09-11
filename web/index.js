@@ -31,6 +31,10 @@ function hexToRgb(hex) {
     return [r, g, b];
 }
 
+function clamp(val, min, max) {
+    return Math.min(Math.max(val, min), max)
+}
+
 function onTypeChange(target) {
     const row = target.parentElement.parentElement;
 
@@ -286,8 +290,8 @@ function generateOneSlotTalisman(item, optName, index) {
                 type_id: Database.type.indexOf(row.childNodes[0].childNodes[0].value),
                 slot_count: 1,
                 id: Database[idToType[[item.OneSlotTalisman.type_id]]].indexOf(row.childNodes[2].childNodes[0].value),
-                skill2_pt: 10 + parseInt(row.childNodes[4].childNodes[0].value),
-                skill1_pt: 10 + parseInt(row.childNodes[3].childNodes[0].value),
+                skill2_pt: clamp(10 + parseInt(row.childNodes[4].childNodes[0].value), -10, 245),
+                skill1_pt: clamp(10 + parseInt(row.childNodes[3].childNodes[0].value), -10, 245),
                 deco1: Database.jewel.indexOf(row.childNodes[5].childNodes[0].value),
                 skill1_id: Database.skill.indexOf(row.childNodes[6].childNodes[0].value),
                 skill2_id: Database.skill.indexOf(row.childNodes[7].childNodes[0].value)
@@ -330,8 +334,8 @@ function generateZeroSlotTalisman(item, optName, index) {
                 type_id: Database.type.indexOf(row.childNodes[0].childNodes[0].value),
                 slot_count: 0,
                 id: Database[idToType[[item.ZeroSlotTalisman.type_id]]].indexOf(row.childNodes[2].childNodes[0].value),
-                skill2_pt: 10 + parseInt(row.childNodes[4].childNodes[0].value),
-                skill1_pt: 10 + parseInt(row.childNodes[3].childNodes[0].value),
+                skill2_pt: clamp(10 + parseInt(row.childNodes[4].childNodes[0].value), -10, 245),
+                skill1_pt: clamp(10 + parseInt(row.childNodes[3].childNodes[0].value), -10, 245),
                 skill1_id: Database.skill.indexOf(row.childNodes[5].childNodes[0].value),
                 skill2_id: Database.skill.indexOf(row.childNodes[6].childNodes[0].value),
                 unused_deco3: 0
@@ -374,7 +378,7 @@ function generateTwoSlotTalisman(item, optName, index) {
                 slot_count: 2,
                 id: Database[idToType[[item.TwoSlotTalisman.type_id]]].indexOf(row.childNodes[2].childNodes[0].value),
                 unused_skill2_pt: 0,
-                skill1_pt: 10 + parseInt(row.childNodes[3].childNodes[0].value),
+                skill1_pt: clamp(10 + parseInt(row.childNodes[3].childNodes[0].value), -10, 245),
                 deco1: Database.jewel.indexOf(row.childNodes[5].childNodes[0].value),
                 deco2: Database.jewel.indexOf(row.childNodes[6].childNodes[0].value),
                 skill1_id: Database.skill.indexOf(row.childNodes[7].childNodes[0].value)
