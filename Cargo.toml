@@ -6,10 +6,23 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+axum = "0.7.5"
+base64 = "0.22.1"
+rand = "0.8.5"
 serde = {version = "1.0.195", features = ["derive"]}
 serde_derive = "1.0.195"
 serde_json = "1.0.111"
 serde_with = "3.7.0"
+tokio = { version = "1.40.0", features = ["rt-multi-thread"] }
+tower-http = { version = "0.5.2", features = ["fs"] }
+
+[[bin]]
+name = "mh3se-cli"
+path = "src/main.rs"
+
+[[bin]]
+name = "mh3se-webui"
+path = "src/main-ui.rs"
 
 [target.x86_64-pc-windows-gnu]
 rustflags = ["", "-C", "linker=x86_64-w64-mingw32-gcc"]

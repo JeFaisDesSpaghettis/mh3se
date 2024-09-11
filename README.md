@@ -9,6 +9,9 @@ A significant part of the reverse engineering work was based off [this informati
 
 And the ID Database was formed thanks to [this database](https://github.com/sepalani/MH3DB)
 
+[Font used on mh3se-webui according to OFL terms](https://github.com/jenskutilek/homecomputer-fonts)
+[Credits for the background image used on mh3se-webui](https://esawebb.org/images/weic2330a/)
+
 ## Quick guide
 
 ### 1. Getting the save files

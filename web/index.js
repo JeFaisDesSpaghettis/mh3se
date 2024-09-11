@@ -732,7 +732,7 @@ async function loadJson(url) {
     }
 }
 
-function fastApiPost(suffix, data) {
+function axumPost(suffix, data) {
     return fetch(window.location.origin + suffix, {
         method: 'POST',
         headers: {
@@ -766,7 +766,7 @@ async function save2json() {
     lecteur.onloadend = async function (event) {
         const binfile = event.target.result.split(',')[1];
         const slot = slot_tag.value - 1;
-        const res = await fastApiPost("/save2json", { binfile, slot });
+        const res = await axumPost("/save2json", { binfile, slot });
         if (res === undefined) {
             window.alert("Error: Please check the command line logs!");
             return;
@@ -805,7 +805,7 @@ async function json2save() {
         const binfile = event.target.result.split(',')[1];
         const jsonfile = JSON.stringify(SaveSlot);
         const slot = slot_tag.value - 1;
-        const res = await fastApiPost("/json2save", { binfile, jsonfile, slot });
+        const res = await axumPost("/json2save", { binfile, jsonfile, slot });
         if (res === undefined) {
             window.alert("Error: Please check the command line logs!");
             return;

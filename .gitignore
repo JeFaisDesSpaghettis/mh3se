@@ -1,9 +1,5 @@
 **/__pycache__/
-/build
-/dist
 /saves
 /target
 /tmp
-/main.spec
-/mh3se
 /mh3se-release.zip
