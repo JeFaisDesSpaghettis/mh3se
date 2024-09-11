@@ -114,6 +114,6 @@ async fn main() {
         .route("/save2json", post(save2json))
         .route("/json2save", post(json2save))
         .nest_service("/web", ServeDir::new("web"));
-    println!("[main] Opening server on http://127.0.0.1:8000/...");
-    axum::serve(tokio::net::TcpListener::bind("127.0.0.1:8000").await.unwrap(), app).await.unwrap();
+    println!("[main] Opening server on http://127.0.0.1:8888/...");
+    axum::serve(tokio::net::TcpListener::bind("127.0.0.1:8888").await.unwrap(), app).await.unwrap();
 }
